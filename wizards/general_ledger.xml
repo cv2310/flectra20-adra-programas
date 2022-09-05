@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data>
+        <record id="account_report_general_ledger_view_inherit_adra_account_extended" model="ir.ui.view">
+            <field name="name">General Ledger</field>
+            <field name="model">account.report.general.ledger</field>
+            <field name="inherit_id" ref="account.account_common_report_view"/>
+            <field name="arch" type="xml">
+
+                <!-- Add fields -->
+                <xpath expr="//field[@name='target_move']" position="before">
+                    <field name="x_account_analytic_account_id" required="1" options="{'no_create': True, 'no_open': True}" 
+                    groups="account.group_account_invoice"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_account_analytic_account_id']" position="after">
+                    <field name="x_report_type" widget="radio"
+                    groups="account.group_account_invoice,account.group_account_readonly"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_report_type']" position="after">
+                    <field name="x_document_type" widget="radio"
+                    groups="account.group_account_invoice,account.group_account_readonly"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_document_type']" position="after">
+                    <field name="x_sort_by" widget="radio"
+                    groups="account.group_account_invoice,account.group_account_readonly"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_sort_by']" position="after">
+                    <field name="x_bank_final_balance" attrs="{'invisible': [('x_document_type','!=','CONCILIACION')]}"
+                    groups="account.group_account_invoice,account.group_account_readonly"/>
+                </xpath>
+
+                <!-- Make fields invisible -->
+                <xpath expr="//field[@name='target_move']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='sortby']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='display_account']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='initial_balance']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</flectra>

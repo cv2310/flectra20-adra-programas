@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data>
+        <record model="ir.ui.view" id="action_account_report_back">
+            <field name="name">Accountability Report Details</field>
+            <field name="model">account.report.back</field>
+            <field name="arch" type="xml">
+                <!-- <tree string="Accountability Report"> -->
+                <tree string="Accountability Report">
+                    <field name='id'/>
+                    <field name='tipo_docto_senainfo'/>
+                    <field name='tipo_documento'/>
+                    <field name='cod_programa'/>
+                    <field name='programa'/>
+                    <field name='codigo_proyecto'/>
+                    <field name='grupo'/>
+                    <field name='cod_cuenta'/>
+                    <field name='cuenta'/>
+                    <field name='cuenta_senainfo'/>
+                    <field name='periodo'/>
+                    <field name='fecha_ingreso'/>
+                    <field name='nro_comprobante'/>
+                    <field name='correlativo'/>
+                    <field name='fecha_pago'/>
+                    <field name='vigencia'/>
+                    <field name='medio_pago_senainfo'/>
+                    <field name='medio_pago'/>
+                    <field name='monto'/>
+                    <field name='glosa'/>
+                    <field name='cod_cuenta_senainfo'/>
+                    <field name='nro_comprobante_pago'/>
+                    <field name='beneficiario'/>
+                </tree>
+                <!-- </tree> -->
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_account_report_back">
+            <field name="name">Accountability</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.report.back</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+        </record>
+        
+        <menuitem name="Accountability"
+                action="action_account_report_back"
+                id="menu_action_account_report_back"
+                parent="account.account_reports_management_menu"
+                sequence="22"/>
+
+    </data>
+</flectra>

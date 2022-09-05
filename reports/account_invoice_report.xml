@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+
+    <!-- this header can be used on any Chilean report -->
+    <template id="custom_header">
+
+        <t t-set="report_date" t-value="o.invoice_date"/>
+        <t t-set="report_number" t-value="int(o.x_correlative)"/>
+        <t t-set="pre_printed_report" t-value="report_type == 'pdf'"/>
+        <t t-set="report_name" t-value="o.x_document_type"/>
+        <t t-set="header_address" t-value="o.company_id.partner_id"/>
+        <t t-set="custom_footer">
+            <t t-call="adra_account_extended.custom_footer"/>
+        </t>
+
+        <div>
+            <div class="row">
+                <div name="left-upper-side" class="col-8">
+                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)"
+                         style="max-height: 45px;" alt="Logo"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="informations">
+        <div id="informations" class="row mt8 mb8">
+            <div class="col-6">
+                <P>ANTECEDENTES CONTABLES</P>
+                <strong>
+                    <span t-att-style="'color: %s;' % o.company_id.secondary_color">Fecha:</span>
+                </strong>
+                <span style="color:gray" t-esc="o.invoice_date" t-options='{"widget": "date"}'/>
+                <br/>
+
+                <strong>Benefactor:</strong>
+                <span style="color:gray" t-field="o.invoice_partner_display_name"/>
+                <br/>
+
+                <strong>Tipo Cuenta Ingreso:</strong>
+                <span style="color:gray" t-field="o.x_account_group_id.name"/>
+                <br/>
+
+                <strong>Documento Respaldo:</strong>
+                <t t-if="o.x_document_type == 'INGRESO'">
+                    <span style="color:gray" t-field="o.x_in_back_up_document_type"/>
+                </t>
+                <t t-if="o.x_document_type == 'EGRESO'">
+                    <span style="color:gray" t-field="o.x_out_back_up_document_type"/>
+                </t>
+                <br/>
+
+                <strong>Nº Doc. Respaldo:</strong>
+                <span style="color:gray" t-field="o.x_back_up_document_number"/>
+                <br/>
+
+                <strong>
+                    <span t-att-style="'color: %s;' % o.company_id.secondary_color">Fecha Doc. Resp.:</span>
+                </strong>
+                <span style="color:gray" t-esc="o.x_back_up_document_date" t-options='{"widget": "date"}'/>
+                <br/>
+                <br/>
+
+            </div>
+            <div class="col-6">
+                <P>ANTECEDENTES PROYECTO</P>
+                <strong>Código Proyecto:</strong>
+                <span style="color:gray" t-esc="o.x_account_analytic_account_id.code"/>
+                <br/>
+
+                <strong>Nombre Proyecto:</strong>
+                <span style="color:gray" t-esc="o.x_account_analytic_account_id.name"/>
+                <br/>
+
+                <strong>Entidad Colaboradora:</strong>
+                <span style="color:gray" t-field="o.company_id.partner_id.name"/>
+                <br/>
+
+                <strong>Modalidad de Atención:</strong>
+                <br/>
+                <span style="color:gray">FAE - PROGRAMAS DE FAMILIAS DE ACOGIDA ESPECIALIZADA</span>
+                <br/>
+
+            </div>
+        </div>
+    </template>
+
+    <template id="custom_footer">
+        <div name="footer_left_column" class="col-8 text-center"/>
+    </template>
+
+    <template id="report_invoice_document" inherit_id="account.report_invoice_document" primary="True">
+
+        <t t-set="o" position="after">
+            <t t-set="custom_header" t-value="'adra_account_extended.custom_header'"/>
+        </t>
+
+        <!-- replace information section and usage chilean style -->
+        <div id="informations" position="replace">
+            <t t-call="adra_account_extended.informations"/>
+        </div>
+
+        <!--  we remove the ml auto and also give more space to avoid multiple lines on tax detail -->
+        <xpath expr="//div[@id='total']/div" position="attributes">
+            <attribute name="t-attf-class">#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'}</attribute>
+        </xpath>
+
+        <xpath expr="//div[@id='total']/div" position="before">
+            <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'}"/>
+        </xpath>
+
+        <xpath expr="//div[@id='total']" position="after">
+            <div class="row">
+                <div name="stamp" class="col-4 text-center"/>
+                <div name="transferable-table" class="col-4"/>
+                <div name="transferable-legend" class="col-4 pull-right"/>
+            </div>
+        </xpath>
+
+    </template>
+
+    <!-- FIXME: Temp fix to allow fetching invoice_documemt in Studio Reports with localisation -->
+    <template id="report_invoice" inherit_id="account.report_invoice">
+        <xpath expr='//t[@t-call="account.report_invoice_document"]' position="after">
+            <t t-if="o._get_name_invoice_report() == 'adra_account_extended.report_invoice_document'"
+                t-call="adra_account_extended.report_invoice_document" t-lang="lang"/>
+        </xpath>
+    </template>
+
+    <template id="report_invoice_with_payments" inherit_id="account.report_invoice_with_payments">
+        <xpath expr='//t[@t-call="account.report_invoice_document"]' position="after">
+            <t t-if="o._get_name_invoice_report() == 'adra_account_extended.report_invoice_document'"
+                t-call="adra_account_extended.report_invoice_document" t-lang="lang"/>
+        </xpath>
+    </template>
+
+</flectra>

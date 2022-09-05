@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flectra>
+    <data>
+
+        <!-- Account Parent Group -->
+        <record id="adra_account_extended.account_group_1" model="account.group">
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Ingresos</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_2" model="account.group">
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Activos Fijos</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_3" model="account.group">
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Egresos</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_4" model="account.group">
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Transferencias y Devoluciones</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_5" model="account.group">
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Gasto en Personal</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_17" model="account.group">
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Provisión Indemnización</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_18" model="account.group">
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Garantía por Arriendo</field>
+        </record>
+
+    </data>
+</flectra>

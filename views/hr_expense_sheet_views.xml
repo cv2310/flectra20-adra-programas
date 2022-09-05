@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data>
+        <record id="hr_expense_sheet_inherit_adra_account_extended" model="ir.ui.view">
+            <field name="name">hr.expense_sheet.view.form.inherit</field>
+            <field name="model">hr.expense.sheet</field>
+            <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
+            <field name="arch" type="xml">
+
+                <!-- Move fields -->
+                <xpath expr="//field[@name='payment_mode']" position="after">
+                    <xpath expr="//form/sheet/notebook/page['other_info']//field[@name='bank_journal_id']" position="move"/>
+                </xpath>
+
+                <!-- Change fields -->
+                <xpath expr="//field[@name='bank_journal_id']" position="attributes">
+                    <attribute name="string">Con cargo a:</attribute>
+                </xpath>
+
+                <!-- Make fields invisible -->
+                <xpath expr="//field[@name='payment_mode']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <!-- Add fields -->
+                <xpath expr="//field[@name='employee_id']" position="before">
+                    <field name="x_account_analytic_account_id" required="1" options="{'no_create': True, 'no_open': True}" 
+                    groups="account.group_account_invoice"/>
+                </xpath>
+
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="x_invoice_date"
+                    groups="account.group_account_invoice,account.group_account_readonly"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</flectra>

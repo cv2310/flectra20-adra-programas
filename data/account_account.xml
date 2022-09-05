@@ -1,0 +1,1103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data noupdate="True">
+
+        <!-- ADITIONAL ACCOUNTS -->
+
+        <!-- Expenses -->
+
+        <!-- Gastos en Personal -->
+        <record id="adra_account_extended.account_470101" model="account.account">
+            <field name="code">470101</field>
+            <field name="name">Sueldos Liquidos Pagados</field>
+            <field name="x_senainfo_name">Sueldos</field>
+            <field name="x_senainfo_project_code">1</field>
+            <field name="x_senainfo_institution_code">31</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_16"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470102" model="account.account">
+            <field name="code">470102</field>
+            <field name="name">Imposiciones</field>
+            <field name="x_senainfo_name">Imposiciones</field>
+            <field name="x_senainfo_project_code">5</field>
+            <field name="x_senainfo_institution_code">35</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_16"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470103" model="account.account">
+            <field name="code">470103</field>
+            <field name="name">Aguinaldos</field>
+            <field name="x_senainfo_name">Otros</field>
+            <field name="x_senainfo_project_code">8</field>
+            <field name="x_senainfo_institution_code">36</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_16"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470104" model="account.account">
+            <field name="code">470104</field>
+            <field name="name">Indeminización por Término de Contrato</field>
+            <field name="x_senainfo_name">Indemnizaciones</field>
+            <field name="x_senainfo_project_code">27</field>
+            <field name="x_senainfo_institution_code">55</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_16"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470105" model="account.account">
+            <field name="code">470105</field>
+            <field name="name">Devolución de Sueldo Gasto Prorrateado</field>
+            <field name="x_senainfo_name">Otros</field>
+            <field name="x_senainfo_project_code">8</field>
+            <field name="x_senainfo_institution_code">36</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_16"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470106" model="account.account">
+            <field name="code">470106</field>
+            <field name="name">Beneficio al Personal</field>
+            <field name="x_senainfo_name">Otros</field>
+            <field name="x_senainfo_project_code">8</field>
+            <field name="x_senainfo_institution_code">36</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_16"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470107" model="account.account">
+            <field name="code">470107</field>
+            <field name="name">Descuento a Personal por Planilla</field>
+            <field name="x_senainfo_name">Otros</field>
+            <field name="x_senainfo_project_code">8</field>
+            <field name="x_senainfo_institution_code">36</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_16"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470108" model="account.account">
+            <field name="code">470108</field>
+            <field name="name">Honorarios Liquidos Pagados</field>
+            <field name="x_senainfo_name">Honorarios</field>
+            <field name="x_senainfo_project_code">3</field>
+            <field name="x_senainfo_institution_code">33</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_16"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470109" model="account.account">
+            <field name="code">470109</field>
+            <field name="name">Impuesto Unico Pagado</field>
+            <field name="x_senainfo_name">Impuesto Único</field>
+            <field name="x_senainfo_project_code">2</field>
+            <field name="x_senainfo_institution_code">32</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_16"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470110" model="account.account">
+            <field name="code">470110</field>
+            <field name="name">Impuesto Segunda Categoría</field>
+            <field name="x_senainfo_name">Impuesto 2da Categoría</field>
+            <field name="x_senainfo_project_code">4</field>
+            <field name="x_senainfo_institution_code">34</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_16"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+<!-- Gastos Operacionales -->
+        <record id="adra_account_extended.account_470121" model="account.account">
+            <field name="code">470121</field>
+            <field name="name">Agua</field>
+            <field name="x_senainfo_name">Consumos Básicos</field>
+            <field name="x_senainfo_project_code">15</field>
+            <field name="x_senainfo_institution_code">43</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470122" model="account.account">
+            <field name="code">470122</field>
+            <field name="name">Alimentos y Bebidas</field>
+            <field name="x_senainfo_name">Alimentación</field>
+            <field name="x_senainfo_project_code">9</field>
+            <field name="x_senainfo_institution_code">37</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470123" model="account.account">
+            <field name="code">470123</field>
+            <field name="name">Arriendo o Compra de Software o Licencias</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470124" model="account.account">
+            <field name="code">470124</field>
+            <field name="name">Arriendo Dependencias</field>
+            <field name="x_senainfo_name">Servicios Generales</field>
+            <field name="x_senainfo_project_code">17</field>
+            <field name="x_senainfo_institution_code">45</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470125" model="account.account">
+            <field name="code">470125</field>
+            <field name="name">Artículos de Librería</field>
+            <field name="x_senainfo_name">Materiales de Oficina</field>
+            <field name="x_senainfo_project_code">18</field>
+            <field name="x_senainfo_institution_code">46</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470126" model="account.account">
+            <field name="code">470126</field>
+            <field name="name">Capacitación al Personal</field>
+            <field name="x_senainfo_name">Capacitación</field>
+            <field name="x_senainfo_project_code">13</field>
+            <field name="x_senainfo_institution_code">41</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470127" model="account.account">
+            <field name="code">470127</field>
+            <field name="name">Combustible y Lubricantes Vehículos Proyecto</field>
+            <field name="x_senainfo_name">Combustible y Lubricación</field>
+            <field name="x_senainfo_project_code">21</field>
+            <field name="x_senainfo_institution_code">49</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470128" model="account.account">
+            <field name="code">470128</field>
+            <field name="name">Correo</field>
+            <field name="x_senainfo_name">Servicios Generales</field>
+            <field name="x_senainfo_project_code">17</field>
+            <field name="x_senainfo_institution_code">45</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470129" model="account.account">
+            <field name="code">470129</field>
+            <field name="name">Devolución Aguinaldos y Bonos a SENAME</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470130" model="account.account">
+            <field name="code">470130</field>
+            <field name="name">Devolución Gasto Prorrateado a Otro Proyecto</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470131" model="account.account">
+            <field name="code">470131</field>
+            <field name="name">Electricidad</field>
+            <field name="x_senainfo_name">Consumos Básicos</field>
+            <field name="x_senainfo_project_code">15</field>
+            <field name="x_senainfo_institution_code">43</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470132" model="account.account">
+            <field name="code">470132</field>
+            <field name="name">Equipamiento Menor para Oficina, Casino y Otros</field>
+            <field name="x_senainfo_name">Materiales de Oficina</field>
+            <field name="x_senainfo_project_code">18</field>
+            <field name="x_senainfo_institution_code">46</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470133" model="account.account">
+            <field name="code">470133</field>
+            <field name="name">Gas</field>
+            <field name="x_senainfo_name">Consumos Básicos</field>
+            <field name="x_senainfo_project_code">15</field>
+            <field name="x_senainfo_institution_code">43</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470134" model="account.account">
+            <field name="code">470134</field>
+            <field name="name">Cargos Bancarios</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470135" model="account.account">
+            <field name="code">470135</field>
+            <field name="name">Gastos Menores</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470136" model="account.account">
+            <field name="code">470136</field>
+            <field name="name">Hospedaje</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470137" model="account.account">
+            <field name="code">470137</field>
+            <field name="name">Insumos Computacionales</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470138" model="account.account">
+            <field name="code">470138</field>
+            <field name="name">Internet</field>
+            <field name="x_senainfo_name">Consumos Básicos</field>
+            <field name="x_senainfo_project_code">15</field>
+            <field name="x_senainfo_institution_code">43</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470139" model="account.account">
+            <field name="code">470139</field>
+            <field name="name">Mantención de Sistemas Computacionales</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470141" model="account.account">
+            <field name="code">470141</field>
+            <field name="name">Mantención y Reparación de Vehículos</field>
+            <field name="x_senainfo_name">Mantención y Reparación</field>
+            <field name="x_senainfo_project_code">20</field>
+            <field name="x_senainfo_institution_code">48</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470142" model="account.account">
+            <field name="code">470142</field>
+            <field name="name">Materiales de Oficina</field>
+            <field name="x_senainfo_name">Materiales de Oficina</field>
+            <field name="x_senainfo_project_code">18</field>
+            <field name="x_senainfo_institution_code">46</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470143" model="account.account">
+            <field name="code">470143</field>
+            <field name="name">Movilización del Personal</field>
+            <field name="x_senainfo_name">Movilización</field>
+            <field name="x_senainfo_project_code">16</field>
+            <field name="x_senainfo_institution_code">44</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470144" model="account.account">
+            <field name="code">470144</field>
+            <field name="name">Permiso de Circulación</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470145" model="account.account">
+            <field name="code">470145</field>
+            <field name="name">Publicidad y Difusión</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470146" model="account.account">
+            <field name="code">470146</field>
+            <field name="name">Seguro Vehículos</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470147" model="account.account">
+            <field name="code">470147</field>
+            <field name="name">Seguro a Personas (Menores)</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470148" model="account.account">
+            <field name="code">470148</field>
+            <field name="name">Seguros Propiedades</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470149" model="account.account">
+            <field name="code">470149</field>
+            <field name="name">Servicios Generales y Menores de Reparación</field>
+            <field name="x_senainfo_name">Servicios Generales</field>
+            <field name="x_senainfo_project_code">17</field>
+            <field name="x_senainfo_institution_code">45</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470151" model="account.account">
+            <field name="code">470151</field>
+            <field name="name">Servicios de Seguridad</field>
+            <field name="x_senainfo_name">Servicios Generales</field>
+            <field name="x_senainfo_project_code">17</field>
+            <field name="x_senainfo_institution_code">45</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470152" model="account.account">
+            <field name="code">470152</field>
+            <field name="name">Telefonía e Internet</field>
+            <field name="x_senainfo_name">Consumos Básicos</field>
+            <field name="x_senainfo_project_code">15</field>
+            <field name="x_senainfo_institution_code">43</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470153" model="account.account">
+            <field name="code">470153</field>
+            <field name="name">Telefonía, Internet y Televisión</field>
+            <field name="x_senainfo_name">Consumos Básicos</field>
+            <field name="x_senainfo_project_code">15</field>
+            <field name="x_senainfo_institution_code">43</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470154" model="account.account">
+            <field name="code">470154</field>
+            <field name="name">Televisión por Cable</field>
+            <field name="x_senainfo_name">Consumos Básicos</field>
+            <field name="x_senainfo_project_code">15</field>
+            <field name="x_senainfo_institution_code">43</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470155" model="account.account">
+            <field name="code">470155</field>
+            <field name="name">Teléfonos Celulares</field>
+            <field name="x_senainfo_name">Consumos Básicos</field>
+            <field name="x_senainfo_project_code">15</field>
+            <field name="x_senainfo_institution_code">43</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470156" model="account.account">
+            <field name="code">470156</field>
+            <field name="name">Teléfonos Fijos</field>
+            <field name="x_senainfo_name">Consumos Básicos</field>
+            <field name="x_senainfo_project_code">15</field>
+            <field name="x_senainfo_institution_code">43</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470157" model="account.account">
+            <field name="code">470157</field>
+            <field name="name">Útiles de Aseo Instalaciones</field>
+            <field name="x_senainfo_name">Materiales y Utiles de Aseo</field>
+            <field name="x_senainfo_project_code">19</field>
+            <field name="x_senainfo_institution_code">47</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470158" model="account.account">
+            <field name="code">470158</field>
+            <field name="name">Materiales para Mantenimiento y Reparaciones</field>
+            <field name="x_senainfo_name">Mantención y Reparación</field>
+            <field name="x_senainfo_project_code">20</field>
+            <field name="x_senainfo_institution_code">48</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470159" model="account.account">
+            <field name="code">470159</field>
+            <field name="name">Transferencia por Préstamo a Programa</field>
+            <field name="x_senainfo_name">Traspaso</field>
+            <field name="x_senainfo_project_code">23</field>
+            <field name="x_senainfo_institution_code">51</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470160" model="account.account">
+            <field name="code">470160</field>
+            <field name="name">Transferencia por Aporte a Programa</field>
+            <field name="x_senainfo_name">Traspaso</field>
+            <field name="x_senainfo_project_code">23</field>
+            <field name="x_senainfo_institution_code">51</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470161" model="account.account">
+            <field name="code">470161</field>
+            <field name="name">Apertura Caja Chica</field>
+            <field name="x_senainfo_name">Cuentas por Rendir</field>
+            <field name="x_senainfo_project_code">22</field>
+            <field name="x_senainfo_institution_code">50</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470162" model="account.account">
+            <field name="code">470162</field>
+            <field name="name">Rendición Caja Chica</field>
+            <field name="x_senainfo_name">Cuentas por Rendir</field>
+            <field name="x_senainfo_project_code">22</field>
+            <field name="x_senainfo_institution_code">50</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470163" model="account.account">
+            <field name="code">470163</field>
+            <field name="name">Entrega Fondos por Rendir</field>
+            <field name="x_senainfo_name">Cuentas por Rendir</field>
+            <field name="x_senainfo_project_code">22</field>
+            <field name="x_senainfo_institution_code">50</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470164" model="account.account">
+            <field name="code">470164</field>
+            <field name="name">Rendición Fondos por Rendir</field>
+            <field name="x_senainfo_name">Cuentas por Rendir</field>
+            <field name="x_senainfo_project_code">22</field>
+            <field name="x_senainfo_institution_code">50</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470165" model="account.account">
+            <field name="code">470165</field>
+            <field name="name">Cierre Caja Chica</field>
+            <field name="x_senainfo_name">Devolución</field>
+            <field name="x_senainfo_project_code">29</field>
+            <field name="x_senainfo_institution_code">56</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_12"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <!-- Gastos de Apoyo Directo -->
+        <record id="adra_account_extended.account_470171" model="account.account">
+            <field name="code">470171</field>
+            <field name="name">Capacitación NNA</field>
+            <field name="x_senainfo_name">Capacitación</field>
+            <field name="x_senainfo_project_code">13</field>
+            <field name="x_senainfo_institution_code">41</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_13"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470173" model="account.account">
+            <field name="code">470173</field>
+            <field name="name">Deportes y Recreación</field>
+            <field name="x_senainfo_name">Deporte y Recreación</field>
+            <field name="x_senainfo_project_code">14</field>
+            <field name="x_senainfo_institution_code">42</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_13"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470174" model="account.account">
+            <field name="code">470174</field>
+            <field name="name">Educación</field>
+            <field name="x_senainfo_name">Educación</field>
+            <field name="x_senainfo_project_code">12</field>
+            <field name="x_senainfo_institution_code">40</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_13"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470175" model="account.account">
+            <field name="code">470175</field>
+            <field name="name">Movilización NNA</field>
+            <field name="x_senainfo_name">Movilización</field>
+            <field name="x_senainfo_project_code">16</field>
+            <field name="x_senainfo_institution_code">44</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_13"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470176" model="account.account">
+            <field name="code">470176</field>
+            <field name="name">Otros Gastos de Apoyo Directo</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_13"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470177" model="account.account">
+            <field name="code">470177</field>
+            <field name="name">Pago Familia Cuidadoras</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_13"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470178" model="account.account">
+            <field name="code">470178</field>
+            <field name="name">Salud e Higiene</field>
+            <field name="x_senainfo_name">Salud e Higiene</field>
+            <field name="x_senainfo_project_code">11</field>
+            <field name="x_senainfo_institution_code">39</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_13"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470179" model="account.account">
+            <field name="code">470179</field>
+            <field name="name">Utiles de Aseo NNA</field>
+            <field name="x_senainfo_name">Salud e Higiene</field>
+            <field name="x_senainfo_project_code">11</field>
+            <field name="x_senainfo_institution_code">39</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_13"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470180" model="account.account">
+            <field name="code">470180</field>
+            <field name="name">Alimentos y Bebidas</field>
+            <field name="x_senainfo_name">Alimentación</field>
+            <field name="x_senainfo_project_code">9</field>
+            <field name="x_senainfo_institution_code">37</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_13"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470181" model="account.account">
+            <field name="code">470181</field>
+            <field name="name">Vestuario y Calzado</field>
+            <field name="x_senainfo_name">Vestuario y Calzado</field>
+            <field name="x_senainfo_project_code">10</field>
+            <field name="x_senainfo_institution_code">38</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_13"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470182" model="account.account">
+            <field name="code">470182</field>
+            <field name="name">Texto y Material de Enseñanza</field>
+            <field name="x_senainfo_name">Educación</field>
+            <field name="x_senainfo_project_code">12</field>
+            <field name="x_senainfo_institution_code">40</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_13"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <!-- Transferencias -->
+        <record id="adra_account_extended.account_470201" model="account.account">
+            <field name="code">470201</field>
+            <field name="name">Aporte de Administración Centralizada a Proyecto</field>
+            <field name="x_senainfo_name">Traspaso</field>
+            <field name="x_senainfo_project_code">23</field>
+            <field name="x_senainfo_institution_code">51</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_14"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470202" model="account.account">
+            <field name="code">470202</field>
+            <field name="name">Castigos y Ajustes</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_14"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470203" model="account.account">
+            <field name="code">470203</field>
+            <field name="name">Devolución Préstamos Institucionales</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_14"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470204" model="account.account">
+            <field name="code">470204</field>
+            <field name="name">Restitución a SENAME por Atención Rechazada</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_14"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470205" model="account.account">
+            <field name="code">470205</field>
+            <field name="name">Transferencia Cierre Proyecto a Otro Proyecto</field>
+            <field name="x_senainfo_name">Traspaso</field>
+            <field name="x_senainfo_project_code">23</field>
+            <field name="x_senainfo_institution_code">51</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_14"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470206" model="account.account">
+            <field name="code">470206</field>
+            <field name="name">Transferencia Cierre de Proyecto a SENAME</field>
+            <field name="x_senainfo_name">Traspaso</field>
+            <field name="x_senainfo_project_code">23</field>
+            <field name="x_senainfo_institution_code">51</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_14"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_470207" model="account.account">
+            <field name="code">470207</field>
+            <field name="name">Transferencia por Administración Centralizada</field>
+            <field name="x_senainfo_name">Traspaso</field>
+            <field name="x_senainfo_project_code">23</field>
+            <field name="x_senainfo_institution_code">51</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_14"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+
+        <!-- Income -->
+
+        <!-- Ingresos SENAME -->
+        <record id="adra_account_extended.account_460101" model="account.account">
+            <field name="code">330101</field>
+            <field name="name">Subvención</field>
+            <field name="x_senainfo_name">Subvención</field>
+            <field name="x_senainfo_project_code">1</field>
+            <field name="x_senainfo_institution_code">8</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_8"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_460102" model="account.account">
+            <field name="code">330102</field>
+            <field name="name">Remesas</field>
+            <field name="x_senainfo_name">Remesa</field>
+            <field name="x_senainfo_project_code">2</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_8"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_460103" model="account.account">
+            <field name="code">330103</field>
+            <field name="name">Aguinaldos</field>
+            <field name="x_senainfo_name">Aguinaldos</field>
+            <field name="x_senainfo_project_code">3</field>
+            <field name="x_senainfo_institution_code">10</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_8"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <!-- Aportes Institucionales -->
+        <record id="adra_account_extended.account_440101" model="account.account">
+            <field name="code">340101</field>
+            <field name="name">Aporte Directo Organismo Colaborador</field>
+            <field name="x_senainfo_name">Otros</field>
+            <field name="x_senainfo_project_code">7</field>
+            <field name="x_senainfo_institution_code">14</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_6"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_440102" model="account.account">
+            <field name="code">340102</field>
+            <field name="name">Donaciones de otras Instituciones y Privados</field>
+            <field name="x_senainfo_name">Donaciones</field>
+            <field name="x_senainfo_project_code">6</field>
+            <field name="x_senainfo_institution_code">13</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_6"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_440103" model="account.account">
+            <field name="code">340103</field>
+            <field name="name">Ingresos para pago de Aguinaldos</field>
+            <field name="x_senainfo_name">Aguinaldos</field>
+            <field name="x_senainfo_project_code">3</field>
+            <field name="x_senainfo_institution_code">10</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_6"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_440104" model="account.account">
+            <field name="code">340104</field>
+            <field name="name">Ingreso para pago de Bonos</field>
+            <field name="x_senainfo_name">Aguinaldos</field>
+            <field name="x_senainfo_project_code">3</field>
+            <field name="x_senainfo_institution_code">10</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_6"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_440105" model="account.account">
+            <field name="code">340105</field>
+            <field name="name">Préstamos Institucionales</field>
+            <field name="x_senainfo_name">Otros</field>
+            <field name="x_senainfo_project_code">7</field>
+            <field name="x_senainfo_institution_code">14</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_6"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_440106" model="account.account">
+            <field name="code">340106</field>
+            <field name="name">Otros Ingresos</field>
+            <field name="x_senainfo_name">Otros</field>
+            <field name="x_senainfo_project_code">7</field>
+            <field name="x_senainfo_institution_code">14</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_6"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <!-- Ingresos de Transferencia -->
+        <record id="adra_account_extended.account_450101" model="account.account">
+            <field name="code">350101</field>
+            <field name="name">Ingreso por Transferencia desde Otro Proyecto</field>
+            <field name="x_senainfo_name">Otros</field>
+            <field name="x_senainfo_project_code">4</field>
+            <field name="x_senainfo_institution_code">11</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_7"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_450102" model="account.account">
+            <field name="code">350102</field>
+            <field name="name">Ingreso Centralización de Recursos</field>
+            <field name="x_senainfo_name">Traspaso</field>
+            <field name="x_senainfo_institution_code">8</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_7"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_450103" model="account.account">
+            <field name="code">350103</field>
+            <field name="name">Reintegro de Pagos Prorrateados (Devoluciones)</field>
+            <field name="x_senainfo_name">Otros</field>
+            <field name="x_senainfo_project_code">7</field>
+            <field name="x_senainfo_institution_code">14</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_7"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <!-- Devoluciones -->
+        <record id="adra_account_extended.account_470221" model="account.account">
+            <field name="code">360101</field>
+            <field name="name">Devoluciones</field>
+            <field name="x_senainfo_name">Devolución</field>
+            <field name="x_senainfo_project_code">29</field>
+            <field name="x_senainfo_institution_code">56</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_15"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <!-- Infraestructura -->
+        <record id="adra_account_extended.account_160101" model="account.account">
+            <field name="code">160101</field>
+            <field name="name">Infraestructura</field>
+            <field name="x_senainfo_name">Infraestructura</field>
+            <field name="x_senainfo_project_code">26</field>
+            <field name="x_senainfo_institution_code">54</field>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_10"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <!-- Equipamiento -->
+        <record id="adra_account_extended.account_170101" model="account.account">
+            <field name="code">170101</field>
+            <field name="name">Equipamiento</field>
+            <field name="x_senainfo_name">Equipamiento</field>
+            <field name="x_senainfo_project_code">25</field>
+            <field name="x_senainfo_institution_code">53</field>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_11"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <!-- Compensation provision -->
+        <record id="adra_account_extended.account_180101" model="account.account">
+            <field name="code">180101</field>
+            <field name="name">Pagar Finiquito contra Provisión</field>
+            <field name="x_senainfo_name">Pago Provisión por Indemnización</field>
+            <field name="x_senainfo_project_code">30</field>
+            <field name="x_senainfo_institution_code">57</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_19"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_180102" model="account.account">
+            <field name="code">180102</field>
+            <field name="name">Provisionar Recursos</field>
+            <field name="x_senainfo_name">Pago Provisión por Indemnización</field>
+            <field name="x_senainfo_project_code">30</field>
+            <field name="x_senainfo_institution_code">57</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_19"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <!-- Lease guarantees -->
+        <record id="adra_account_extended.account_180101" model="account.account">
+            <field name="code">190101</field>
+            <field name="name">Garantías por Arriendo Recuperadas</field>
+            <field name="x_senainfo_name">Devolución</field>
+            <field name="x_senainfo_project_code">29</field>
+            <field name="x_senainfo_institution_code">56</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_20"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="adra_account_extended.account_180102" model="account.account">
+            <field name="code">190102</field>
+            <field name="name">Garantías por Arriendo Pagadas</field>
+            <field name="x_senainfo_name">Otros Gastos</field>
+            <field name="x_senainfo_project_code">24</field>
+            <field name="x_senainfo_institution_code">52</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="group_id" ref="adra_account_extended.account_group_20"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+    </data>
+</flectra>

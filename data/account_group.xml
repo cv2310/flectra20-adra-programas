@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flectra>
+    <data>
+
+        <!-- Account Child Group -->
+        <record id="adra_account_extended.account_group_6" model="account.group">
+            <field name="parent_id" ref="adra_account_extended.account_group_1"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Aportes Institucionales</field>
+            <field name="x_ingress_group">1</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_7" model="account.group">
+            <field name="parent_id" ref="adra_account_extended.account_group_1"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Ingreso de Transferencia</field>
+            <field name="x_ingress_group">1</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_8" model="account.group">
+            <field name="parent_id" ref="adra_account_extended.account_group_1"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Ingresos SENAME</field>
+            <field name="x_ingress_group">1</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_9" model="account.group">
+            <field name="parent_id" ref="adra_account_extended.account_group_2"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Otros</field>
+            <field name="x_egress_group">1</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_10" model="account.group">
+            <field name="parent_id" ref="adra_account_extended.account_group_2"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Infraestructura</field>
+            <field name="x_egress_group">1</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_11" model="account.group">
+            <field name="parent_id" ref="adra_account_extended.account_group_2"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Equipamiento</field>
+            <field name="x_egress_group">1</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_12" model="account.group">
+            <field name="parent_id" ref="adra_account_extended.account_group_3"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Gastos Operacionales</field>
+            <field name="x_egress_group">1</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_13" model="account.group">
+            <field name="parent_id" ref="adra_account_extended.account_group_3"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Gastos de Apoyo Directo</field>
+            <field name="x_egress_group">1</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_14" model="account.group">
+            <field name="parent_id" ref="adra_account_extended.account_group_4"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Transferencias</field>
+            <field name="x_ingress_group">1</field>
+            <field name="x_egress_group">1</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_15" model="account.group">
+            <field name="parent_id" ref="adra_account_extended.account_group_4"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Devoluciones</field>
+            <field name="x_ingress_group">1</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_16" model="account.group">
+            <field name="parent_id" ref="adra_account_extended.account_group_5"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Gastos Personal</field>
+            <field name="x_egress_group">1</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_19" model="account.group">
+            <field name="parent_id" ref="adra_account_extended.account_group_17"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Provisión Indemnización</field>
+            <field name="x_egress_group">1</field>
+        </record>
+
+        <record id="adra_account_extended.account_group_20" model="account.group">
+            <field name="parent_id" ref="adra_account_extended.account_group_18"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Garantía por Arriendo</field>
+            <field name="x_egress_group">1</field>
+        </record>
+
+
+    </data>
+</flectra>

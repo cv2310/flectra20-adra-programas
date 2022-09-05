@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+
+    <data>
+
+        <record id="account_asset_inherit_adra_account_extended" model="ir.ui.view">
+            <field name="name">account.asset.view.form.inherit</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_asset_form"/>
+            <field name="arch" type="xml">
+                
+                <!-- Add fields -->
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="x_account_analytic_account_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_account_analytic_account_id']" position="after">
+                    <xpath expr="//field[@name='date']" position="move"/>
+                </xpath>
+
+                <xpath expr="//field[@name='date']" position="after">
+                    <xpath expr="//field[@name='code']" position="move"/>
+                </xpath>
+
+                <xpath expr="//field[@name='code']" position="after">
+                    <field name="x_floor"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_floor']" position="after">
+                    <field name="x_office_number"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_office_number']" position="after">
+                    <field name="x_quantity"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_quantity']" position="after">
+                    <field name="x_type_measure"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_type_measure']" position="after">
+                    <field name="x_brand"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_brand']" position="after">
+                    <field name="x_model"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_model']" position="after">
+                    <field name="x_color"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_color']" position="after">
+                    <field name="x_procedence"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_procedence']" position="after">
+                    <field name="x_expense_number"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_expense_number']" position="after">
+                    <field name="x_expense_date"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_expense_date']" position="after">
+                    <field name="x_invoice_number"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_invoice_number']" position="after">
+                    <xpath expr="//field[@name='partner_id']" position="move"/>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="x_transfer_record_number"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_transfer_record_number']" position="after">
+                    <field name="x_location"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_location']" position="after">
+                    <field name="x_inventory_unsubscribe_number"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_inventory_unsubscribe_number']" position="after">
+                    <field name="x_quantity_unsubscribe"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_quantity_unsubscribe']" position="after">
+                    <field name="x_status"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_status']" position="after">
+                    <field name="x_description"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_description']" position="after">
+                    <field name="x_used_by"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_used_by']" position="after">
+                    <xpath expr="//field[@name='value']" position="move"/>
+                </xpath>
+
+                <xpath expr="//field[@name='value']" position="after">
+                    <xpath expr="//field[@name='salvage_value']" position="move"/>
+                </xpath>
+
+                <xpath expr="//field[@name='salvage_value']" position="after">
+                    <xpath expr="//field[@name='value_residual']" position="move"/>
+                </xpath>
+
+                <!-- Change fields -->
+                <xpath expr="//field[@name='category_id']" position="attributes">
+                    <attribute name="string">Categoria</attribute>
+                </xpath>
+
+                <!-- Make fields invisible -->
+                <xpath expr="//field[@name='date_first_depreciation']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='first_depreciation_manual_date']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+    
+</flectra>

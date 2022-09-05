@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data>
+        <record id="hr_expense_inherit_adra_account_extended" model="ir.ui.view">
+            <field name="name">hr.expense.view.form.inherit</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+            <field name="arch" type="xml">
+
+                <!-- Add fields -->
+                <xpath expr="//field[@name='reference']" position="after">
+                    <field name="x_out_back_up_document_type" required="1"
+                    groups="account.group_account_invoice,account.group_account_readonly"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_out_back_up_document_type']" position="after">
+                    <field name="x_back_up_document_number" required="1"
+                    groups="account.group_account_invoice,account.group_account_readonly"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_back_up_document_number']" position="after">
+                    <field name="x_back_up_document_date"
+                    groups="account.group_account_invoice,account.group_account_readonly"/>
+                </xpath>
+
+                <xpath expr="//field[@name='unit_amount']" position="after">
+                    <field name="x_payment_method_id" string="Forma de Pago" required="1" options="{'no_create': True, 'no_open': True}"
+                    groups="account.group_account_invoice,account.group_account_readonly"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_payment_method_id']" position="after">
+                    <field name="x_income_document_number" required="1"
+                    groups="account.group_account_invoice,account.group_account_readonly"/>
+                </xpath>
+
+                <!-- Move fields -->
+                <xpath expr="//field[@name='x_income_document_number']" position="after">
+                    <xpath expr="//field[@name='date']" position="move"/>
+                </xpath>
+
+                <!-- Make fields invisible -->
+                <xpath expr="//field[@name='reference']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='amount_residual']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='analytic_account_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</flectra>

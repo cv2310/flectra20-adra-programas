@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flectra>
+    <data>
+
+        <!-- Payment methods -->
+        <record id="account_payment_method_manual_in" model="account.payment.method">
+            <field name="name">Efectivo</field>
+            <field name="code">efectivo</field>
+            <field name="payment_type">inbound</field>
+        </record>
+        <record id="account_payment_method_manual_out" model="account.payment.method">
+            <field name="name">Efectivo</field>
+            <field name="code">efectivo</field>
+            <field name="payment_type">outbound</field>
+        </record>
+
+        <record id="account_payment_method_deposito_in" model="account.payment.method">
+            <field name="name">Depósito</field>
+            <field name="code">deposito</field>
+            <field name="payment_type">inbound</field>
+        </record>
+        <record id="account_payment_method_deposito_out" model="account.payment.method">
+            <field name="name">Depósito</field>
+            <field name="code">deposito</field>
+            <field name="payment_type">outbound</field>
+        </record>
+
+        <record id="account_payment_method_transferencia_in" model="account.payment.method">
+            <field name="name">Transferencia Bancaria</field>
+            <field name="code">transferencia</field>
+            <field name="payment_type">inbound</field>
+        </record>
+        <record id="account_payment_method_transferencia_out" model="account.payment.method">
+            <field name="name">Transferencia Bancaria</field>
+            <field name="code">transferencia</field>
+            <field name="payment_type">outbound</field>
+        </record>
+
+        <record id="account_payment_method_cheque_out" model="account.payment.method">
+            <field name="name">Cheque</field>
+            <field name="code">cheque</field>
+            <field name="payment_type">outbound</field>
+        </record>
+
+    </data>
+</flectra>
