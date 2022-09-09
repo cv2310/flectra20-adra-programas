@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from flectra import models, fields, api
+from flectra.exceptions import RedirectWarning, UserError, ValidationError, AccessError
+from flectra.tools.misc import formatLang, format_date, get_lang
 
 
 class AccountMove(models.Model):
@@ -115,6 +117,14 @@ class AccountMove(models.Model):
     def _post(self, soft=True):
         self._check_document_types_post()
         return super()._post(soft)
+
+    def write(self, vals):
+        for move in self:
+            lock_date = move.company_id._get_user_fiscal_lock_date()
+            if move.invoice_date <= lock_date:
+                message = ("No se puede modificar o crear movimientos después del ", format_date(self.env, lock_date))
+                raise UserError(message)
+        return super().write(vals)
 
     # def _get_name_invoice_report(self):
     #     self.ensure_one()

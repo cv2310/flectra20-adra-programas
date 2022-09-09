@@ -39,7 +39,7 @@
         'views/account_payment_register_views.xml',
         'views/hr_expense_sheet_views.xml',
         'views/hr_expense_views.xml',
-        'reports/account_report_back_view.xml',
+#       'reports/account_report_back_view.xml',
         'wizards/general_ledger.xml'
     ],
     # only loaded in demonstration mode

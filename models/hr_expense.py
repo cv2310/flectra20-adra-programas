@@ -27,18 +27,6 @@ class HrExpense(models.Model):
     x_payment_method_id = fields.Selection([('5', 'Efectivo'), ('9', 'Transferencia Bancaria')], default='5')
     x_income_document_number = fields.Char(string='Nº Comprobante', store=True);
 
-    def _compute_from_product_id_company_id(self):
-        for expense in self.filtered('product_id'):
-            expense = expense.with_company(expense.company_id)
-            expense.name = expense.name or expense.product_id.display_name
-            if not expense.attachment_number or (expense.attachment_number and not expense.unit_amount):
-                expense.unit_amount = expense.product_id.price_compute('standard_price')[expense.product_id.id]
-            expense.product_uom_id = expense.product_id.uom_id
-            expense.tax_ids = expense.product_id.supplier_taxes_id.filtered(lambda tax: tax.company_id == expense.company_id)  # taxes only from the same company
-            # account = expense.product_id.product_tmpl_id._get_product_accounts()['expense']
-            # if account:
-            #     expense.account_id = account
-
     def _get_account_move_line_values(self):
         move_line_values_by_expense = {}
         for expense in self:

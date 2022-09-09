@@ -12,3 +12,5 @@ from . import hr_expense_sheet
 from . import hr_expense
 from . import account_report_back
 from . import account_report_export
+from . import company
+from . import res_partner

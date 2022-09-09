@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flectra>
-    <data>
+    <data noupdate="1">
 
         <!-- Payment methods -->
         <record id="account_payment_method_manual_in" model="account.payment.method">

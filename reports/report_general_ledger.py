@@ -668,12 +668,12 @@ class ReportGeneralLedger(models.AbstractModel):
             GROUP BY grupo''')
 
         sqlFiledBase = "row_number() OVER () as id, grupo as cuenta_senainfo, sum(monto) as total"
-        sqlFiled1 = '''ag.name AS grupo, CASE
+        sqlFiled1 = '''ac.x_senainfo_group_name AS grupo, CASE
                             WHEN ac.code::text = '360101'::character varying::text THEN ml.price_total * '-1'::integer::numeric
                             ELSE ml.price_total
                         END AS monto
                     '''
-        sqlFiled2 = '''ag.name AS grupo, CASE
+        sqlFiled2 = '''ac.x_senainfo_group_name AS grupo, CASE
                             WHEN ac.code::text = '360101'::character varying::text THEN he.total_amount * '-1'::integer::numeric
                             ELSE he.total_amount
                         END AS monto

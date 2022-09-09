@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flectra>
-    <data>
+    <data noupdate="1">
 
         <!-- Account Parent Group -->
         <record id="adra_account_extended.account_group_1" model="account.group">
