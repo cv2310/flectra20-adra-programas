@@ -18,7 +18,7 @@ class AccountGroup(models.Model):
 
     def write(self, vals):
         if   not self.env.user.has_group('base.group_partner_manager'):
-            message = ("No se puede modificar o crear Cuentas Contables ")
+            message = ("No tiene los privilegios para crear o modificar una Cuenta Contable. Comuníquese con un Administrador.")
             raise UserError(message)
         return super().write(vals)
 

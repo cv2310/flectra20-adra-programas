@@ -141,7 +141,7 @@ class HrExpense(models.Model):
         for move in move_group_by_sheet.values():
             move.x_account_analytic_account_id = self.sheet_id.x_account_analytic_account_id
             move.invoice_date = self.sheet_id.x_invoice_date
-            move.date = expense.date
+            move.date = self.sheet_id.x_invoice_date
             move.x_out_back_up_document_type = expense.x_out_back_up_document_type
             move.x_back_up_document_number = expense.x_back_up_document_number
             move.x_back_up_document_date = expense.x_back_up_document_date

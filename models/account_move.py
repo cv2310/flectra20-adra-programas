@@ -4,6 +4,9 @@ from flectra import models, fields, api
 from flectra.exceptions import RedirectWarning, UserError, ValidationError, AccessError
 from flectra.tools.misc import formatLang, format_date, get_lang
 
+import logging
+_logger = logging.getLogger(__name__)
+
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
@@ -74,7 +77,7 @@ class AccountMove(models.Model):
         elif self.move_type == 'entry':
             document_type = "EGRESO"
 
-        if self.env['account.account'].browse(self.line_ids.account_id.ids[1]).code == '360101': # Devolutions
+        if self.env['account.account'].browse(self.line_ids.account_id.ids[1]).group_id.id == 17: # Devolutions
             document_type = "EGRESO"
 
         return document_type
@@ -89,16 +92,16 @@ class AccountMove(models.Model):
         ''' if it already has a correlative, do not assign '''
         if self.x_correlative:
             return self.x_correlative
-
         query = """
-            SELECT MAX(x_correlative)
-            FROM account_move
-            WHERE EXTRACT(YEAR FROM invoice_date) = EXTRACT(YEAR FROM NOW())
-            AND x_account_analytic_account_id = %s
-            AND company_id = %s
-            AND x_document_type = %s
+                    SELECT MAX(x_correlative)
+                    FROM account_move
+                    WHERE x_account_analytic_account_id = %s
+                    AND company_id = %s
+                    AND x_document_type = %s
+                    AND EXTRACT(YEAR FROM invoice_date) = %s
         """
-        self.env.cr.execute(query, (self.x_account_analytic_account_id.id, self.company_id.id, self.x_document_type))
+
+        self.env.cr.execute(query, (self.x_account_analytic_account_id.id, self.company_id.id, self.x_document_type,  self.invoice_date.year))
         max_sequence = self.env.cr.fetchone()[0]
         if max_sequence is None:
             return 1
@@ -121,7 +124,7 @@ class AccountMove(models.Model):
     def write(self, vals):
         for move in self:
             lock_date = move.company_id._get_user_fiscal_lock_date()
-            if move.invoice_date <= lock_date:
+            if move.date <= lock_date:
                 message = ("No se puede modificar o crear movimientos después del ", format_date(self.env, lock_date))
                 raise UserError(message)
         return super().write(vals)
@@ -164,3 +167,8 @@ class AccountMove(models.Model):
                 'ref': reconciliation_ref,
             })
         return reconciled_vals
+
+    @api.constrains('name', 'journal_id', 'state')
+    def _check_unique_sequence_number(self):
+        _logger.warning("nw _check_unique_sequence_number")
+        return

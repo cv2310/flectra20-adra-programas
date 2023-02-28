@@ -14,3 +14,4 @@ from . import account_report_back
 from . import account_report_export
 from . import company
 from . import res_partner
+from . import res_partner_bank
