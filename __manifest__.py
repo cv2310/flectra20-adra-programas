@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'account', 'account_asset', 'l10n_cl', 'hr_expense', 'accounting_pdf_reports'],
+    'depends': ['base', 'account', 'account_asset', 'l10n_cl', 'hr_expense', 'accounting_pdf_reports', 'report_xlsx'],
 
     # always loaded
     'data': [
@@ -39,8 +39,10 @@
         'views/account_payment_register_views.xml',
         'views/hr_expense_sheet_views.xml',
         'views/hr_expense_views.xml',
-#       'reports/account_report_back_view.xml',
-        'wizards/general_ledger.xml'
+        'reports/account_report_back_view.xml',
+        'wizards/general_ledger.xml',
+        'wizards/adra_assets_excel_reports.xml',
+        'wizards/adra_assets_pdf_reports.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

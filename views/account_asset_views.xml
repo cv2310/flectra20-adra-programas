@@ -55,6 +55,15 @@
                 </xpath>
 
                 <xpath expr="//field[@name='x_procedence']" position="after">
+                    <field name="x_account_move_id"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_account_move_id']" position="after">
+                    <field name="x_expense_n" attrs="{'invisible': [('x_account_move_id', '!=', False)]}"/>
+                </xpath>
+
+
+                <xpath expr="//field[@name='x_expense_n']" position="after">
                     <field name="x_expense_number"/>
                 </xpath>
 
@@ -87,6 +96,13 @@
                 </xpath>
 
                 <xpath expr="//field[@name='x_quantity_unsubscribe']" position="after">
+                    <field name="x_status_active"
+                           string="Estado-activo"
+                           selection="[('vigente', 'Vigente'), ('dado_baja', 'Dado de Baja'), ('general', 'General')]"
+                           default="vigente"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_status_active']" position="after">
                     <field name="x_status"/>
                 </xpath>
 

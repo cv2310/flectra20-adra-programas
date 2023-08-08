@@ -54,7 +54,7 @@ class TXTExport(ExportFormat, http.Controller):
         line_str = ''
         if row['tipo_docto_senainfo'] == 1: # Ingreso
             line_str += pycompat.to_text(str(row['tipo_docto_senainfo']))
-            line_str += pycompat.to_text(row['codigo_proyecto'].zfill(9))
+            line_str += pycompat.to_text(row['cod_programa'].zfill(9))
             line_str += pycompat.to_text(row['periodo'])
             line_str += pycompat.to_text(row['fecha_ingreso'].strftime('%d-%m-%Y'))
             line_str += pycompat.to_text(str(row['nro_comprobante']).zfill(9))
@@ -66,7 +66,7 @@ class TXTExport(ExportFormat, http.Controller):
             line_str += pycompat.to_text(self.clean_text(row['glosa'][0:20]).ljust(20,' ').ljust(89,'-'))
         elif row['tipo_docto_senainfo'] == 0: # Egreso
             line_str += pycompat.to_text(str(row['tipo_docto_senainfo']))
-            line_str += pycompat.to_text(row['codigo_proyecto'].zfill(9))
+            line_str += pycompat.to_text(row['cod_programa'].zfill(9))
             line_str += pycompat.to_text(row['periodo'])
             line_str += pycompat.to_text(row['fecha_ingreso'].strftime('%d-%m-%Y'))
             line_str += pycompat.to_text(str(row['nro_comprobante']).zfill(9))

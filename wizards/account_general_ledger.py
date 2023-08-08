@@ -14,11 +14,12 @@ class AccountReportGeneralLedger(models.TransientModel):
     x_document_type = fields.Selection([('INGRESO', 'Libro Ingresos'), ('EGRESO', 'Libro Egresos'), ('BANCO', 'Libro Banco'), ('RENDICION', 'Rendición de Cuentas'), ('CONCILIACION', 'Conciliación Bancaria')], string='Tipo de Movimientos', required=True, default='EGRESO')
     x_bank_final_balance = fields.Float(string='Saldo Cartola Bancaria', store=True, default=0)
     journal_ids = fields.Many2many('account.journal', 'account_report_general_ledger_journal_rel', 'account_id', 'journal_id', string='Journals', required=True)
+    x_report_version = fields.Selection([('new', 'Nueva'), ('old', 'Antigua')], string='Versión Reportes', required=True, default='new')
 
     def _print_report(self, data):
         self.x_program_name = self.x_account_analytic_account_id.name
         data = self.pre_print_report(data)
-        data['form'].update(self.read(['x_account_analytic_account_id', 'x_sort_by', 'x_report_type', 'x_document_type', 'x_program_name', 'x_bank_final_balance'])[0])
+        data['form'].update(self.read(['x_account_analytic_account_id', 'x_sort_by', 'x_report_type', 'x_document_type', 'x_program_name', 'x_bank_final_balance','x_report_version'])[0])
         if not data['form'].get('date_from'):
             raise UserError(_("Debe seleccionar una fecha de inicio."))
         if not data['form'].get('date_to'):

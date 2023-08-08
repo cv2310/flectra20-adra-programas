@@ -19,6 +19,11 @@
                 </xpath>
 
                 <xpath expr="//field[@name='x_report_type']" position="after">
+                    <field name="x_report_version" widget="radio"
+                    groups="account.group_account_invoice,account.group_account_readonly"/>
+                </xpath>
+
+                <xpath expr="//field[@name='x_report_type']" position="after">
                     <field name="x_document_type" widget="radio"
                     groups="account.group_account_invoice,account.group_account_readonly"/>
                 </xpath>

@@ -114,9 +114,17 @@
                                 <field name="x_back_up_document_date" required="1" nolabel="1" options="{'datepicker': {'warn_future': true}}"/>
                             </group>
                         </group>
-                    </page>                
+                    </page>
                 </xpath>
-
+                <xpath expr="//form/sheet/notebook/page[2]" position="after">
+                    <page id="assets_document_tab" string="Activos">
+                        <group id="assets_document_tab_group">
+                            <group string="Activos">
+                                <field name="x_account_asset_asset_ids"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
             </field>
         </record>
 

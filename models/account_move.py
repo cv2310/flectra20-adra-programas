@@ -13,6 +13,7 @@ class AccountMove(models.Model):
 
     x_account_analytic_account_id = fields.Many2one('account.analytic.account', string='Proyecto', store=True, index=True)
     x_account_group_id = fields.Many2one('account.group', string='Tipo de Cuenta', store=True)
+    x_account_asset_asset_ids = fields.One2many('account.asset.asset', 'x_account_move_id', string='Activo(s) asociado(s)', store=True, index=True)
     x_correlative = fields.Integer(string='Nº Documento', store=True, index=True);
     x_document_type = fields.Char(string='Tipo Documento', copy=False, store=True, index=True)
     x_name = fields.Char(string='Documento', copy=False, store=True)

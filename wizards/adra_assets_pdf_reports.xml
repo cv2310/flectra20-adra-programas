@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data noupdate="1">
+        <record id="paperformat_pdf_asset_reports" model="report.paperformat">
+            <field name="name">Carta para informes pdf</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">1</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">96</field>
+        </record>
+
+
+        <record id="view_adra_assets_pdf_reports_form_modal" model="ir.ui.view">
+            <field name="name">Pdf Reports Form View Modal</field>
+            <field name="model">report.adra_account_extended.adra_report_sis_pdf</field>
+            <field name="arch" type="xml">
+                <!-- Vista de formulario modal -->
+                <form string="Generador de Reportes" mode="primary">
+                    <group>
+                        <field name="x_account_analytic_account_id"/>
+                    </group>
+                    <footer>
+                        <button string="Imprimir" type="object" name="print_report" class="btn-primary"/>
+                        <button string="Cancelar" type="object" name="cancel_report" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="report_pdf_assets" model="ir.actions.report">
+            <field name="model">report.adra_account_extended.adra_report_sis_pdf</field>
+            <field name="name">Reporte pdf para activos</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">adra_account_extended.adra_report_sis_pdf</field>
+            <field name="report_file">adra_account_extended.adra_report_sis_pdf</field>
+            <field name="attachment_use">False</field>
+            <field name="paperformat_id" ref="paperformat_pdf_asset_reports"/>
+        </record>
+
+        <record id="action_window_adra_assets_pdf_reports" model="ir.actions.act_window">
+            <field name="name">Generador de Reportes</field>
+            <field name="res_model">report.adra_account_extended.adra_report_sis_pdf</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_adra_assets_pdf_reports_form_modal"/>
+            <field name="context">{"wizard_mode": "1"}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Haga clic en Crear para generar un informe.</p>
+            </field>
+            <field name="target">new</field>
+        </record>
+        <template id="adra_report_sis_pdf">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <div style="font-family: Liberation Sans; font-size: 8px; display: flex; justify-content: space-between;">
+                        <span style="text-align: left; width: 50%;"><t t-esc="current_date"/></span>
+                        <span style="text-align: center; width: 50%;margin-left:362px">ADRA Chile</span>
+                    </div>
+                    <table style="width: 100%; font-family: Liberation Sans; font-size: 8px; border-collapse: collapse;margin-top:15px">
+                        <tr>
+                            <td style="width: 50px;"><img src="/adra_account_extended/static/src/img/logo_adra.jpg" width="50" height="40"/></td>
+                            <td style="width: 75px;"><img src="/adra_account_extended/static/src/img/mejor_niñez.jpg" width="75" height="50"/></td>
+                            <td style="text-align: left; padding-left: 10px;">
+                                Agencia Adventista de Desarrollo y Recursos Asistenciales<br/>
+                                RUT:70051600-8
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="font-family: Liberation Sans; font-size: 16.5px; display: flex; justify-content: space-between;margin-top:15px">
+                        <span style="text-align: left;">FORMULARIO DE INVENTARIO DE BIENES</span>
+                        <span style="font-family: Liberation Sans; font-size: 12.5px; text-align: right;margin-left:530px"
+                              t-esc="current_date_dmy"/>
+                    </div>
+                    <div style="font-family: Liberation Sans; font-size: 8px; text-align: left; font-weight: bold; margin-top: 15px; margin-bottom: 15px; display: flex;">
+                        <span style="text-align: left;">Programa: <t t-esc="proyecto_name"/></span>
+                        <span style="text-align: left;margin-left:200px">Ordenado por:</span>
+                        <span style="text-align: left;margin-left:200px">Tipo de Reporte:</span>
+                    </div>
+                    <table style="width: 100%; font-family: Liberation Sans; font-size: 8px; text-align: center; border-collapse: collapse;justify-content: space-between">
+                        <thead style="font-weight: bold; background-color: #FFFFCC;">
+                            <tr style="height: 25px">
+                                <td style="width: 30px; border: 1px solid black;vertical-align: middle">N</td>
+                                <td style="width: 50px; border: 1px solid black;vertical-align: middle">CE</td>
+                                <td style="width: 50px; border: 1px solid black;vertical-align: middle">Fecha</td>
+                                <td style="width: 70px; border: 1px solid black;vertical-align: middle">Código</td>
+                                <td style="width: 90px; border: 1px solid black;vertical-align: middle">Clasificación</td>
+                                <td style="width: 120px; border: 1px solid black;vertical-align: middle">Descripción</td>
+                                <td style="width: 70px; border: 1px solid black;vertical-align: middle">Estado</td>
+                                <td style="width: 100px; border: 1px solid black;vertical-align: middle">Observación</td>
+                                <td style="width: 50px; border: 1px solid black;vertical-align: middle">Ubicación</td>
+                                <td style="width: 30px; border: 1px solid black;vertical-align: middle">Cantidad</td>
+                                <td style="width: 50px; border: 1px solid black;vertical-align: middle">Monto</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-log="assets"/>
+                            <t t-foreach="assets" t-as="asset">
+                                <t t-log="assets.ce"/>
+                                <tr>
+                                    <td style="border: 1px solid black;"><span t-esc="asset_index + 1"/></td>
+                                    <td style="border: 1px solid black;"><span t-field="asset.x_expense_number"/></td>
+                                    <td style="border: 1px solid black;"><span t-field="asset.date"/></td>
+                                    <td style="border: 1px solid black;"><span t-field="asset.code"/></td>
+                                    <td style="border: 1px solid black;"><span t-field="asset.name"/></td>
+                                    <td style="border: 1px solid black;"><span t-field="asset.x_description"/></td>
+                                    <td style="border: 1px solid black;"><span t-field="asset.x_status"/></td>
+                                    <td style="border: 1px solid black;"><span t-field="asset.x_description"/></td>
+                                    <td style="border: 1px solid black;"><span t-field="asset.x_location"/></td>
+                                    <td style="border: 1px solid black;"><span t-field="asset.x_quantity"/></td>
+                                    <td style="border: 1px solid black;"><span t-field="asset.value"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+        <menuitem id="menu_item_adra_assets_reports"
+                  name="Reportes de activos"
+                  parent="account.menu_finance_reports"
+                  sequence="20"/>
+
+        <menuitem id="menu_item_generator_adra_assets_pdf_reports"
+                  name="Generador de reportes PDF"
+                  parent="menu_item_adra_assets_reports"
+                  action="action_window_adra_assets_pdf_reports"
+                  sequence="21"/>
+
+
+    </data>
+</flectra>
