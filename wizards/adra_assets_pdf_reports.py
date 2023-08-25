@@ -2,7 +2,6 @@ from flectra.exceptions import UserError
 from flectra import models, _
 import datetime
 
-
 class AdraAssetsPdfReports(models.TransientModel):
     _name = 'report.adra_account_extended.adra_report_sis_pdf'
     _description = 'Generador de Reportes en PDF para activos.'
@@ -13,6 +12,8 @@ class AdraAssetsPdfReports(models.TransientModel):
         projects_quantity = data.get('projects_quantity')
         sort_by = data.get('sort_by')
         x_status_active = data.get('x_status_active')
+        date_from = None
+        date_to = None
         pro_search = None
         act_search = None
 
@@ -46,18 +47,23 @@ class AdraAssetsPdfReports(models.TransientModel):
         #     asset_records = self.env['account.asset.asset'].search([])
         asset_records = self.env['account.asset.asset'].search(search)
         if sort_by == 'fecha_ingreso':
+            sort_by = 'Fecha de ingreso'
             asset_records = sorted(asset_records, key=lambda r: (r.date))
         elif sort_by == 'proyecto_fecha':
+            sort_by = 'Proyecto/Fecha'
             project_name = 'TODOS LOS PROGRAMAS'
             asset_records = sorted(asset_records, key=lambda r: (r.x_account_analytic_account_id.name, r.date))
         else:
+            sort_by = 'Fecha/Proyecto'
             project_name = 'TODOS LOS PROGRAMAS'
             asset_records = sorted(asset_records, key=lambda r: (r.date, r.x_account_analytic_account_id.name))
 
         return {
             'assets': asset_records,
-            'current_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            'current_date_dmy': datetime.now().strftime('%d-%m-%Y'),
+            'current_date': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'current_date_dmy': datetime.datetime.now().strftime('%d-%m-%Y'),
             'project_name': project_name,
-            'sort_by': sort_by
+            'sort_by': sort_by,
+            'date_from': date_from,
+            'date_to': date_to
         }

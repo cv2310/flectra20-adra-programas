@@ -9,7 +9,7 @@ class AdraAssetsReports(models.TransientModel):
                                       string='Proyecto', default='one')
     x_account_analytic_account_id = fields.Many2one('account.analytic.account', string='Seleccione un proyecto')
     x_sort_by_project = fields.Selection([('fecha_ingreso', 'Fecha')], string='Ordenado por', default='fecha_ingreso')
-    x_sort_by_all = fields.Selection([('fecha_proyecto', 'Fecha/Proyecto'), ('proyecto_fecha', 'Proyecto/fecha')],
+    x_sort_by_all = fields.Selection([('fecha_proyecto', 'Fecha/Proyecto'), ('proyecto_fecha', 'Proyecto/Fgitecha')],
                                      string='Ordenado por', default='fecha_proyecto')
     x_status_active = fields.Selection([('general', 'General'), ('vigente', 'Vigente'), ('dado_baja', 'Dado de baja')],
                                      string='Estado activo;', default='general')

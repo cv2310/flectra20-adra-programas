@@ -11,11 +11,13 @@ class ReportXls(models.AbstractModel):
         projects_quantity = data.get('projects_quantity')
         x_status_active = data.get('x_status_active')
         sort_by = data.get('sort_by')
-        date_from = data.get('x_date_from')
-
-        worksheet = workbook.add_worksheet("Report")
+        date_to = None
+        date_from = None
         pro_search = None
         act_search = None
+
+        worksheet = workbook.add_worksheet("Report")
+
         search = []
         if data['x_date_from']:
             ano, mes, dia = map(int, data['x_date_from'].split('-'))
@@ -70,11 +72,11 @@ class ReportXls(models.AbstractModel):
              'text_wrap': True})
 
         if projects_quantity == 'all':
-            self.all_projects_header(workbook, worksheet, data)
+            self.all_projects_header(workbook, worksheet, data, date_from, date_to)
             index_ap = 1
 
         else:
-            self.project_header(workbook, worksheet, data)
+            self.project_header(workbook, worksheet, data, date_from, date_to)
             index_ap = 0
 
         row = 9
@@ -119,7 +121,7 @@ class ReportXls(models.AbstractModel):
 
         workbook.close()
 
-    def project_header(self, workbook, worksheet, data):
+    def project_header(self, workbook, worksheet, data, date_from, date_to):
         project_name = data.get('project_name')
         project_code = data.get('project_code')
         module_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -140,9 +142,15 @@ class ReportXls(models.AbstractModel):
         project_info_format_left = workbook.add_format(
             {'font_name': 'Calibri', 'font_size': 8, 'bold': True, 'align': 'left', 'valign': 'vcenter',
              'text_wrap': True})
+        project_info_format_right = workbook.add_format(
+            {'font_name': 'Calibri', 'font_size': 8, 'bold': True, 'align': 'right', 'valign': 'vcenter',
+             'text_wrap': True})
         project_info_format_bordered = workbook.add_format(
             {'font_size': 10, 'bold': True, 'align': 'center', 'bottom': True, 'top': True, 'valign': 'vcenter',
              'text_wrap': True})
+        project_info_format_left_date = workbook.add_format(
+            {'font_name': 'Calibri', 'font_size': 8, 'bold': True, 'align': 'left', 'valign': 'vcenter',
+             'text_wrap': True, 'num_format': 'dd/mm/yyyy'})
 
         worksheet.set_column('A:A', 9.43)
         worksheet.set_column('B:B', 7.14)
@@ -175,11 +183,17 @@ class ReportXls(models.AbstractModel):
         worksheet.merge_range('A4:B4', 'ADRA CHILE', adra_format)
         worksheet.insert_image('C3', logo_path_adra)
         worksheet.insert_image('R2', logo_path_mejornines)
-        worksheet.write('H3', f'NOMBRE PROYECTO: {project_name}', project_info_format_left)
-        worksheet.write('H4', f'CÓDIGO PROYECTO: {project_code}', project_info_format_left)
+        worksheet.write('H3', 'NOMBRE PROYECTO:', project_info_format_left)
+        worksheet.write('H4', 'CÓDIGO PROYECTO:', project_info_format_left)
         worksheet.write('H5', 'INSTITUCIÓN:', project_info_format_left)
-        worksheet.merge_range('I3:L3', '   FAE MARGA MARGA 1', project_info_format_bordered)
-        worksheet.merge_range('I4:L4', '   1051416', project_info_format_bordered)
+        if date_from:
+            worksheet.write('N3', 'DESDE:', project_info_format_right)
+            worksheet.write('O3', date_from, project_info_format_left_date)
+        if date_to:
+            worksheet.write('N5', 'HASTA:', project_info_format_right)
+            worksheet.write('O5', date_to, project_info_format_left_date)
+        worksheet.merge_range('I3:L3', f'   {project_name}', project_info_format_bordered)
+        worksheet.merge_range('I4:L4', f'   {project_code}', project_info_format_bordered)
         worksheet.merge_range('I5:L5', '   AGENCIA ADVENTISTA Y DESARROLLO', project_info_format_bordered)
 
         header_format = workbook.add_format(
@@ -214,13 +228,13 @@ class ReportXls(models.AbstractModel):
         worksheet.write('L9', 'N° Factura', subheader_format)
         worksheet.write('M9', 'Fecha egr.', subheader_format)
 
-    def all_projects_header(self, workbook, worksheet, data):
+    def all_projects_header(self, workbook, worksheet, data, date_from, date_to):
         projects_quantity = data.get('projects_quantity')
         project_name = data.get('project_name')
         project_code = data.get('project_code')
         if projects_quantity == 'all':
             project_name = 'TODOS LOS PROYECTOS'
-            project_code = 'TODOS LOS CÓDIGOS INVOLUCRADOS'
+            project_code = 'TODOS LOS CÓDIGOS'
         module_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         logo_path_adra = os.path.join(module_path, 'static', 'src', 'img', 'logo_adra.jpg')
         logo_path_mejornines = os.path.join(module_path, 'static', 'src', 'img', 'mejor_niñez.jpg')
@@ -239,9 +253,15 @@ class ReportXls(models.AbstractModel):
         project_info_format_left = workbook.add_format(
             {'font_name': 'Calibri', 'font_size': 8, 'bold': True, 'align': 'left', 'valign': 'vcenter',
              'text_wrap': True})
+        project_info_format_right = workbook.add_format(
+            {'font_name': 'Calibri', 'font_size': 8, 'bold': True, 'align': 'right', 'valign': 'vcenter',
+             'text_wrap': True})
         project_info_format_bordered = workbook.add_format(
             {'font_size': 10, 'bold': True, 'align': 'center', 'bottom': True, 'top': True, 'valign': 'vcenter',
              'text_wrap': True})
+        project_info_format_left_date = workbook.add_format(
+            {'font_name': 'Calibri', 'font_size': 8, 'bold': True, 'align': 'left', 'valign': 'vcenter',
+             'text_wrap': True, 'num_format': 'dd/mm/yyyy'})
 
         worksheet.set_column('A:A', 9.43)
         worksheet.set_column('B:B', 30.14)
@@ -275,11 +295,17 @@ class ReportXls(models.AbstractModel):
         worksheet.write('A4', 'ADRA CHILE', adra_format)
         worksheet.insert_image('B3', logo_path_adra)
         worksheet.insert_image('T2', logo_path_mejornines)
-        worksheet.merge_range('C3:F3', f'NOMBRE PROYECTO: {project_name}', project_info_format_left)
-        worksheet.merge_range('C4:F4', f'CÓDIGO PROYECTO: {project_code}', project_info_format_left)
+        worksheet.merge_range('C3:F3', 'NOMBRE PROYECTO:', project_info_format_left)
+        worksheet.merge_range('C4:F4', 'CÓDIGO PROYECTO:', project_info_format_left)
         worksheet.merge_range('C5:F5', 'INSTITUCIÓN:', project_info_format_left)
-        worksheet.merge_range('I3:N3', '                   FAE MARGA MARGA 1', project_info_format_bordered)
-        worksheet.merge_range('I4:N4', '                   1051416', project_info_format_bordered)
+        if date_from:
+            worksheet.write('P3', 'DESDE:', project_info_format_right)
+            worksheet.write('Q3', date_from, project_info_format_left_date)
+        if date_to:
+            worksheet.write('P5', 'HASTA:', project_info_format_right)
+            worksheet.write('Q5', date_to, project_info_format_left_date)
+        worksheet.merge_range('I3:N3', f'                   {project_name}', project_info_format_bordered)
+        worksheet.merge_range('I4:N4', f'                   {project_code}', project_info_format_bordered)
         worksheet.merge_range('I5:N5', '                   AGENCIA ADVENTISTA Y DESARROLLO',
                               project_info_format_bordered)
 

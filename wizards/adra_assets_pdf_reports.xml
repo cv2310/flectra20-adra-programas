@@ -50,8 +50,10 @@
                     </div>
                     <div style="font-family: Liberation Sans; font-size: 8px; text-align: left; font-weight: bold; margin-top: 15px; margin-bottom: 15px; display: flex;">
                         <span style="text-align: left;">Programa: <t t-esc="project_name"/></span>
-                        <span style="text-align: left;margin-left:200px">Ordenado por: <t t-esc="sort_by"/></span>
-                        <span style="text-align: left;margin-left:200px">Tipo de Reporte: SENAINFO</span>
+                        <span style="text-align: left;margin-left:80px">Ordenado por: <t t-esc="sort_by"/></span>
+                        <span style="text-align: left;margin-left:80px">Tipo de Reporte: SENAINFO</span>
+                        <t t-if="date_from"> <span style="text-align: left;margin-left:80px">Desde: <t t-esc="date_from"/></span> </t>
+                        <t t-if="date_from"> <span style="text-align: left;;margin-left:80px">Hasta: <t t-esc="date_to"/></span> </t>
                     </div>
                     <table style="width: 100%; font-family: Liberation Sans; font-size: 8px; text-align: center; border-collapse: collapse;justify-content: space-between">
                         <thead style="font-weight: bold; background-color: #FFFFCC;">
