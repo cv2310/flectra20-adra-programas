@@ -25,7 +25,7 @@ class ReportXlsAsinet(models.AbstractModel):
             {'align': 'left', 'valign': 'vcenter', 'text_wrap': True})
         column_content_format_number = workbook.add_format(
             {'align': 'right', 'valign': 'vcenter', 'text_wrap': True, 'num_format': '#,##0'})
-
+        #columns
         worksheet.set_column(0, 0, 16.71)
         worksheet.set_column(1, 1, 12)
         worksheet.set_column(2, 2, 15.43)
