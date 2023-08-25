@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data noupdate="1">
+        <record id="report_xlsx_general_ledger" model="ir.actions.report">
+            <field name="model">report.adra_account_extended.report_xlsx_general_ledger</field>
+            <field name="name">Reporte xls para Libro Mayor</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">adra_account_extended.report_xlsx_general_ledger</field>
+            <field name="report_file">Reporte de Libro Mayor.</field>
+            <field name="attachment_use">False</field>
+            <field name="attachment">reporte_test_general_ledger.xlsx</field>
+        </record>
+    </data>
+</flectra>

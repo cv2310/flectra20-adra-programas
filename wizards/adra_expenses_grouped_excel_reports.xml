@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data noupdate="1">
+        <record id="view_adra_expenses_grouped_reports_form_modal" model="ir.ui.view">
+            <field name="name">Vista modal para reportes de gastos agrupados</field>
+            <field name="model">adra.expenses.grouped.reports</field>
+            <field name="arch" type="xml">
+                <form string="Generador de Reportes" mode="primary">
+                    <group>
+                        <field name="x_account_analytic_account_id"/>
+                    </group>
+                    <group>
+                        <field name="x_date_from" widget="date"/>
+                        <field name="x_date_to" widget="date"/>
+                    </group>
+                    <footer>
+                        <button string="Generar Excel" type="object" name="generate_excel_report" class="btn-primary"/>
+                        <button string="Cancelar" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="report_xlsx_expenses_grouped" model="ir.actions.report">
+            <field name="model">report.adra_account_extended.report_xlsx_expenses_grouped</field>
+            <field name="name">Reporte xls para gastos agrupados</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">adra_account_extended.report_xlsx_expenses_grouped</field>
+            <field name="report_file">Reporte de Gastos Agrupados.</field>
+            <field name="attachment_use">False</field>
+            <field name="attachment">reporte_test_expenses_grouped.xlsx</field>
+        </record>
+
+        <record id="action_window_expenses_grouped_reports" model="ir.actions.act_window">
+            <field name="name">Generador de reportes para Gastos Agruapdos</field>
+            <field name="res_model">adra.expenses.grouped.reports</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_adra_expenses_grouped_reports_form_modal"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_item_others_reports"
+                  name="Otros"
+                  parent="account.menu_finance_reports"
+                  action="action_window_expenses_grouped_reports"
+                  sequence="50"/>
+
+        <menuitem id="menu_item_generator_expenses_grouped_reports"
+                  name="Presupuesto"
+                  parent="menu_item_others_reports"
+                  action="action_window_expenses_grouped_reports"
+                  sequence="51"/>
+    </data>
+</flectra>

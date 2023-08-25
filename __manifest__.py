@@ -39,10 +39,19 @@
         'views/account_payment_register_views.xml',
         'views/hr_expense_sheet_views.xml',
         'views/hr_expense_views.xml',
+        'views/account_analytic_account.xml',
         'reports/account_report_back_view.xml',
         'wizards/general_ledger.xml',
         'wizards/adra_assets_excel_reports.xml',
-        'wizards/adra_assets_pdf_reports.xml'
+        'wizards/adra_assets_pdf_reports.xml',
+        'wizards/adra_assets_reports.xml',
+        'wizards/adra_asinet_excel_reports.xml',
+        'wizards/adra_dj1945_excel_reports.xml',
+        'wizards/adra_quarterly_excel_reports.xml',
+        'wizards/adra_expenses_grouped_excel_reports.xml',
+        'wizards/adra_general_ledger_excel_reports.xml',
+        'wizards/adra_assets_change_project.xml'
+
     ],
     # only loaded in demonstration mode
     'demo': [

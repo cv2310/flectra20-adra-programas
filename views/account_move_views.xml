@@ -117,9 +117,9 @@
                     </page>
                 </xpath>
                 <xpath expr="//form/sheet/notebook/page[2]" position="after">
-                    <page id="assets_document_tab" string="Activos">
+                    <page id="assets_document_tab" string="Activos" attrs="{'invisible': [('state', '!=', 'posted')]}">
                         <group id="assets_document_tab_group">
-                            <group string="Activos">
+                            <group string="Activo(s) asociado(s):">
                                 <field name="x_account_asset_asset_ids"/>
                             </group>
                         </group>

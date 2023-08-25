@@ -19,9 +19,12 @@
                 </xpath>
 
                 <xpath expr="//field[@name='date']" position="after">
-                    <xpath expr="//field[@name='code']" position="move"/>
+                    <xpath expr="//field[@name='code']" position="move" attrs="{'readonly': True}"/>
                 </xpath>
 
+                <xpath expr="//field[@name='code']" position="attributes">
+                    <attribute name="string">Código Inventario</attribute>
+                </xpath>
                 <xpath expr="//field[@name='code']" position="after">
                     <field name="x_floor"/>
                 </xpath>

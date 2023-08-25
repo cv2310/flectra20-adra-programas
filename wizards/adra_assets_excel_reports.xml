@@ -1,26 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <flectra>
     <data noupdate="1">
-
-        <record id="view_adra_assets_excel_reports_form_modal" model="ir.ui.view">
-            <field name="name">Excel Reports Form View Modal</field>
-            <field name="model">adra.assets.excel.reports</field>
-            <field name="arch" type="xml">
-                <!-- Vista de formulario modal -->
-                <form string="Generador de Reportes" mode="primary">
-                    <group>
-                        <field name="x_account_analytic_account_id"/>
-                    </group>
-                    <footer>
-                        <button string="Imprimir" type="object" name="print_report" class="btn-primary"/>
-                        <button string="Cancelar" type="object" name="cancel_report" class="btn-secondary"/>
-                    </footer>
-                </form>
-            </field>
-        </record>
-
         <record id="report_xlsx_assets" model="ir.actions.report">
-            <field name="model">adra.assets.excel.reports</field>
+            <field name="model">report.adra_account_extended.report_xlsx_assets</field>
             <field name="name">Reporte xls para activos</field>
             <field name="report_type">xlsx</field>
             <field name="report_name">adra_account_extended.report_xlsx_assets</field>
@@ -28,24 +10,5 @@
             <field name="attachment_use">False</field>
             <field name="attachment">reporte_test.xlsx</field>
         </record>
-
-        <record id="action_window_adra_assets_excel_reports" model="ir.actions.act_window">
-            <field name="name">Generador de Reportes</field>
-            <field name="res_model">adra.assets.excel.reports</field>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="view_adra_assets_excel_reports_form_modal"/>
-            <field name="context">{"wizard_mode": "1"}</field>            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Haga clic en Crear para generar un informe.</p>
-            </field>
-            <field name="target">new</field>
-        </record>
-
-
-        <menuitem id="menu_item_generator_adra_assets_excel_reports"
-                  name="Generador de reportes EXCEL"
-                  parent="menu_item_adra_assets_reports"
-                  action="action_window_adra_assets_excel_reports"
-                  sequence="22"/>
-
     </data>
 </flectra>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data noupdate="1">
+        <record id="view_adra_dj1945_reports_form_modal" model="ir.ui.view">
+            <field name="name">Vista modal para reportes de Dj1945</field>
+            <field name="model">adra.dj1945.reports</field>
+            <field name="arch" type="xml">
+                <form string="Generador de Reportes" mode="primary">
+                    <group>
+                        <field name="x_date_from" widget="date"/>
+                        <field name="x_date_to" widget="date"/>
+                    </group>
+                    <footer>
+                        <button string="Generar Excel" type="object" name="generate_excel_report" class="btn-primary"/>
+                        <button string="Cancelar" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="report_xlsx_dj1945" model="ir.actions.report">
+            <field name="model">report.adra_account_extended.report_xlsx_dj1945</field>
+            <field name="name">Reporte xls para dj1945</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">adra_account_extended.report_xlsx_dj1945</field>
+            <field name="report_file">Reporte de Dej1945.</field>
+            <field name="attachment_use">False</field>
+            <field name="attachment">reporte_test_dj1945.xlsx</field>
+        </record>
+
+        <record id="action_window_adra_dj1945_reports" model="ir.actions.act_window">
+            <field name="name">Generador de reportes para Dj1945</field>
+            <field name="res_model">adra.dj1945.reports</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_adra_dj1945_reports_form_modal"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_item_generator_adra_dj1945_reports"
+                  name="Dj1945"
+                  parent="menu_item_adra_integration_reports"
+                  action="action_window_adra_dj1945_reports"
+                  sequence="21"/>
+    </data>
+</flectra>

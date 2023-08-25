@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data>
+        <record id="view_adra_assets_change_project_form_modal" model="ir.ui.view">
+            <field name="name">Vista modal para cambiar proyecto asociado a activo(s)</field>
+            <field name="model">adra.assets.change.project</field>
+            <field name="arch" type="xml">
+                <form string="Cambiar proyecto asociado a activo(s)" edit="true">
+                        <group>
+                            <field name="x_account_analytic_account_id"/>
+                        </group>
+                    <footer>
+                        <button string="Cambiar proyecto" type="object" name="change_project" class="btn-primary"/>
+                        <button string="Cancelar" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_window_adra_asset_change_project" model="ir.actions.act_window">
+            <field name="name">Cambiar proyecto asociado</field>
+            <field name="res_model">adra.assets.change.project</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_adra_assets_change_project_form_modal"/>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="model_account_asset_asset"/>
+            <field name="binding_view_types">list</field>
+        </record>
+    </data>
+</flectra>

@@ -10,7 +10,7 @@ _logger = logging.getLogger(__name__)
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
-
+    _rec_name = 'x_name'
     x_account_analytic_account_id = fields.Many2one('account.analytic.account', string='Proyecto', store=True, index=True)
     x_account_group_id = fields.Many2one('account.group', string='Tipo de Cuenta', store=True)
     x_account_asset_asset_ids = fields.One2many('account.asset.asset', 'x_account_move_id', string='Activo(s) asociado(s)', store=True, index=True)
@@ -173,3 +173,16 @@ class AccountMove(models.Model):
     def _check_unique_sequence_number(self):
         _logger.warning("nw _check_unique_sequence_number")
         return
+ #   def name_get(self):
+  #      return [(accountMove.id, accountMove.x_name ) for accountMove in self]
+    def name_get(self):
+        result = []
+        for accountMove in self:
+            if accountMove.x_name:
+                name = accountMove.x_name
+            elif accountMove.name:
+                name = accountMove.name
+            else:
+                name = "Sin Definir"
+            result.append((accountMove.id, name))
+        return result

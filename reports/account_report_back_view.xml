@@ -35,7 +35,19 @@
             </field>
         </record>
 
-        <record model="ir.actions.act_window" id="action_account_report_back">
+        <record id="view_account_report_back_filter" model="ir.ui.view">
+            <field name="name">account.report.back.select</field>
+            <field name="model">account.report.back</field>
+            <field name="arch" type="xml">
+                <search string="Buscar">
+                    <filter string="Incluye 6902" name="cod_programa_1" domain="[('cod_programa', '=', 6902)]"/>
+                    <filter string="Excluye 6902" name="cod_programa_2" domain="[('cod_programa', '!=', 6902)]"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_account_report_back_window">
             <field name="name">Accountability</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">account.report.back</field>
@@ -43,8 +55,8 @@
             <field name="view_id" eval="False"/>
         </record>
         
-        <menuitem name="Accountability"
-                action="action_account_report_back"
+        <menuitem name="Archivo Plano"
+                action="action_account_report_back_window"
                 id="menu_action_account_report_back"
                 parent="account.account_reports_management_menu"
                 sequence="22"/>

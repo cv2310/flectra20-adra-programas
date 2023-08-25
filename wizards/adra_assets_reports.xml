@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data noupdate="1">
+        <record id="view_adra_assets_reports_form_modal" model="ir.ui.view">
+            <field name="name">Vista modal para reportes de Activos</field>
+            <field name="model">adra.assets.reports</field>
+            <field name="arch" type="xml">
+                <form string="Generador de Reportes" mode="primary">
+                        <group>
+                            <div style="display: flex">
+                                <label for="x_all_projects" string="Proyecto" style="font-weight: bold; border-right: 1.5px solid #eaeaea; padding-right: 80px;"/>
+                                <field name="x_all_projects" widget="radio" options="{'no_create': True}" style="margin-left: 2.5px"/>
+                                <label  attrs="{'invisible': [('x_all_projects', '=', 'all')]}" for="x_all_projects" string="Seleccione" style="font-weight: bold; margin-right:15px; border-right: 1.5px solid #eaeaea; padding-right: 45px;"/>
+                                <field attrs="{'invisible': [('x_all_projects', '=', 'all')]}" name="x_account_analytic_account_id" style="margin-right: 100px;"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="x_date_from" widget="date"/>
+                            <field name="x_date_to" widget="date"/>
+                        </group>
+                        <group>
+                            <field name="x_status_active" widget="radio"/>
+                        </group>
+                        <group attrs="{'invisible': [('x_all_projects', '=', 'all')]}">
+                            <field name="x_sort_by_project" widget="radio"/>
+                        </group>
+                        <group attrs="{'invisible': [('x_all_projects', '=', 'one')]}">
+                            <field name="x_sort_by_all" widget="radio"/>
+                        </group>
+                    <footer>
+                        <button string="Generar PDF" type="object" name="generate_pdf_report" class="btn-primary"/>
+                        <button string="Generar Excel" type="object" name="generate_excel_report" class="btn-primary"/>
+                        <button string="Cancelar" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_window_adra_assets_reports" model="ir.actions.act_window">
+            <field name="name">Generador de Reportes para Activos</field>
+            <field name="res_model">adra.assets.reports</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_adra_assets_reports_form_modal"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_item_adra_assets_reports"
+                  name="Reportes de activos"
+                  parent="account.menu_finance_reports"
+                  sequence="20"/>
+
+        <menuitem id="menu_item_generator_adra_assets_reports"
+                  name="Generador de reportes"
+                  parent="menu_item_adra_assets_reports"
+                  action="action_window_adra_assets_reports"
+                  sequence="21"/>
+    </data>
+</flectra>

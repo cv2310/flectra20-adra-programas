@@ -54,6 +54,10 @@
                 <xpath expr="//field[@name='initial_balance']" position="attributes">
                     <attribute name="invisible">True</attribute>
                 </xpath>
+
+                <xpath expr="//button[@name='check_report']" position="after">
+                    <button name="print_report_xls" string="Imprimir Excel" type="object" class="btn-primary"/>
+                </xpath>
             </field>
         </record>
     </data>

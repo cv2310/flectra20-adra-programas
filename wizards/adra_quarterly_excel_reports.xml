@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data noupdate="1">
+        <record id="view_adra_quarterly_reports_form_modal" model="ir.ui.view">
+            <field name="name">Vista modal para reportes Trimsetrales</field>
+            <field name="model">adra.quarterly.reports</field>
+            <field name="arch" type="xml">
+                <form string="Generador de Reportes" mode="primary">
+                        <group>
+                            <field name="x_date" widget="date_picker"/>
+                        </group>
+                    <footer>
+                        <button string="Generar Excel" type="object" name="generate_excel_report" class="btn-primary"/>
+                        <button string="Cancelar" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="report_xlsx_quarterly" model="ir.actions.report">
+            <field name="model">report.adra_account_extended.report_xlsx_quarterly</field>
+            <field name="name">Reporte xls Trimestral</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">adra_account_extended.report_xlsx_quarterly</field>
+            <field name="report_file">Reporte Trimestral</field>
+            <field name="attachment_use">False</field>
+            <field name="attachment">reporte_test_quarterly.xlsx</field>
+        </record>
+
+        <record id="action_window_adra_quarterly_reports" model="ir.actions.act_window">
+            <field name="name">Generador de Reportes Trimestrales</field>
+            <field name="res_model">adra.quarterly.reports</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_adra_quarterly_reports_form_modal"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_item_generator_adra_quarterly_reports"
+                  name="Reporte Trimestral"
+                  parent="menu_item_adra_integration_reports"
+                  action="action_window_adra_quarterly_reports"
+                  sequence="21"/>
+    </data>
+</flectra>

@@ -15,7 +15,7 @@ class AccountAssetAsset(models.Model):
     x_procedence = fields.Char(string='Procedencia', store=True)
     x_account_move_id = fields.Many2one('account.move', string='Egreso asociado', inverse_name='x_account_asset_asset_ids', store=True, index=True)
     x_expense_n = fields.Char(string='Nº de Egreso', store=True)
-    x_expense_number = fields.Char(string='Documento de Egreso', store=True)
+    x_expense_number = fields.Char(string='Tipo de documento', store=True)
     x_expense_date = fields.Date(string='Fecha Doc. Egreso', index=True, default=fields.Date.context_today)
     x_invoice_number = fields.Char(string='Nº de Factura', store=True)
     x_transfer_record_number = fields.Char(string='Nº Acta de Traspaso', store=True)
@@ -24,8 +24,7 @@ class AccountAssetAsset(models.Model):
     x_quantity_unsubscribe = fields.Integer(string='Cantidad dada de Baja', store=True)
     x_status_active = fields.Selection([
         ('vigente', 'Vigente'),
-        ('dado_baja', 'Dado de Baja'),
-        ('general', 'General'),
+        ('dado_baja', 'Dado de Baja')
     ], string='Estado-activo', store=True, default='vigente')
     x_status = fields.Char(string='Estado', store=True)
     x_description = fields.Text('Observaciones')
@@ -37,5 +36,30 @@ class AccountAssetAsset(models.Model):
 
     @api.onchange('x_account_move_id')
     def _onchange_x_account_move_id(self):
-        if self.x_account_move_id and self.x_account_move_id.name:
-            self.x_expense_n = self.x_account_move_id.name
+        if self.x_account_move_id._origin != self.x_account_move_id:
+            self.x_account_move_id = self.x_account_move_id._origin
+            self.x_account_analytic_account_id = self.x_account_move_id.x_account_analytic_account_id
+        self.x_expense_n = self.x_account_move_id.x_name
+    @api.onchange('x_expense_n', 'x_account_analytic_account_id', 'x_expense_date')
+    def _onchange_x_code(self):
+        for asset in self:
+            expense = ''
+            project = ''
+            year = ''
+            if asset.x_expense_n:
+                expense = asset.x_expense_n
+            if asset.x_account_analytic_account_id:
+                project = asset.x_account_analytic_account_id.code
+            if asset.x_account_move_id:
+                year = asset.x_account_move_id.date.year
+                expense = asset.x_account_move_id.x_correlative
+            else:
+                if self.date:
+                    year = asset.x_expense_date.year
+
+            code = f"{project}-{expense}-{year}"
+            asset.code = code
+
+  #  @api.model
+   # def default_get(self, fields):
+        #active_model = self.env.context.get('account_oove')
