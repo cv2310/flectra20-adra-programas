@@ -894,7 +894,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
             #2151025 -
             if move_lines_income:
                 asinet = {}
-                asinet['code'] = proyecto.code
+                asinet['Project'] = proyecto.name
                 asinet['AccountCode'] = 1112001
                 asinet['SubAccountCode'] = proyecto.x_sub_account_code_expense
                 asinet['FundCode'] = 10
@@ -906,7 +906,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
                 asinets.append(asinet)
                 for line in move_lines_income:
                     asinet = {}
-                    asinet['code'] = proyecto.code
+                    asinet['Project'] = proyecto.name
                     asinet['AccountCode'] = 2151025
                     asinet['SubAccountCode'] = proyecto.proyecto.x_sub_account_code_income
                     asinet['FundCode'] = 10
@@ -939,7 +939,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
             if move_lines_expenses:
                 for line in move_lines_expenses:
                     asinet = {}
-                    asinet['code'] = proyecto.code
+                    asinet['Project'] = proyecto.name
                     asinet['AccountCode'] = 2151025
                     asinet['SubAccountCode'] = proyecto.x_sub_account_code_income
                     asinet['FundCode'] = 10
@@ -953,7 +953,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
                         asinet['Description'] = 'TOTAL ' + ' -'
                     asinets.append(asinet)
                 asinet = {}
-                asinet['code'] = proyecto.code
+                asinet['Project'] = proyecto.name
                 asinet['AccountCode'] = 1112001
                 asinet['SubAccountCode'] = proyecto.x_sub_account_code_expense
                 asinet['FundCode'] = 10
