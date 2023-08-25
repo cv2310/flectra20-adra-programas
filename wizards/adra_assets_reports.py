@@ -1,3 +1,4 @@
+from flectra.exceptions import UserError
 from flectra import fields, models
 import datetime
 
@@ -9,7 +10,7 @@ class AdraAssetsReports(models.TransientModel):
                                       string='Proyecto', default='one')
     x_account_analytic_account_id = fields.Many2one('account.analytic.account', string='Seleccione un proyecto')
     x_sort_by_project = fields.Selection([('fecha_ingreso', 'Fecha')], string='Ordenado por', default='fecha_ingreso')
-    x_sort_by_all = fields.Selection([('fecha_proyecto', 'Fecha/Proyecto'), ('proyecto_fecha', 'Proyecto/Fgitecha')],
+    x_sort_by_all = fields.Selection([('fecha_proyecto', 'Fecha/Proyecto'), ('proyecto_fecha', 'Proyecto/Fecha')],
                                      string='Ordenado por', default='fecha_proyecto')
     x_status_active = fields.Selection([('general', 'General'), ('vigente', 'Vigente'), ('dado_baja', 'Dado de baja')],
                                      string='Estado activo;', default='general')
@@ -19,6 +20,12 @@ class AdraAssetsReports(models.TransientModel):
     def generate_pdf_report(self):
         sort_by = self.x_sort_by_project if self.x_all_projects == 'one' else self.x_sort_by_all
         projects_quantity = self.x_all_projects
+        if projects_quantity == 'one' and not self.x_account_analytic_account_id:
+            error_message = ("Por favor, seleccione un proyecto antes de continuar.\n"
+                             "Si desea incluir todos los proyectos en el informe, "
+                             "asegúrese de seleccionar la opción 'TODOS LOS PROYECTOS'.")
+            raise UserError(error_message)
+
         data = {
             'project_code': self.x_account_analytic_account_id.code,
             'project_name': self.x_account_analytic_account_id.name,
@@ -34,6 +41,11 @@ class AdraAssetsReports(models.TransientModel):
     def generate_excel_report(self):
         sort_by = self.x_sort_by_project if self.x_all_projects == 'one' else self.x_sort_by_all
         projects_quantity = self.x_all_projects
+        if projects_quantity == 'one' and not self.x_account_analytic_account_id:
+            error_message = ("Por favor, seleccione un proyecto antes de continuar.\n"
+                             "Si desea incluir todos los proyectos en el informe, "
+                             "asegúrese de seleccionar la opción 'TODOS LOS PROYECTOS'.")
+            raise UserError(error_message)
         data = {'project_name': self.x_account_analytic_account_id.name,
                 'project_code': self.x_account_analytic_account_id.code,
                 'sort_by': sort_by,
@@ -44,4 +56,3 @@ class AdraAssetsReports(models.TransientModel):
                 }
         report = self.env.ref('adra_account_extended.report_xlsx_assets')
         return report.report_action(self, data=data)
-#test
