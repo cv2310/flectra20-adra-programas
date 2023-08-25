@@ -44,3 +44,4 @@ class AdraAssetsReports(models.TransientModel):
                 }
         report = self.env.ref('adra_account_extended.report_xlsx_assets')
         return report.report_action(self, data=data)
+#test
