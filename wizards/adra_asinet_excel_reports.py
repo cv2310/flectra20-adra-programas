@@ -26,7 +26,7 @@ class ReportXlsAsinet(models.AbstractModel):
         column_content_format_number = workbook.add_format(
             {'align': 'right', 'valign': 'vcenter', 'text_wrap': True, 'num_format': '#,##0'})
 
-        worksheet.set_column(0, 0, 16.71)
+        worksheet.set_column(0, 0, 36)
         worksheet.set_column(1, 1, 12)
         worksheet.set_column(2, 2, 15.43)
         worksheet.set_column(3, 3, 9.29)
@@ -37,14 +37,14 @@ class ReportXlsAsinet(models.AbstractModel):
         worksheet.set_column(8, 8, 45.29)
 
         worksheet.write(0, 0, 'Project', column_content_format)
-        worksheet.write(1, 0, 'AccountCode', column_content_format)
-        worksheet.write(2, 0, 'SubAccountCode', column_content_format)
-        worksheet.write(3, 0, 'FundCode', column_content_format)
-        worksheet.write(4, 0, 'FunctionCode', column_content_format_number)
-        worksheet.write(5, 0, 'RestrictionCode', column_content_format)
-        worksheet.write(6, 0, 'EntityValue', column_content_format)
-        worksheet.write(7, 0, 'SendMemo', column_content_format)
-        worksheet.write(8, 0, 'Description', column_content_format)
+        worksheet.write(0, 1, 'AccountCode', column_content_format)
+        worksheet.write(0, 2, 'SubAccountCode', column_content_format)
+        worksheet.write(0, 3, 'FundCode', column_content_format)
+        worksheet.write(0, 4, 'FunctionCode', column_content_format_number)
+        worksheet.write(0, 5, 'RestrictionCode', column_content_format)
+        worksheet.write(0, 6, 'EntityValue', column_content_format)
+        worksheet.write(0, 7, 'SendMemo', column_content_format)
+        worksheet.write(0, 8, 'Description', column_content_format)
 
         current_row = 1
 
