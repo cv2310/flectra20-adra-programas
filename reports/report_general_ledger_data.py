@@ -908,7 +908,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
                     asinet = {}
                     asinet['Project'] = proyecto.name
                     asinet['AccountCode'] = 2151025
-                    asinet['SubAccountCode'] = proyecto.proyecto.x_sub_account_code_income
+                    asinet['SubAccountCode'] = proyecto.x_sub_account_code_income
                     asinet['FundCode'] = 10
                     asinet['FunctionCode'] = proyecto.x_function_code
                     asinet['RestrictionCode'] = '0A'
