@@ -31,6 +31,10 @@ class AdraAssetsPdfReports(models.TransientModel):
         if projects_quantity == 'one':
             pro_search = ('x_account_analytic_account_id', '=', project_code)
             search.append(pro_search)
+        elif not self.env.user.has_group('base.group_partner_manager'):
+            pro_search = ('x_account_analytic_account_id', 'in',  self.env.user.x_account_analytic_account_ids.ids)
+            search.append(pro_search)
+
         if x_status_active != 'general':
             act_search = ('x_status_active', '=', x_status_active)
             search.append(act_search)

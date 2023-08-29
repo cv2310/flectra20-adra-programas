@@ -869,100 +869,101 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         asinets=[]
         for proyecto in proyectos:
-            #'2023-04-30'
-            sql_param = {
-                'x_account_analytic_account_id': proyecto.id,
-                'date_from': date_from,
-                'date_to': date_to,
-                'date_close': date_close,
-            }
-            cr = self.env.cr
-            sqlNew = self.getSql(self.RENDICION_CUENTAS, 2, sql_param)
-            cr.execute(sqlNew)
-            # SQL 2
-            # cr.execute(sqlNew)
-            move_lines_income = []
-            total_income_from_period = 0
-            for row in cr.dictfetchall():
-                line = {}
-                line['id'] = row['id']
-                line['cuenta_senainfo'] = row['cuenta_senainfo']
-                line['total'] = row['total']
-                move_lines_income.append(line)
-                total_income_from_period += row['total']
-            #1112001 + T
-            #2151025 -
-            if move_lines_income:
-                asinet = {}
-                asinet['Project'] = proyecto.name
-                asinet['AccountCode'] = 1112001
-                asinet['SubAccountCode'] = proyecto.x_sub_account_code_expense
-                asinet['FundCode'] = 10
-                asinet['FunctionCode'] = proyecto.x_function_code
-                asinet['RestrictionCode'] = '0A'
-                asinet['EntityValue'] = total_income_from_period
-                asinet['SendMemo'] = 'False'
-                asinet['Description'] = 'TOTAL INGRESO -'
-                asinets.append(asinet)
-                for line in move_lines_income:
+            if proyecto.code != '6902':
+                #'2023-04-30'
+                sql_param = {
+                    'x_account_analytic_account_id': proyecto.id,
+                    'date_from': date_from,
+                    'date_to': date_to,
+                    'date_close': date_close,
+                }
+                cr = self.env.cr
+                sqlNew = self.getSql(self.RENDICION_CUENTAS, 2, sql_param)
+                cr.execute(sqlNew)
+                # SQL 2
+                # cr.execute(sqlNew)
+                move_lines_income = []
+                total_income_from_period = 0
+                for row in cr.dictfetchall():
+                    line = {}
+                    line['id'] = row['id']
+                    line['cuenta_senainfo'] = row['cuenta_senainfo']
+                    line['total'] = row['total']
+                    move_lines_income.append(line)
+                    total_income_from_period += row['total']
+                #1112001 + T
+                #2151025 -
+                if move_lines_income:
                     asinet = {}
                     asinet['Project'] = proyecto.name
-                    asinet['AccountCode'] = 2151025
-                    asinet['SubAccountCode'] = proyecto.x_sub_account_code_income
+                    asinet['AccountCode'] = 1112001
+                    asinet['SubAccountCode'] = proyecto.x_sub_account_code_expense
                     asinet['FundCode'] = 10
                     asinet['FunctionCode'] = proyecto.x_function_code
                     asinet['RestrictionCode'] = '0A'
-                    asinet['EntityValue'] = -1 * line['total']
+                    asinet['EntityValue'] = total_income_from_period
                     asinet['SendMemo'] = 'False'
-                    if line['cuenta_senainfo']:
-                        asinet['Description'] = 'TOTAL ' + line['cuenta_senainfo'] +  ' -'
-                    else:
-                        asinet['Description'] = 'TOTAL ' +  ' -'
+                    asinet['Description'] = 'TOTAL INGRESO -'
                     asinets.append(asinet)
+                    for line in move_lines_income:
+                        asinet = {}
+                        asinet['Project'] = proyecto.name
+                        asinet['AccountCode'] = 2151025
+                        asinet['SubAccountCode'] = proyecto.x_sub_account_code_income
+                        asinet['FundCode'] = 10
+                        asinet['FunctionCode'] = proyecto.x_function_code
+                        asinet['RestrictionCode'] = '0A'
+                        asinet['EntityValue'] = -1 * line['total']
+                        asinet['SendMemo'] = 'False'
+                        if line['cuenta_senainfo']:
+                            asinet['Description'] = 'TOTAL ' + line['cuenta_senainfo'] +  ' -'
+                        else:
+                            asinet['Description'] = 'TOTAL ' +  ' -'
+                        asinets.append(asinet)
 
-            cr = self.env.cr
-            sqlNew = self.getSql(self.RENDICION_CUENTAS, 3, sql_param)
-            cr.execute(sqlNew)
-            # SQL 3
-            # cr.execute(sql, params)
-            total_expenses_from_period = 0
-            move_lines_expenses = []
-            for row in cr.dictfetchall():
-                line = dict((fn, (0)) for fn in ['id'])
-                line['id'] = row['id']
-                line['cuenta_senainfo'] = row['cuenta_senainfo']
-                line['total'] = row['total']
-                move_lines_expenses.append(line)
-                total_expenses_from_period += row['total']
-            # 2151025 -
-            # 1112001 + T
-            if move_lines_expenses:
-                for line in move_lines_expenses:
+                cr = self.env.cr
+                sqlNew = self.getSql(self.RENDICION_CUENTAS, 3, sql_param)
+                cr.execute(sqlNew)
+                # SQL 3
+                # cr.execute(sql, params)
+                total_expenses_from_period = 0
+                move_lines_expenses = []
+                for row in cr.dictfetchall():
+                    line = dict((fn, (0)) for fn in ['id'])
+                    line['id'] = row['id']
+                    line['cuenta_senainfo'] = row['cuenta_senainfo']
+                    line['total'] = row['total']
+                    move_lines_expenses.append(line)
+                    total_expenses_from_period += row['total']
+                # 2151025 -
+                # 1112001 + T
+                if move_lines_expenses:
+                    for line in move_lines_expenses:
+                        asinet = {}
+                        asinet['Project'] = proyecto.name
+                        asinet['AccountCode'] = 2151025
+                        asinet['SubAccountCode'] = proyecto.x_sub_account_code_income
+                        asinet['FundCode'] = 10
+                        asinet['FunctionCode'] = proyecto.x_function_code
+                        asinet['RestrictionCode'] = '0A'
+                        asinet['EntityValue'] = line['total']
+                        asinet['SendMemo'] = 'False'
+                        if line['cuenta_senainfo']:
+                            asinet['Description'] = 'TOTAL ' + line['cuenta_senainfo'] + ' -'
+                        else:
+                            asinet['Description'] = 'TOTAL ' + ' -'
+                        asinets.append(asinet)
                     asinet = {}
                     asinet['Project'] = proyecto.name
-                    asinet['AccountCode'] = 2151025
-                    asinet['SubAccountCode'] = proyecto.x_sub_account_code_income
+                    asinet['AccountCode'] = 1112001
+                    asinet['SubAccountCode'] = proyecto.x_sub_account_code_expense
                     asinet['FundCode'] = 10
                     asinet['FunctionCode'] = proyecto.x_function_code
                     asinet['RestrictionCode'] = '0A'
-                    asinet['EntityValue'] = line['total']
+                    asinet['EntityValue'] = -1 * total_expenses_from_period
                     asinet['SendMemo'] = 'False'
-                    if line['cuenta_senainfo']:
-                        asinet['Description'] = 'TOTAL ' + line['cuenta_senainfo'] + ' -'
-                    else:
-                        asinet['Description'] = 'TOTAL ' + ' -'
+                    asinet['Description'] = 'TOTAL EGRESO -'
                     asinets.append(asinet)
-                asinet = {}
-                asinet['Project'] = proyecto.name
-                asinet['AccountCode'] = 1112001
-                asinet['SubAccountCode'] = proyecto.x_sub_account_code_expense
-                asinet['FundCode'] = 10
-                asinet['FunctionCode'] = proyecto.x_function_code
-                asinet['RestrictionCode'] = '0A'
-                asinet['EntityValue'] = -1 * total_expenses_from_period
-                asinet['SendMemo'] = 'False'
-                asinet['Description'] = 'TOTAL EGRESO -'
-                asinets.append(asinet)
         return asinets
 
     # income/expense ledger - Libro Ingresos - Libro Egresos
