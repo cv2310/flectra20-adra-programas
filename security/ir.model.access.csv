@@ -8,28 +8,20 @@ access_report_adra_account_extended_adra_report_sis_pdf_manager,Adra Assets Pdf 
 access_adra_assets_reports_user,Adra Assets Reports Users,model_adra_assets_reports,base.group_user,1,0,1,0
 access_adra_assets_reports_manager,Adra Assets Reports Managers,model_adra_assets_reports,base.group_erp_manager,1,1,1,1
 
-access_adra_asinet_reports_user,Adra Asinet Reports Users,model_adra_asinet_reports,base.group_user,1,0,1,0
 access_adra_asinet_reports_manager,Adra Asinet Reports Managers,model_adra_asinet_reports,base.group_erp_manager,1,1,1,1
 
-access_report_adra_account_extended_report_xlsx_asinet_user,Access Adra XLSX Asinet Reports Users,model_report_adra_account_extended_report_xlsx_asinet,base.group_user,1,0,1,0
 access_report_adra_account_extended_report_xlsx_asinet_manager,Access Adra XLSX Asinet Reports Managers,model_report_adra_account_extended_report_xlsx_asinet,base.group_erp_manager,1,1,1,1
 
-access_adra_dj1945_reports_user,Adra DJ1945 Reports User,model_adra_dj1945_reports,base.group_user,1,0,1,0
 access_adra_dj1945_reports_manager,Adra DJ1945 Reports Managers,model_adra_dj1945_reports,base.group_erp_manager,1,1,1,1
 
-access_report_adra_account_extended_report_xlsx_dj1945_user,Access Adra XLSX DJ1945 Reports Users,model_report_adra_account_extended_report_xlsx_dj1945,base.group_user,1,0,1,0
 access_report_adra_account_extended_report_xlsx_dj1945_manager,Access Adra XLSX DJ1945 Reports Managers,model_report_adra_account_extended_report_xlsx_dj1945,base.group_erp_manager,1,1,1,1
 
-access_adra_quarterly_reports_user,Adra Quarterly Reports User,model_adra_quarterly_reports,base.group_user,1,0,1,0
 access_adra_quarterly_reports_manager,Adra Quarterly Reports Managers,model_adra_quarterly_reports,base.group_erp_manager,1,1,1,1
 
-access_report_adra_account_extended_report_xlsx_quarterly_user,Access Adra XLSX Quarterly Reports Users,model_report_adra_account_extended_report_xlsx_quarterly,base.group_user,1,0,1,0
 access_report_adra_account_extended_report_xlsx_quarterly_manager,Access Adra XLSX Quarterly Reports Managers,model_report_adra_account_extended_report_xlsx_quarterly,base.group_erp_manager,1,1,1,1
 
-access_adra_expenses_grouped_reports_user,Adra Expenses Grouped Reports User,model_adra_expenses_grouped_reports,base.group_user,1,0,1,0
 access_adra_expenses_grouped_reports_manager,Adra Expenses Grouped Reports Managers,model_adra_expenses_grouped_reports,base.group_erp_manager,1,1,1,1
 
-access_report_adra_account_extended_report_xlsx_expenses_grouped_user,Access Adra XLSX Expenses Grouped Reports Users,model_report_adra_account_extended_report_xlsx_expenses_grouped,base.group_user,1,0,1,0
 access_report_adra_account_extended_report_xlsx_expenses_grouped_manager,Access Adra XLSX Expenses Grouped Reports Managers,model_report_adra_account_extended_report_xlsx_expenses_grouped,base.group_erp_manager,1,1,1,1
 
 access_adra_assets_change_project_user,Adra Change Project User,model_adra_assets_change_project,base.group_user,1,0,1,0
