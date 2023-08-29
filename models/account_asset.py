@@ -40,12 +40,17 @@ class AccountAssetAsset(models.Model):
             self.x_account_move_id = self.x_account_move_id._origin
             self.x_account_analytic_account_id = self.x_account_move_id.x_account_analytic_account_id
         self.x_expense_n = self.x_account_move_id.x_name
-    @api.onchange('x_expense_n', 'x_account_analytic_account_id', 'x_expense_date')
+    @api.onchange('x_expense_n', 'x_account_analytic_account_id', 'x_expense_date','id')
     def _onchange_x_code(self):
         for asset in self:
             expense = ''
             project = ''
             year = ''
+            id = ''
+            if asset._origin:
+                id = asset._origin.id
+            elif asset.id:
+                id = asset.id
             if asset.x_expense_n:
                 expense = asset.x_expense_n
             if asset.x_account_analytic_account_id:
@@ -57,9 +62,15 @@ class AccountAssetAsset(models.Model):
                 if self.date:
                     year = asset.x_expense_date.year
 
-            code = f"{project}-{expense}-{year}"
+            code = f"{id}-{project}-{expense}-{year}"
             asset.code = code
 
+
+
+    def validate(self):
+        for asset in self:
+            asset._onchange_x_code()
+        return super().validate()
   #  @api.model
    # def default_get(self, fields):
         #active_model = self.env.context.get('account_oove')
