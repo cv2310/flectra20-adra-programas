@@ -1,0 +1,69 @@
+<flectra>
+    <data>
+        <record id="view_adra_move_locks_form_modal" model="ir.ui.view">
+            <field name="name">Vista modal para bloquear movimientos</field>
+            <field name="model">adra.company.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Bloqueo de movimientos" mode="primary">
+                        <group>
+                            <field name="move_lock_date" widget="date"/>
+                        </group>
+                    <group>
+                            <field name="move_lock_date_new" widget="date"/>
+                        </group>
+                    <footer>
+                        <button string="Actualizar" special="cancel" class="btn-secondary"/>
+                        <button string="Cancelar" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_adra_archivo_plano_form_modal" model="ir.ui.view">
+            <field name="name">Vista modal para actualizar la fecha de archivo plano</field>
+            <field name="model">adra.company.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Actualizar fecha de archivo plano" mode="primary">
+                        <group>
+                            <field name="archivo_plano_date" widget="date"/>
+                        </group>
+                    <group>
+                            <field name="archivo_plano_date_new" widget="date"/>
+                        </group>
+                    <footer>
+                        <button string="Actualizar" special="cancel" class="btn-secondary"/>
+                        <button string="Cancelar" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_window_adra_move_locks" model="ir.actions.act_window">
+            <field name="name">Bloqueo de movimientos</field>
+            <field name="res_model">adra.company.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_adra_move_locks_form_modal"/>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_window_adra_archivo_plano" model="ir.actions.act_window">
+            <field name="name">Actualización de fecha de archivo plano</field>
+            <field name="res_model">adra.company.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_adra_archivo_plano_form_modal"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_item_adra_move_locks"
+                  name="Bloqueo de movimientos"
+                  parent="account.account_invoicing_menu"
+                  action="action_window_adra_move_locks"
+                  sequence="20"/>
+
+        <menuitem id="menu_item_adra_archivos_planos"
+                  name="Actualización de archivo plano"
+                  parent="account.account_invoicing_menu"
+                  action="action_window_adra_archivo_plano"
+                  sequence="21"/>
+
+    </data>
+</flectra>

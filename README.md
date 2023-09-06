@@ -142,7 +142,7 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                                         </h3>
                                         </td>
                                     </tr>
-                                    <tr style="font-size:12px;font-weight:bold" class="text-center">
+                                    <tr style="font-size:15px;font-weight:bold" class="text-center">
                                         <th class="text-center">FECHA</th>
                                         <th class="text-center">Nº COMP.</th>
                                         <th class="text-center">FORMA DE PAGO</th>
@@ -155,7 +155,7 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr style="font-size:10px" t-foreach="account['move_lines']" t-as="line">
+                                        <tr style="font-size:14px" t-foreach="account['move_lines']" t-as="line">
                                             <t t-if="line['tipo_documento'] == 'INGRESO'">
                                                 <td class="text-center"><span t-esc="line['fecha_ingreso']" t-options='{"widget": "date"}'/></td>
                                                 <td class="text-center"><span t-esc="line['nro_comprobante']"/></td>
@@ -185,7 +185,7 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                                             </h3>
                                             </td>
                                         </tr>
-                                        <tr style="font-size:12px;font-weight:bold" class="text-center">
+                                        <tr style="font-size:15px;font-weight:bold" class="text-center">
                                             <th class="text-center">FECHA</th>
                                             <th class="text-center">Nº COMP.</th>
                                             <th class="text-center">FORMA DE PAGO</th>
@@ -197,7 +197,7 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                                             <th class="text-center">SALDO</th>
                                         </tr>
                                     </thead>
-                                    <tbody style="font-size:10px">
+                                    <tbody style="font-size:14px">
                                         <t t-set="total_sum" t-value="0"/>
     <t t-set="nro_doc" t-value="-1"/>
     <tr t-foreach="account['move_lines']" t-as="line">
