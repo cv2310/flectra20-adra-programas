@@ -477,6 +477,18 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                   </td>
                 </t>
             </tr>
+            <table class="table table-sm table-reports">
+                <tr>
+                  <td colspan="12" class="text-right">
+                    <br/>
+                    <h3>
+                      <span style="color: white;" t-esc="'..'"/>
+                      <span>Saldo Final: </span>
+                      <span t-esc="account['final_balance']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                    </h3>
+                  </td>
+                </tr>
+            </table>
         </t>
     </tr>
                                     </tbody>

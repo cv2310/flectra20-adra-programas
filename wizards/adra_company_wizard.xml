@@ -12,7 +12,7 @@
                             <field name="move_lock_date_new" widget="date"/>
                         </group>
                     <footer>
-                        <button string="Actualizar" special="cancel" class="btn-secondary"/>
+                        <button string="Actualizar" type="object" name="update_move_lock_date" class="btn-secondary"/>
                         <button string="Cancelar" special="cancel" class="btn-secondary"/>
                     </footer>
                 </form>
@@ -31,7 +31,7 @@
                             <field name="archivo_plano_date_new" widget="date"/>
                         </group>
                     <footer>
-                        <button string="Actualizar" special="cancel" class="btn-secondary"/>
+                        <button string="Actualizar" type="object" name="update_archivo_plano_date" class="btn-secondary"/>
                         <button string="Cancelar" special="cancel" class="btn-secondary"/>
                     </footer>
                 </form>
