@@ -3,6 +3,8 @@
 
 import io
 import math
+import re
+
 
 from flectra import http
 # from flectra.http import serialize_exception as _serialize_exception
@@ -81,7 +83,9 @@ class TXTExport(ExportFormat, http.Controller):
             else:
                 line_str += pycompat.to_text(row['glosa'].ljust(20,' '))
             line_str += pycompat.to_text(str(row['cod_cuenta_senainfo']).zfill(9))
-            line_str += pycompat.to_text(row['nro_comprobante_pago'].rjust(20,' '))
+            nro_copro_pago = row['nro_comprobante_pago']
+            nro_copro_pago = re.sub(r'\D', '', nro_copro_pago)[-20:]
+            line_str += pycompat.to_text(nro_copro_pago.rjust(20,' '))
             row['beneficiario'] = self.clean_text(row['beneficiario'])
             if len(row['beneficiario']) > 39:
                 line_str += pycompat.to_text(row['beneficiario'][0:39].rjust(40,' '))
