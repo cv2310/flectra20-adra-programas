@@ -12,7 +12,7 @@ class AccountReportGeneralLedger(models.TransientModel):
     x_program_name = fields.Char(string='Nombre Proyecto', copy=False, store=True)
     x_sort_by = fields.Selection([('fecha_ingreso', 'Fecha'), ('nro_comprobante', 'Nro. Comprobante')], string='Ordenado por', required=True, default='nro_comprobante')
     x_report_type = fields.Selection([('cuenta', 'ADRA'), ('cuenta_senainfo', 'SENAINFO')], string='Tipo de Reporte', required=True, default='cuenta')
-    x_document_type = fields.Selection([('INGRESO', 'Libro Ingresos'), ('EGRESO', 'Libro Egresos'), ('BANCO', 'Libro Banco'), ('RENDICION', 'Rendición de Cuentas'), ('CONCILIACION', 'Conciliación Bancaria')], string='Tipo de Movimientos', required=True, default='EGRESO')
+    x_document_type = fields.Selection([('INGRESO', 'Libro Ingresos'), ('EGRESO', 'Libro Egresos'), ('BANCO', 'Libro Banco'), ('RENDICION', 'Rendición de Cuentas'), ('CONCILIACION', 'Conciliación Bancaria')], string='Tipo de Movimientos', required=True, default='BANCO')
     x_bank_final_balance = fields.Float(string='Saldo Cartola Bancaria', store=True, default=0)
     journal_ids = fields.Many2many('account.journal', 'account_report_general_ledger_journal_rel', 'account_id', 'journal_id', string='Journals', required=True)
     x_report_version = fields.Selection([('new', 'Nueva'), ('old', 'Antigua')], string='Versión Reportes', required=True, default='new')
