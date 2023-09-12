@@ -22,7 +22,7 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                         <div class="col-2 mb4">
                             <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)" style="max-height: 90px;" alt="Logo"/>
                         </div>
-                        <div style="font-size:11px" class="col-10">
+                        <div style="font-size:18px" class="col-10">
                             <span>Agencia Adventista de Desarrollo y Recursos Asistenciales</span><br/>
                             <span>RUT: </span><span t-if="res_company.vat" t-field="res_company.vat"></span>
                         </div>
@@ -39,13 +39,13 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                         </h2>
                       </div>
                       <div class="col-6 text-right">
-                        <h4 style="font-size:16px">
+                        <h4 style="font-size:18px">
                           <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/>
                         </h4>
                       </div>
                     </div>
                     <br/>
-                    <div style="font-size:11px" class="row mb32">
+                    <div style="font-size:18px" class="row mb32">
                         <div class="col-3">
                             <strong>Programa:</strong><br/>
                             <t t-if="data['x_program_name']"><span t-esc="data['x_program_name']"/></t>
@@ -62,7 +62,7 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                         <div class="col-3">
                             <strong>Tipo de Reporte:</strong>
                             <p t-if="data['x_report_type'] == 'cuenta'">ADRA</p>
-                            <p t-if="data['x_report_type'] == 'cuenta_senainfo'">SENAINFO</p>
+                            <p t-if="data['x_report_type'] == 'cuenta_senainfo'">SIS</p>
                         </div>
                     </div>
                     <br/>
@@ -125,7 +125,7 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                                 <table class="table table-sm table-reports">
                                     <tr>
                                         <td colspan="12" class="text-right">
-                                        <h3 style="font-size:14px">
+                                        <h3>
                                             <span style="color: white;" t-esc="'..'"/>
                                             <span>Saldo Inicial: </span>
                                             <span t-esc="account['initial_balance']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
@@ -136,13 +136,13 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                                     <thead>
                                     <tr>
                                         <td colspan="12" class="text-left">
-                                        <h3 style="font-size:16px">
+                                        <h5>
                                             <span style="color: white;" t-esc="'..'"/>
-                                            <span>INGRESOS: </span>
-                                        </h3>
+                                            <span style= "font-weight: bold">INGRESOS: </span>
+                                        </h5>
                                         </td>
                                     </tr>
-                                    <tr style="font-size:15px;font-weight:bold" class="text-center">
+                                    <tr style="font-weight:bold" class="text-center">
                                         <th class="text-center">FECHA</th>
                                         <th class="text-center">Nº COMP.</th>
                                         <th class="text-center">FORMA DE PAGO</th>
@@ -155,7 +155,7 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr style="font-size:14px" t-foreach="account['move_lines']" t-as="line">
+                                        <tr t-foreach="account['move_lines']" t-as="line">
                                             <t t-if="line['tipo_documento'] == 'INGRESO'">
                                                 <td class="text-center"><span t-esc="line['fecha_ingreso']" t-options='{"widget": "date"}'/></td>
                                                 <td class="text-center"><span t-esc="line['nro_comprobante']"/></td>
@@ -179,13 +179,13 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                                         <tr>
                                             <td colspan="12" class="text-left">
                                             <br/><br/>
-                                            <h3 style="font-size:16px">
+                                            <h5>
                                                 <span style="color: white;" t-esc="'..'"/>
-                                                <span>EGRESOS: </span>
-                                            </h3>
+                                                <span style= "font-weight: bold">EGRESOS: </span>
+                                            </h5>
                                             </td>
                                         </tr>
-                                        <tr style="font-size:15px;font-weight:bold" class="text-center">
+                                        <tr style="font-weight:bold" class="text-center">
                                             <th class="text-center">FECHA</th>
                                             <th class="text-center">Nº COMP.</th>
                                             <th class="text-center">FORMA DE PAGO</th>
@@ -197,7 +197,7 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                                             <th class="text-center">SALDO</th>
                                         </tr>
                                     </thead>
-                                    <tbody style="font-size:14px">
+                                    <tbody>
                                         <t t-set="total_sum" t-value="0"/>
     <t t-set="nro_doc" t-value="-1"/>
     <tr t-foreach="account['move_lines']" t-as="line">
@@ -300,14 +300,14 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                                     <tr style="font-weight: bold;">
                                         <td class="text-right" colspan="6">
                                         <br/>
-                                        <h5 style="font-size:14px">
+                                        <h5 style="font-size:18px">
                                             <span>Total Ingresos: </span>
                                             <span t-esc="account['total_income']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </h5>
                                         </td>
                                         <td class="text-right" colspan="6">
                                         <br/>
-                                        <h5 style="font-size:14px">
+                                        <h5 style="font-size:18px">
                                             <span>Total Egresos: </span>
                                             <span t-esc="account['total_expenses']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </h5>
@@ -316,7 +316,7 @@ En algunos casos, se realizaron cambios directamente sobre el ERP en ciertas vis
                                     <tr>
                                         <td colspan="12" class="text-right">
                                         <br/>
-                                        <h3 style="font-size:16px">
+                                        <h3>
                                             <span style="color: white;" t-esc="'..'"/>
                                             <span>Saldo Final: </span>
                                             <span t-esc="account['final_balance']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
