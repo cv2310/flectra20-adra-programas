@@ -12,7 +12,7 @@ class ReportXlsDj1945(models.AbstractModel):
         x_date_to = data.get('x_date_to')
 
         reportData = self.env['report.general.ledger.data']
-        move_lines = reportData._get_DJ1945_data(x_date_from, x_date_to, '2023-04-30')
+        move_lines = reportData._get_DJ1945_data(x_date_from, x_date_to, '2023-06-30')
 
 
         worksheet.set_column('A:A', 12)

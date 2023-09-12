@@ -3,7 +3,7 @@
 from flectra import models, fields, api
 from flectra.exceptions import RedirectWarning, UserError, ValidationError, AccessError
 from flectra.tools.misc import formatLang, format_date, get_lang
-
+import datetime
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -124,10 +124,14 @@ class AccountMove(models.Model):
 
     def write(self, vals):
         for move in self:
-            lock_date = move.company_id._get_user_fiscal_lock_date()
-            if move.date <= lock_date:
-                message = ("No se puede modificar o crear movimientos después del ", format_date(self.env, lock_date))
-                raise UserError(message)
+            vals.get('date')
+            date = vals.get('date')
+            if date is not None:
+                lock_date = datetime.date(2023, 6, 30)
+                #lock_date = move.company_id._get_user_fiscal_lock_date()
+                if date <= lock_date:
+                    message = ("No se puede modificar o crear movimientos antes del ", format_date(self.env, lock_date))
+                    raise UserError(message)
         return super().write(vals)
 
     # def _get_name_invoice_report(self):

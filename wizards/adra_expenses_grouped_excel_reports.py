@@ -47,7 +47,7 @@ class ReportXlsExpensesGrouped(models.AbstractModel):
         worksheet.write('B2', x_date_from, column_header_format)
         worksheet.write('D2', x_date_to, column_header_format)
 
-        date_close = datetime.date(2023, 4, 30)
+        date_close = datetime.date(2023, 6, 30)
         reportData = self.env['report.general.ledger.data']
         move_lines = reportData._get_budget_report_data( x_account_analytic_account_id, date_from, date_to, date_close)
         current_row = 3

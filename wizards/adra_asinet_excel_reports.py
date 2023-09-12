@@ -19,7 +19,7 @@ class ReportXlsAsinet(models.AbstractModel):
         ano, mes, dia = map(int, x_date_from.split('-'))
         str_mes = meses[mes]
         reportData = self.env['report.general.ledger.data']
-        move_lines = reportData._get_asinet_data(x_date_from, x_date_to, '2023-04-30')
+        move_lines = reportData._get_asinet_data(x_date_from, x_date_to, '2023-06-30')
 
         column_content_format = workbook.add_format(
             {'align': 'left', 'valign': 'vcenter', 'text_wrap': True})
