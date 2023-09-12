@@ -35,7 +35,7 @@ class ReportXlsGeneralLedger(models.AbstractModel):
         if x_report_type == 'cuenta':
             x_report_type = 'ADRA'
         elif x_report_type == 'cuenta_senainfo':
-            x_report_type = 'SENAINFO'
+            x_report_type = 'SIS'
 
         accounts = objs['Accounts']
 
