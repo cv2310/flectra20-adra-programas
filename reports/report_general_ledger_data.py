@@ -706,22 +706,26 @@ class ReportGeneralLedgerData(models.AbstractModel):
     def _get_budget_report_data(self,x_account_analytic_account_id, date_from, date_to, date_close):
 
         ingresos = [
-            {'tipo I': 'tipo i 1', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
-            {'tipo I 1': 'tipo i 2', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
-            {'tipo I 2': 'tipo i 3', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
+            {'tipo_cuenta':'i', 'cuenta':'i1', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
+            {'tipo_cuenta':'i', 'cuenta':'i2', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
+            {'tipo_cuenta':'i', 'cuenta':'i3', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
         ]
         ingresos_total = [
             {'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
                    ]
         gastos = [
-            {'tipo G': 'tipo g 1', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
-            {'tipo G 1': 'tipo g 2', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
-            {'tipo G 2': 'tipo g 3', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
+            {'tipo_cuenta':'g', 'cuenta':'g1', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
+            {'tipo_cuenta':'g', 'cuenta':'g2', 'mes_01':  24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
+            {'tipo_cuenta':'g', 'cuenta':'g3', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
         ]
         gastos_total = [
             {'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
             ]
-        return { 'ingreso': ingresos, 'ingresos_total': ingresos_total, 'gastos':gastos, 'gastos_total': gastos_total}
+        saldo = [
+            {'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24,
+             'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
+        ]
+        return { 'ingreso': ingresos, 'ingresos_total': ingresos_total, 'gastos':gastos, 'gastos_total': gastos_total: 'saldo':saldo}
 
         sqlFiledBase = '''row_number() OVER () as id, account_type, account, sum(monto) as expense\
                                               '''
