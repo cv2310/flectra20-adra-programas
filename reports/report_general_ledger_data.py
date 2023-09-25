@@ -9,7 +9,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
     LIBRO_BANCO = 'Libro Banco'
     RECONCILIACION_BANCO = 'Reconciliacion Banco'
     RENDICION_CUENTAS = 'RendiciOn de Cuentas'
-    REPORTE_DJ1945 ='DJ1945'
+    REPORTE_DJ1945 = 'DJ1945'
 
     @staticmethod
     def getSqlBase():
@@ -612,7 +612,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
                 sql = sqlHead + " ORDER BY " + x_sort_by + ", nro_comprobante "
         return sql
 
-    #reporte de hasto trismestra
+    # reporte de hasto trismestra
     def _get_quarterly_report_data(self, date_from, date_to, date_close, month):
 
         sqlFiledBase = '''row_number() OVER () as id,  project, code , DATE_TRUNC('month', date) AS date, sum(monto) as expense\
@@ -694,40 +694,93 @@ class ReportGeneralLedgerData(models.AbstractModel):
             if project['code'] == project_code:
                 project[month] = gasto
                 return True
-        project={'project': project_name,
-                  'code':project_code,
-                  'month_01':0,
-                  'month_02':0,
-                  'month_03':0}
+        project = {'project': project_name,
+                   'code': project_code,
+                   'month_01': 0,
+                   'month_02': 0,
+                   'month_03': 0}
         project[month] = gasto
         projects.append(project)
         return False
-    #  presupuesto
-    def _get_budget_report_data(self,x_account_analytic_account_id, date_from, date_to, date_close):
 
+    #  presupuesto
+    def _get_budget_report_data(self, x_account_analytic_account_id, date_from, date_to, date_close):
         ingresos = [
-            {'tipo_cuenta':'i', 'cuenta':'i1', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
-            {'tipo_cuenta':'i', 'cuenta':'i2', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
-            {'tipo_cuenta':'i', 'cuenta':'i3', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
+            {'tipo_cuenta': 'i', 'cuenta': 'i1', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500,
+             'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24,
+             'mes_12': 4500, 'mes_total': 10000},
+            {'tipo_cuenta': 'i', 'cuenta': 'i2', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500,
+             'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24,
+             'mes_12': 4500, 'mes_total': 10000},
+            {'tipo_cuenta': 'i', 'cuenta': 'i3', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500,
+             'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24,
+             'mes_12': 4500, 'mes_total': 10000},
         ]
         ingresos_total = [
-            {'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
-                   ]
+            {'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24,
+             'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
+        ]
         gastos = [
-            {'tipo_cuenta':'g', 'cuenta':'g1', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
-            {'tipo_cuenta':'g', 'cuenta':'g2', 'mes_01':  24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
-            {'tipo_cuenta':'g', 'cuenta':'g3', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
+            {'tipo_cuenta': 'g', 'cuenta': 'g1', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500,
+             'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24,
+             'mes_12': 4500, 'mes_total': 10000},
+            {'tipo_cuenta': 'g', 'cuenta': 'g2', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500,
+             'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24,
+             'mes_12': 4500, 'mes_total': 10000},
+            {'tipo_cuenta': 'g', 'cuenta': 'g3', 'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500,
+             'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24,
+             'mes_12': 4500, 'mes_total': 10000},
         ]
         gastos_total = [
-            {'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24, 'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
-            ]
+            {'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24,
+             'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
+        ]
         saldo = [
             {'mes_01': 24, 'mes_02': 4500, 'mes_03': 24, 'mes_04': 4500, 'mes_05': 24, 'mes_06': 4500, 'mes_07': 24,
              'mes_08': 4500, 'mes_09': 24, 'mes_10': 4500, 'mes_11': 24, 'mes_12': 4500, 'mes_total': 10000},
         ]
-        return { 'ingreso': ingresos, 'ingresos_total': ingresos_total, 'gastos':gastos, 'gastos_total': gastos_total: 'saldo':saldo}
 
-        sqlFiledBase = '''row_number() OVER () as id, account_type, account, sum(monto) as expense\
+        # Get initial balance
+        sql = ('''SELECT amount_total\
+                FROM account_move\
+                WHERE x_account_analytic_account_id = %s\
+                AND x_name = 'SALDO INICIAL'\
+                ''')
+
+        params = (x_account_analytic_account_id,)
+        cr = self.env.cr
+        cr.execute(sql, params)
+
+        initial_balance = 0
+        for row in cr.dictfetchall():
+            initial_balance = row['amount_total']
+
+        sql_param = {
+            'x_account_analytic_account_id': x_account_analytic_account_id,
+            'date_from': date_from,
+            'date_close': date_close,
+        }
+        sqlNew = self.getSql(self.LIBRO_BANCO, 1, sql_param)
+
+        cr.execute(sqlNew)
+        # Banco SQL 1
+        # cr.execute(sql, params)
+
+        total_income = 0
+        total_expenses = 0
+        for row in cr.dictfetchall():
+            if row['tipo_documento'] == 'INGRESO':
+                total_income = row['saldo']
+            elif row['tipo_documento'] == 'EGRESO':
+                total_expenses = row['saldo']
+
+        #     if total_income and total_expenses:
+        initial_balance += total_income - total_expenses
+
+
+
+
+        sqlFiledBase = '''row_number() OVER () as id, type_move, mes, account_type, account, sum(monto) as total\
                                               '''
         if date_from <= date_close and date_close <= date_to:
             dato_tipo = "OPEN_CLOSE"
@@ -737,7 +790,9 @@ class ReportGeneralLedgerData(models.AbstractModel):
             dato_tipo = "CLOSE"
         if dato_tipo == "OPEN_CLOSE" or dato_tipo == "OPEN":
 
-            sqlFiled1 = '''row_number() OVER () as id,  
+            sqlFiled1 = '''row_number() OVER () as id,
+                                  m.x_document_type type_move,
+                                  EXTRACT(MONTH FROM mlp.date) AS mes,
                                   ag.name as account_type,
                                   ac.name as account,
                                   CASE
@@ -746,7 +801,9 @@ class ReportGeneralLedgerData(models.AbstractModel):
                                   END AS monto
                               '''
 
-            sqlFiled2 = '''row_number() OVER () as id,  
+            sqlFiled2 = '''row_number() OVER () as id,
+                                    m.x_document_type type_move,
+                                    EXTRACT(MONTH FROM m.date) AS mes,
                                     ag.name as account_type,
                                   ac.name as account,
                               CASE
@@ -755,14 +812,14 @@ class ReportGeneralLedgerData(models.AbstractModel):
                                   END AS monto
                               '''
             if dato_tipo == "OPEN_CLOSE":
-                sqlWhere1 = f''' m.x_account_analytic_account_id = {x_account_analytic_account_id} AND m.x_document_type = 'EGRESO' AND '{date_close}' < mlp.date AND  mlp.date <= '{date_to}' AND\
+                sqlWhere1 = f''' m.x_account_analytic_account_id = {x_account_analytic_account_id} AND m.x_document_type in ('EGRESO','INGRESO') AND '{date_close}' < mlp.date AND  mlp.date <= '{date_to}' AND\
                                 '''
-                sqlWhere2 = f''' m.x_account_analytic_account_id = {x_account_analytic_account_id} AND m.x_document_type = 'EGRESO' AND '{date_close}' < m.date  AND m.date  <= '{date_to}' AND\
+                sqlWhere2 = f''' m.x_account_analytic_account_id = {x_account_analytic_account_id} AND m.x_document_type in ('EGRESO','INGRESO') AND '{date_close}' < m.date  AND m.date  <= '{date_to}' AND\
                                   '''
             else:
-                sqlWhere1 = f''' m.x_account_analytic_account_id = {x_account_analytic_account_id} AND m.x_document_type = 'EGRESO' AND mlp.date BETWEEN '{date_from}' AND '{date_to}' AND\
+                sqlWhere1 = f''' m.x_account_analytic_account_id = {x_account_analytic_account_id} AND m.x_document_type in ('EGRESO','INGRESO') AND mlp.date BETWEEN '{date_from}' AND '{date_to}' AND\
                                                         '''
-                sqlWhere2 = f''' m.x_account_analytic_account_id = {x_account_analytic_account_id} AND m.x_document_type = 'EGRESO' AND m.date BETWEEN '{date_from}' AND '{date_to}' AND\
+                sqlWhere2 = f''' m.x_account_analytic_account_id = {x_account_analytic_account_id} AND m.x_document_type in ('EGRESO','INGRESO') AND m.date BETWEEN '{date_from}' AND '{date_to}' AND\
                                                           '''
             sqlOpen = self.getSqlOpen().format(sqlFiled1=sqlFiled1, sqlWhere1=sqlWhere1,
                                                sqlFiled2=sqlFiled2, sqlWhere2=sqlWhere2)
@@ -778,36 +835,143 @@ class ReportGeneralLedgerData(models.AbstractModel):
             sqlHead = self.getSqlHead().format(sqlFiledBase=sqlFiledBase, sqlOpen='', unionAll='',
                                                sqlClose='{sqlClose}')
         if dato_tipo == "OPEN_CLOSE" or dato_tipo == "CLOSE":
-            sqlField1 = 'row_number() OVER () as id,  grupo_name as account_type, account as account, monto'
-            sqlField2 = 'row_number() OVER () as id,  grupo_name as account_type, account as account, monto'
+            sqlField1 = 'row_number() OVER () as id, tipo_documento AS type_move, EXTRACT(MONTH FROM date) AS mes, grupo_name as account_type, account as account, monto'
+            sqlField2 = 'row_number() OVER () as id, tipo_documento AS type_move, EXTRACT(MONTH FROM date) AS mes, grupo_name as account_type, account as account, monto'
 
             if dato_tipo == "OPEN_CLOSE":
-                sqlWhere = f''' x_account_analytic_account_id = {x_account_analytic_account_id} AND tipo_documento = 'EGRESO' AND date BETWEEN '{date_from}' AND '{date_close}' \
+                sqlWhere = f''' x_account_analytic_account_id = {x_account_analytic_account_id} AND tipo_documento in ('EGRESO','INGRESO') AND date BETWEEN '{date_from}' AND '{date_close}' \
                                 '''
             else:
-                sqlWhere = f''' x_account_analytic_account_id = {x_account_analytic_account_id} AND tipo_documento = 'EGRESO' AND date BETWEEN '{date_from}' AND '{date_to}' \
+                sqlWhere = f''' x_account_analytic_account_id = {x_account_analytic_account_id} AND tipo_documento in ('EGRESO','INGRESO') AND date BETWEEN '{date_from}' AND '{date_to}' \
                                                         '''
             sqlClose = self.getSqlClose().format(sqlField1=sqlField1, sqlWhere1=sqlWhere,
                                                  sqlField2=sqlField2, sqlWhere2=sqlWhere)
             sqlHead = sqlHead.format(sqlClose=sqlClose)
-        sqlNew = sqlHead + " GROUP BY  account_type,account "
-        cr = self.env.cr
+        sqlNew = sqlHead + " GROUP BY type_move, mes, account_type,account "
+
         cr.execute(sqlNew)
 
         move_lines = []
+        ingresos = []
+        gastos = []
+        ingresos_totales = [{'mes_01': 0,
+                             'mes_02': 0,
+                             'mes_03': 0,
+                             'mes_04': 0,
+                             'mes_05': 0,
+                             'mes_06': 0,
+                             'mes_07': 0,
+                             'mes_08': 0,
+                             'mes_09': 0,
+                             'mes_10': 0,
+                             'mes_11': 0,
+                             'mes_12': 0,
+                             'mes_total': 0
+                             }]
+        gastos_totales = [{'mes_01': 0,
+                          'mes_02': 0,
+                          'mes_03': 0,
+                          'mes_04': 0,
+                          'mes_05': 0,
+                          'mes_06': 0,
+                          'mes_07': 0,
+                          'mes_08': 0,
+                          'mes_09': 0,
+                          'mes_10': 0,
+                          'mes_11': 0,
+                          'mes_12': 0,
+                          'mes_total': 0
+                          }]
+        saldos = [{'mes_01': 0,
+                 'mes_02': 0,
+                 'mes_03': 0,
+                 'mes_04': 0,
+                 'mes_05': 0,
+                 'mes_06': 0,
+                 'mes_07': 0,
+                 'mes_08': 0,
+                 'mes_09': 0,
+                 'mes_10': 0,
+                 'mes_11': 0,
+                 'mes_12': 0,
+                 'mes_total': 0
+                 }]
+        saldo_inicial = [{'mes_01': 0,
+                   'mes_02': 0,
+                   'mes_03': 0,
+                   'mes_04': 0,
+                   'mes_05': 0,
+                   'mes_06': 0,
+                   'mes_07': 0,
+                   'mes_08': 0,
+                   'mes_09': 0,
+                   'mes_10': 0,
+                   'mes_11': 0,
+                   'mes_12': 0
+                   }]
         for row in cr.dictfetchall():
             line = {}
             line['account_type'] = row['account_type']
             line['account'] = row['account']
-            line['expense'] = row['expense']
+            line['expense'] = row['type_move']
+            month = f"mes_{int(row['mes']):02}"
             move_lines.append(line)
-        return move_lines
+            self.add_month_budget(row['type_move'], row['account_type'], row['account'], month, row['total'], ingresos, ingresos_totales, gastos, gastos_totales)
+        for i in range(1,13):
+            month = f"mes_{int(i):02}"
+            if i == 1:
+                saldo_inicial[0][month] = initial_balance
+            saldos[0][month] = saldo_inicial[0][month] + ingresos_totales[0][month] - gastos_totales[0][month]
+            if 1 <= i < 12:
+                month_next = f"mes_{int(i+1):02}"
+                saldo_inicial[0][month_next] = saldos[0][month]
+        saldos[0]['mes_total'] = saldos[0][month]
+        return {'ingresos': ingresos, 'ingresos_totales': ingresos_totales, 'gastos': gastos,
+                'gastos_totales': gastos_totales, 'saldos': saldos, 'saldo_inicial': saldo_inicial}
 
-    #  DJ1945
+    def add_month_budget(self, type_move, tipo_cuenta, cuenta, month, total, ingresos, ingresos_totales, gastos, gastos_totales):
+        if type_move == 'INGRESO':
+            datos = ingresos
+            datos_totales = ingresos_totales
+        else:
+            datos = gastos
+            datos_totales = gastos_totales
+
+        for dato in datos:
+            if dato['tipo_cuenta'] == tipo_cuenta and dato['cuenta'] == cuenta:
+                dato[month] = total
+                dato['mes_total'] = dato['mes_total'] + total
+                datos_totales[0][month] = datos_totales[0][month] + total
+                datos_totales[0]['mes_total'] = datos_totales[0]['mes_total'] + total
+                return True
+        dato = {'tipo_cuenta': tipo_cuenta,
+                'cuenta': cuenta,
+                'mes_01': 0,
+                'mes_02': 0,
+                'mes_03': 0,
+                'mes_04': 0,
+                'mes_05': 0,
+                'mes_06': 0,
+                'mes_07': 0,
+                'mes_08': 0,
+                'mes_09': 0,
+                'mes_10': 0,
+                'mes_11': 0,
+                'mes_12': 0,
+                'mes_total': 0
+                }
+        dato[month] = total
+        dato['mes_total'] = total
+        datos.append(dato)
+        datos_totales[0][month] = datos_totales[0][month] + total
+        datos_totales[0]['mes_total'] = datos_totales[0]['mes_total'] + total
+        return False
+
+        #  DJ1945
     def _get_DJ1945_data(self, date_from, date_to, date_close):
 
         sqlFiledBase = '''row_number() OVER () as id, beneficiario, rut, sum(monto) as total\
-                                                 '''
+                                         '''
         if date_from <= date_close and date_close <= date_to:
             dato_tipo = "OPEN_CLOSE"
         if date_close < date_from:
@@ -817,32 +981,32 @@ class ReportGeneralLedgerData(models.AbstractModel):
         if dato_tipo == "OPEN_CLOSE" or dato_tipo == "OPEN":
 
             sqlFiled1 = '''row_number() OVER () as id,  
-                                     upper(rp.name::text)AS beneficiario,
-                                     rp.vat as rut,\
-                                     CASE
-                                         WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                         ELSE ml.price_total
-                                     END AS monto
-                                 '''
+                             upper(rp.name::text)AS beneficiario,
+                             rp.vat as rut,\
+                             CASE
+                                 WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                                 ELSE ml.price_total
+                             END AS monto
+                         '''
 
             sqlFiled2 = '''row_number() OVER () as id,  
-                               upper(m.x_beneficiary::text) AS beneficiario,\
-                               upper(m.x_rut_beneficiary::text) AS rut,\
-                                 CASE
-                                         WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                         ELSE he.total_amount
-                                     END AS monto
-                                 '''
+                       upper(m.x_beneficiary::text) AS beneficiario,\
+                       upper(m.x_rut_beneficiary::text) AS rut,\
+                         CASE
+                                 WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                                 ELSE he.total_amount
+                             END AS monto
+                         '''
             if dato_tipo == "OPEN_CLOSE":
                 sqlWhere1 = f'''   m.x_document_type = 'EGRESO' AND '{date_close}' < mlp.date AND  mlp.date <= '{date_to}' AND\
-                                   '''
+                           '''
                 sqlWhere2 = f''' m.x_document_type = 'EGRESO' AND '{date_close}' < m.date  AND m.date  <= '{date_to}' AND\
-                                     '''
+                             '''
             else:
                 sqlWhere1 = f''' m.x_document_type = 'EGRESO' AND mlp.date BETWEEN '{date_from}' AND '{date_to}' AND\
-                                                           '''
+                                                   '''
                 sqlWhere2 = f''' m.x_document_type = 'EGRESO' AND m.date BETWEEN '{date_from}' AND '{date_to}' AND\
-                                                             '''
+                                                     '''
             sqlOpen = self.getSqlOpen().format(sqlFiled1=sqlFiled1, sqlWhere1=sqlWhere1,
                                                sqlFiled2=sqlFiled2, sqlWhere2=sqlWhere2)
             if dato_tipo == "OPEN_CLOSE":
@@ -862,10 +1026,10 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
             if dato_tipo == "OPEN_CLOSE":
                 sqlWhere = f''' tipo_documento = 'EGRESO' AND date BETWEEN '{date_from}' AND '{date_close}' \
-                                   '''
+                           '''
             else:
                 sqlWhere = f''' tipo_documento = 'EGRESO' AND date BETWEEN '{date_from}' AND '{date_to}' \
-                                                           '''
+                                                   '''
             sqlClose = self.getSqlClose().format(sqlField1=sqlField1, sqlWhere1=sqlWhere,
                                                  sqlField2=sqlField2, sqlWhere2=sqlWhere)
             sqlHead = sqlHead.format(sqlClose=sqlClose)
@@ -885,14 +1049,15 @@ class ReportGeneralLedgerData(models.AbstractModel):
             move_lines.append(line)
         return move_lines
 
-    #ASINET
+        # ASINET
+
     def _get_asinet_data(self, date_from, date_to, date_close):
         proyectos = self.env['account.analytic.account'].search([])
 
-        asinets=[]
+        asinets = []
         for proyecto in proyectos:
             if proyecto.code != '6902':
-                #'2023-04-30'
+                # '2023-04-30'
                 sql_param = {
                     'x_account_analytic_account_id': proyecto.id,
                     'date_from': date_from,
@@ -913,8 +1078,8 @@ class ReportGeneralLedgerData(models.AbstractModel):
                     line['total'] = row['total']
                     move_lines_income.append(line)
                     total_income_from_period += row['total']
-                #1112001 + T
-                #2151025 -
+                # 1112001 + T
+                # 2151025 -
                 if move_lines_income:
                     asinet = {}
                     asinet['Project'] = proyecto.name
@@ -938,9 +1103,9 @@ class ReportGeneralLedgerData(models.AbstractModel):
                         asinet['EntityValue'] = -1 * line['total']
                         asinet['SendMemo'] = 'False'
                         if line['cuenta_senainfo']:
-                            asinet['Description'] = 'TOTAL ' + line['cuenta_senainfo'] +  ' -'
+                            asinet['Description'] = 'TOTAL ' + line['cuenta_senainfo'] + ' -'
                         else:
-                            asinet['Description'] = 'TOTAL ' +  ' -'
+                            asinet['Description'] = 'TOTAL ' + ' -'
                         asinets.append(asinet)
 
                 cr = self.env.cr
@@ -1005,64 +1170,65 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
             # Get movements of mayor ledger
             sqlFiled = ''' grupo, account_id, cod_cuenta, nro_comprobante,\
-                    tipo_docto_respaldo, nro_docto_respaldo, beneficiario, medio_pago,\
-                    nro_comprobante_pago, fecha_pago, glosa, monto, monto as total\
-                    '''
+            tipo_docto_respaldo, nro_docto_respaldo, beneficiario, medio_pago,\
+            nro_comprobante_pago, fecha_pago, glosa, monto, monto as total\
+            '''
 
             sql = ('''SELECT grupo, account_id, cod_cuenta, nro_comprobante,\
-                    tipo_docto_respaldo, nro_docto_respaldo, beneficiario, medio_pago,\
-                    nro_comprobante_pago, fecha_pago, glosa, monto, monto as total\
-                    FROM account_report_back\
-                    WHERE tipo_documento = %s\
-                    AND x_account_analytic_account_id = %s\
-                    AND fecha_ingreso BETWEEN %s AND %s\
-                    ORDER BY account_id, ''' + x_sort_by)
+            tipo_docto_respaldo, nro_docto_respaldo, beneficiario, medio_pago,\
+            nro_comprobante_pago, fecha_pago, glosa, monto, monto as total\
+            FROM account_report_back\
+            WHERE tipo_documento = %s\
+            AND x_account_analytic_account_id = %s\
+            AND fecha_ingreso BETWEEN %s AND %s\
+            ORDER BY account_id, ''' + x_sort_by)
 
             sqlFiledBase = ''' grupo, account_id, cod_cuenta, nro_comprobante,\
-                                tipo_docto_respaldo, nro_docto_respaldo, beneficiario, medio_pago,\
-                                nro_comprobante_pago, fecha_pago, glosa, monto, monto as total\
-                                '''
+                        tipo_docto_respaldo, nro_docto_respaldo, beneficiario, medio_pago,\
+                        nro_comprobante_pago, fecha_pago, glosa, monto, monto as total\
+                        '''
 
             sqlFiled1 = ''' ag.name AS grupo, ac.id AS account_id, ac.code AS cod_cuenta,  m.x_correlative AS nro_comprobante,\
-                                CASE
-                                    WHEN m.x_in_back_up_document_type IS NOT NULL THEN m.x_in_back_up_document_type
-                                    WHEN m.x_out_back_up_document_type IS NOT NULL THEN m.x_out_back_up_document_type
-                                    ELSE ''::character varying
-                                END AS tipo_docto_respaldo,  m.x_back_up_document_number AS nro_docto_respaldo,  CASE
-                                    WHEN m.x_document_type::text = 'EGRESO'::character varying::text THEN upper(rp.name::text)
-                                    ELSE upper(rp.name::text)
-                                END AS beneficiario,  pm.name AS medio_pago,\
-                                p.x_income_document_number::text AS nro_comprobante_pago, mlp.date AS fecha_pago, upper(p.x_name::text) AS glosa, CASE
-                                    WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                    ELSE ml.price_total
-                                END AS monto\
-                                '''
+                        CASE
+                            WHEN m.x_in_back_up_document_type IS NOT NULL THEN m.x_in_back_up_document_type
+                            WHEN m.x_out_back_up_document_type IS NOT NULL THEN m.x_out_back_up_document_type
+                            ELSE ''::character varying
+                        END AS tipo_docto_respaldo,  m.x_back_up_document_number AS nro_docto_respaldo,  CASE
+                            WHEN m.x_document_type::text = 'EGRESO'::character varying::text THEN upper(rp.name::text)
+                            ELSE upper(rp.name::text)
+                        END AS beneficiario,  pm.name AS medio_pago,\
+                        p.x_income_document_number::text AS nro_comprobante_pago, mlp.date AS fecha_pago, upper(p.x_name::text) AS glosa, CASE
+                            WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                            ELSE ml.price_total
+                        END AS monto\
+                        '''
 
             sqlFiled2 = ''' ag.name AS grupo, ac.id AS account_id, ac.code AS cod_cuenta, m.x_correlative AS nro_comprobante,\
-                                CASE
-                                    WHEN m.x_in_back_up_document_type IS NOT NULL THEN m.x_in_back_up_document_type
-                                    WHEN m.x_out_back_up_document_type IS NOT NULL THEN m.x_out_back_up_document_type
-                                    ELSE ''::character varying
-                                END AS tipo_docto_respaldo,  m.x_back_up_document_number AS nro_docto_respaldo,  upper(m.x_beneficiary::text) AS beneficiario, pm.name AS medio_pago,\
-                                 he.x_income_document_number::text AS nro_comprobante_pago,  m.date AS fecha_pago, upper(ml.name::text) AS glosa,  CASE
-                                    WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                    ELSE he.total_amount
-                                END AS monto\
-                                '''
+                        CASE
+                            WHEN m.x_in_back_up_document_type IS NOT NULL THEN m.x_in_back_up_document_type
+                            WHEN m.x_out_back_up_document_type IS NOT NULL THEN m.x_out_back_up_document_type
+                            ELSE ''::character varying
+                        END AS tipo_docto_respaldo,  m.x_back_up_document_number AS nro_docto_respaldo,  upper(m.x_beneficiary::text) AS beneficiario, pm.name AS medio_pago,\
+                         he.x_income_document_number::text AS nro_comprobante_pago,  m.date AS fecha_pago, upper(ml.name::text) AS glosa,  CASE
+                            WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                            ELSE he.total_amount
+                        END AS monto\
+                        '''
 
             sqlWhere1 = ''' m.x_document_type = %s\
-                        AND m.x_account_analytic_account_id = %s\
-                        AND m.invoice_date BETWEEN %s AND %s AND\
-                    '''
+                AND m.x_account_analytic_account_id = %s\
+                AND m.invoice_date BETWEEN %s AND %s AND\
+            '''
             sqlWhere2 = '''  m.x_document_type = %s\
-                        AND m.x_account_analytic_account_id = %s\
-                        AND m.date BETWEEN %s AND %s AND \
-                    '''
+                AND m.x_account_analytic_account_id = %s\
+                AND m.date BETWEEN %s AND %s AND \
+            '''
             sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
             sql = sql + " ORDER BY account_id," + x_sort_by
 
-            params = (x_document_type, x_account_analytic_account_id, where_params[2][1], where_params[2][0],
-                      x_document_type, x_account_analytic_account_id, where_params[2][1], where_params[2][0])
+            params = (
+                x_document_type, x_account_analytic_account_id, where_params[2][1], where_params[2][0],
+                x_document_type, x_account_analytic_account_id, where_params[2][1], where_params[2][0])
 
             cr.execute(sql, params)
 
@@ -1087,37 +1253,38 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
             # Get total group by cod_grupo
             sql = ('''SELECT cod_grupo as code, grupo as name, sum(monto) AS total\
-                    FROM account_report_back\
-                    WHERE tipo_documento = %s\
-                    AND x_account_analytic_account_id = %s\
-                    AND fecha_ingreso BETWEEN %s AND %s\
-                    GROUP BY cod_grupo, grupo''')
+            FROM account_report_back\
+            WHERE tipo_documento = %s\
+            AND x_account_analytic_account_id = %s\
+            AND fecha_ingreso BETWEEN %s AND %s\
+            GROUP BY cod_grupo, grupo''')
 
             sqlFiledBase = "cod_grupo as code, grupo as name, sum(monto) AS total"
             sqlFiled1 = '''ac.group_id AS cod_grupo, ag.name AS grupo, CASE
-                                    WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                    ELSE ml.price_total
-                                END AS monto
-                             '''
+                            WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                            ELSE ml.price_total
+                        END AS monto
+                     '''
             sqlFiled2 = '''ac.group_id AS cod_grupo, ag.name AS grupo, CASE
-                                    WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                    ELSE he.total_amount
-                                END AS monto
-                             '''
+                            WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                            ELSE he.total_amount
+                        END AS monto
+                     '''
 
             sqlWhere1 = ''' m.x_document_type = %s\
-                    AND m.x_account_analytic_account_id = %s\
-                    AND m.invoice_date BETWEEN %s AND %s AND \
-                  '''
+            AND m.x_account_analytic_account_id = %s\
+            AND m.invoice_date BETWEEN %s AND %s AND \
+          '''
             sqlWhere2 = ''' m.x_document_type = %s\
-                    AND m.x_account_analytic_account_id = %s\
-                    AND m.date BETWEEN %s AND %s AND \
-                  '''
+            AND m.x_account_analytic_account_id = %s\
+            AND m.date BETWEEN %s AND %s AND \
+          '''
             sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
             sql = sql + " GROUP BY cod_grupo, grupo"
 
-            params = (x_document_type, x_account_analytic_account_id, where_params[2][1], where_params[2][0],
-                      x_document_type, x_account_analytic_account_id, where_params[2][1], where_params[2][0])
+            params = (
+                x_document_type, x_account_analytic_account_id, where_params[2][1], where_params[2][0],
+                x_document_type, x_account_analytic_account_id, where_params[2][1], where_params[2][0])
 
             cr.execute(sql, params)
 
@@ -1131,52 +1298,53 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
             # Get movements of mayor ledger
             sql = ('''SELECT cod_grupo as code, nro_comprobante, tipo_docto_respaldo, nro_docto_respaldo, beneficiario,\
-                    medio_pago, nro_comprobante_pago, fecha_pago, glosa, monto\
-                    FROM account_report_back\
-                    WHERE tipo_documento = %s\
-                    AND x_account_analytic_account_id = %s\
-                    AND fecha_ingreso BETWEEN %s AND %s\
-                    ORDER BY cod_grupo, ''' + x_sort_by)
+            medio_pago, nro_comprobante_pago, fecha_pago, glosa, monto\
+            FROM account_report_back\
+            WHERE tipo_documento = %s\
+            AND x_account_analytic_account_id = %s\
+            AND fecha_ingreso BETWEEN %s AND %s\
+            ORDER BY cod_grupo, ''' + x_sort_by)
 
             sqlFiledBase = '''cod_grupo as code, nro_comprobante, tipo_docto_respaldo, nro_docto_respaldo, beneficiario,\
-                                medio_pago, nro_comprobante_pago, fecha_pago, glosa, monto\
-                               '''
+                        medio_pago, nro_comprobante_pago, fecha_pago, glosa, monto\
+                       '''
             sqlFiled1 = '''ac.group_id AS cod_grupo,m.x_correlative AS nro_comprobante, CASE
-                                    WHEN m.x_in_back_up_document_type IS NOT NULL THEN m.x_in_back_up_document_type
-                                    WHEN m.x_out_back_up_document_type IS NOT NULL THEN m.x_out_back_up_document_type
-                                    ELSE ''::character varying
-                                END AS tipo_docto_respaldo, m.x_back_up_document_number AS nro_docto_respaldo,  CASE
-                                    WHEN m.x_document_type::text = 'EGRESO'::character varying::text THEN upper(rp.name::text)
-                                    ELSE upper(rp.name::text)
-                                END AS beneficiario,  pm.name AS medio_pago, p.x_income_document_number::text AS nro_comprobante_pago, mlp.date AS fecha_pago, upper(p.x_name::text) AS glosa, CASE
-                                    WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                    ELSE ml.price_total
-                                END AS monto\
-                               '''
+                            WHEN m.x_in_back_up_document_type IS NOT NULL THEN m.x_in_back_up_document_type
+                            WHEN m.x_out_back_up_document_type IS NOT NULL THEN m.x_out_back_up_document_type
+                            ELSE ''::character varying
+                        END AS tipo_docto_respaldo, m.x_back_up_document_number AS nro_docto_respaldo,  CASE
+                            WHEN m.x_document_type::text = 'EGRESO'::character varying::text THEN upper(rp.name::text)
+                            ELSE upper(rp.name::text)
+                        END AS beneficiario,  pm.name AS medio_pago, p.x_income_document_number::text AS nro_comprobante_pago, mlp.date AS fecha_pago, upper(p.x_name::text) AS glosa, CASE
+                            WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                            ELSE ml.price_total
+                        END AS monto\
+                       '''
             sqlFiled2 = '''ac.group_id AS cod_grupo,m.x_correlative AS nro_comprobante,CASE
-                                    WHEN m.x_in_back_up_document_type IS NOT NULL THEN m.x_in_back_up_document_type
-                                    WHEN m.x_out_back_up_document_type IS NOT NULL THEN m.x_out_back_up_document_type
-                                    ELSE ''::character varying
-                                END AS tipo_docto_respaldo, m.x_back_up_document_number AS nro_docto_respaldo,  upper(m.x_beneficiary::text) AS beneficiario, pm.name AS medio_pago,\
-                                he.x_income_document_number::text AS nro_comprobante_pago,  m.date AS fecha_pago, upper(ml.name::text) AS glosa,  CASE
-                                    WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                    ELSE he.total_amount
-                                END AS monto\
-                               '''
+                            WHEN m.x_in_back_up_document_type IS NOT NULL THEN m.x_in_back_up_document_type
+                            WHEN m.x_out_back_up_document_type IS NOT NULL THEN m.x_out_back_up_document_type
+                            ELSE ''::character varying
+                        END AS tipo_docto_respaldo, m.x_back_up_document_number AS nro_docto_respaldo,  upper(m.x_beneficiary::text) AS beneficiario, pm.name AS medio_pago,\
+                        he.x_income_document_number::text AS nro_comprobante_pago,  m.date AS fecha_pago, upper(ml.name::text) AS glosa,  CASE
+                            WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                            ELSE he.total_amount
+                        END AS monto\
+                       '''
             sqlWhere1 = ''' m.x_document_type = %s\
-                            AND m.x_account_analytic_account_id = %s\
-                            AND m.invoice_date BETWEEN %s AND %s AND \
-                          '''
+                    AND m.x_account_analytic_account_id = %s\
+                    AND m.invoice_date BETWEEN %s AND %s AND \
+                  '''
             sqlWhere2 = ''' m.x_document_type = %s\
-                            AND m.x_account_analytic_account_id = %s\
-                            AND m.date BETWEEN %s AND %s AND \
-                          '''
+                    AND m.x_account_analytic_account_id = %s\
+                    AND m.date BETWEEN %s AND %s AND \
+                  '''
 
             sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
             sql = sql + " ORDER BY cod_grupo, " + x_sort_by
 
-            params = (x_document_type, x_account_analytic_account_id, where_params[2][1], where_params[2][0],
-                      x_document_type, x_account_analytic_account_id, where_params[2][1], where_params[2][0])
+            params = (
+                x_document_type, x_account_analytic_account_id, where_params[2][1], where_params[2][0],
+                x_document_type, x_account_analytic_account_id, where_params[2][1], where_params[2][0])
 
             cr.execute(sql, params)
 
@@ -1208,10 +1376,10 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         # Get initial balance
         sql = ('''SELECT amount_total\
-                FROM account_move\
-                WHERE x_account_analytic_account_id = %s\
-                AND x_name = 'SALDO INICIAL'\
-                ''')
+        FROM account_move\
+        WHERE x_account_analytic_account_id = %s\
+        AND x_name = 'SALDO INICIAL'\
+        ''')
 
         params = (x_account_analytic_account_id,)
         cr.execute(sql, params)
@@ -1222,23 +1390,23 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         sqlFiledBase = "tipo_documento, sum(monto) as saldo"
         sqlFiled1 = '''m.x_document_type AS tipo_documento, CASE
-                                WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                ELSE ml.price_total
-                            END AS monto
-                        '''
+                        WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                        ELSE ml.price_total
+                    END AS monto
+                '''
         sqlFiled2 = '''m.x_document_type AS tipo_documento,             
-                            CASE
-                                WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                ELSE he.total_amount
-                            END AS monto
-                        '''
+                    CASE
+                        WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                        ELSE he.total_amount
+                    END AS monto
+                '''
 
         sqlWhere1 = ''' m.x_account_analytic_account_id = %s\
-                        AND mlp.date < %s AND \
-                      '''
+                AND mlp.date < %s AND \
+              '''
         sqlWhere2 = ''' m.x_account_analytic_account_id = %s\
-                        AND m.date <  %s  AND \
-                      '''
+                AND m.date <  %s  AND \
+              '''
         sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
         sql = sql + " GROUP BY tipo_documento"
 
@@ -1267,10 +1435,10 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         # Get ids movements of bank ledger
         sql = ('''SELECT row_number() OVER () as id\
-                FROM account_report_back\
-                WHERE x_account_analytic_account_id = %s\
-                AND EXTRACT(YEAR FROM fecha_pago) = ''' + where_params[2][1][0:4] + ''' \
-                AND fecha_pago BETWEEN %s AND %s''')
+        FROM account_report_back\
+        WHERE x_account_analytic_account_id = %s\
+        AND EXTRACT(YEAR FROM fecha_pago) = ''' + where_params[2][1][0:4] + ''' \
+        AND fecha_pago BETWEEN %s AND %s''')
 
         params = (x_account_analytic_account_id, where_params[2][1], where_params[2][0])
 
@@ -1290,32 +1458,32 @@ class ReportGeneralLedgerData(models.AbstractModel):
             x_sort_by = 'fecha_pago'
 
         sqlFiledBase = '''row_number() OVER () as id, tipo_documento, fecha_ingreso, nro_comprobante, medio_pago, nro_comprobante_pago, fecha_pago, glosa, beneficiario,\
-                        CASE tipo_documento WHEN 'INGRESO' THEN monto ELSE 0 END AS ingreso,\
-                        CASE tipo_documento WHEN 'EGRESO' THEN monto ELSE 0 END AS egreso\
-                        '''
+                CASE tipo_documento WHEN 'INGRESO' THEN monto ELSE 0 END AS ingreso,\
+                CASE tipo_documento WHEN 'EGRESO' THEN monto ELSE 0 END AS egreso\
+                '''
         sqlFiled1 = '''row_number() OVER () as id, m.x_document_type AS tipo_documento, m.invoice_date AS fecha_ingreso,  m.x_correlative AS nro_comprobante,  pm.name AS medio_pago, p.x_income_document_number::text AS nro_comprobante_pago,  mlp.date AS fecha_pago, upper(p.x_name::text) AS glosa, CASE
-                                WHEN m.x_document_type::text = 'EGRESO'::character varying::text THEN upper(rp.name::text)
-                                ELSE ''::text
-                            END AS beneficiario,\
-                        CASE
-                                WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                ELSE ml.price_total
-                            END AS monto
-                        '''
+                        WHEN m.x_document_type::text = 'EGRESO'::character varying::text THEN upper(rp.name::text)
+                        ELSE ''::text
+                    END AS beneficiario,\
+                CASE
+                        WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                        ELSE ml.price_total
+                    END AS monto
+                '''
 
         sqlFiled2 = '''row_number() OVER () as id, m.x_document_type as tipo_documento,m.invoice_date AS fecha_ingreso,  m.x_correlative AS nro_comprobante,  pm.name AS medio_pago, he.x_income_document_number::text AS nro_comprobante_pago, m.invoice_date AS fecha_pago,  upper(ml.name::text) AS glosa,  upper(m.x_beneficiary::text) AS beneficiario,\
-                        CASE
-                                WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                ELSE he.total_amount
-                            END AS monto
-                        '''
+                CASE
+                        WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                        ELSE he.total_amount
+                    END AS monto
+                '''
 
         sqlWhere1 = ''' m.x_account_analytic_account_id = %s\
-                        AND mlp.date BETWEEN %s AND %s AND\
-                      '''
+                AND mlp.date BETWEEN %s AND %s AND\
+              '''
         sqlWhere2 = ''' m.x_account_analytic_account_id = %s\
-                        AND m.date BETWEEN %s AND %s AND\
-                      '''
+                AND m.date BETWEEN %s AND %s AND\
+              '''
 
         sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
         sql = sql + " ORDER BY " + x_sort_by + ", nro_comprobante "
@@ -1383,10 +1551,10 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         # Get initial balance
         sql = ('''SELECT amount_total\
-                FROM account_move\
-                WHERE x_account_analytic_account_id = %s\
-                AND x_name = 'SALDO INICIAL'\
-                ''')
+        FROM account_move\
+        WHERE x_account_analytic_account_id = %s\
+        AND x_name = 'SALDO INICIAL'\
+        ''')
 
         params = (x_account_analytic_account_id,)
         cr.execute(sql, params)
@@ -1397,21 +1565,21 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         sqlFiledBase = "tipo_documento, sum(monto) as total"
         sqlFiled1 = '''m.x_document_type AS tipo_documento, CASE
-                                WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                ELSE ml.price_total
-                            END AS monto
-                        '''
+                        WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                        ELSE ml.price_total
+                    END AS monto
+                '''
         sqlFiled2 = '''m.x_document_type AS tipo_documento, CASE
-                                WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                ELSE he.total_amount
-                            END AS monto
-                        '''
+                        WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                        ELSE he.total_amount
+                    END AS monto
+                '''
         sqlWhere1 = ''' m.x_account_analytic_account_id = %s\
-                        AND mlp.date < %s AND\
-                      '''
+                AND mlp.date < %s AND\
+              '''
         sqlWhere2 = ''' m.x_account_analytic_account_id = %s\
-                        AND m.date < %s AND \
-                      '''
+                AND m.date < %s AND \
+              '''
         sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
         sql = sql + " GROUP BY tipo_documento"
         params = (x_account_analytic_account_id, where_params[2][1],
@@ -1440,21 +1608,21 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         sqlFiledBase = "tipo_documento, sum(monto) as total"
         sqlFiled1 = '''m.x_document_type AS tipo_documento, CASE
-                                WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                ELSE ml.price_total
-                            END AS monto
-                        '''
+                        WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                        ELSE ml.price_total
+                    END AS monto
+                '''
         sqlFiled2 = '''m.x_document_type AS tipo_documento, CASE
-                                WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                ELSE he.total_amount
-                            END AS monto
-                        '''
+                        WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                        ELSE he.total_amount
+                    END AS monto
+                '''
         sqlWhere1 = ''' m.x_account_analytic_account_id = %s\
-                        AND mlp.date BETWEEN %s AND %s AND\
-                      '''
+                AND mlp.date BETWEEN %s AND %s AND\
+              '''
         sqlWhere2 = ''' m.x_account_analytic_account_id = %s\
-                        AND m.date BETWEEN %s AND %s AND \
-                      '''
+                AND m.date BETWEEN %s AND %s AND \
+              '''
         sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
         sql = sql + " GROUP BY tipo_documento"
         params = (x_account_analytic_account_id, where_params[2][1], where_params[2][0],
@@ -1482,14 +1650,14 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         # Get checks drawn uncharged
         sql = ('''SELECT row_number() OVER () as id, m2.x_name AS documento, p.x_income_document_number AS nro_cheque,\
-                m.date AS fecha_pago, p.amount AS monto, m.invoice_partner_display_name AS beneficiario, p.x_name AS referencia\
-                FROM account_payment p\
-                LEFT JOIN account_move m ON (m.payment_id = p.id)\
-                LEFT JOIN account_move m2 ON (m.ref = m2.name)\
-                WHERE p.x_is_charged = FALSE\
-                AND m2.x_account_analytic_account_id = %s\
-                AND m.date BETWEEN %s AND %s\
-                ORDER BY ''' + x_sort_by)
+        m.date AS fecha_pago, p.amount AS monto, m.invoice_partner_display_name AS beneficiario, p.x_name AS referencia\
+        FROM account_payment p\
+        LEFT JOIN account_move m ON (m.payment_id = p.id)\
+        LEFT JOIN account_move m2 ON (m.ref = m2.name)\
+        WHERE p.x_is_charged = FALSE\
+        AND m2.x_account_analytic_account_id = %s\
+        AND m.date BETWEEN %s AND %s\
+        ORDER BY ''' + x_sort_by)
 
         params = (x_account_analytic_account_id, where_params[2][1], where_params[2][0])
 
@@ -1526,7 +1694,8 @@ class ReportGeneralLedgerData(models.AbstractModel):
         res['total_income'] = total_income
         res['total_expenses'] = total_expenses
         res['total_checks_drawn_uncharged'] = total_checks_drawn_uncharged
-        res['reconciled_balance'] = ((initial_balance + total_income) - total_expenses) - total_checks_drawn_uncharged
+        res['reconciled_balance'] = ((
+                                             initial_balance + total_income) - total_expenses) - total_checks_drawn_uncharged
         final_balance = (initial_balance + total_income) - total_expenses
         res['final_balance'] = final_balance
         res['bank_final_balance'] = x_bank_final_balance
@@ -1549,10 +1718,10 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         # Get initial balance
         sql = ('''SELECT amount_total\
-                FROM account_move\
-                WHERE x_account_analytic_account_id = %s\
-                AND x_name = 'SALDO INICIAL'\
-                ''')
+        FROM account_move\
+        WHERE x_account_analytic_account_id = %s\
+        AND x_name = 'SALDO INICIAL'\
+        ''')
 
         params = (x_account_analytic_account_id,)
         cr.execute(sql, params)
@@ -1565,23 +1734,23 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         sqlFiledBase = "tipo_documento, sum(monto) as total"
         sqlFiled1 = '''m.x_document_type AS tipo_documento,\
-                        CASE
-                                WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                ELSE ml.price_total
-                            END AS monto
-                        '''
+                CASE
+                        WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                        ELSE ml.price_total
+                    END AS monto
+                '''
         sqlFiled2 = '''m.x_document_type AS tipo_documento,\
-                        CASE
-                                WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                ELSE he.total_amount
-                            END AS monto
-                        '''
+                CASE
+                        WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                        ELSE he.total_amount
+                    END AS monto
+                '''
         sqlWhere1 = ''' m.x_account_analytic_account_id = %s\
-                        AND mlp.date < %s AND\
-                      '''
+                AND mlp.date < %s AND\
+              '''
         sqlWhere2 = ''' m.x_account_analytic_account_id = %s\
-                        AND m.date < %s AND \
-                      '''
+                AND m.date < %s AND \
+              '''
         sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
         sql = sql + " GROUP BY tipo_documento"
         params = (x_account_analytic_account_id, where_params[2][1],
@@ -1611,23 +1780,23 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         sqlFiledBase = "row_number() OVER () as id, grupo as cuenta_senainfo, sum(monto) as total"
         sqlFiled1 = '''ac.x_senainfo_group_name AS grupo, CASE
-                                WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                ELSE ml.price_total
-                            END AS monto
-                        '''
+                        WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                        ELSE ml.price_total
+                    END AS monto
+                '''
         sqlFiled2 = '''ac.x_senainfo_group_name AS grupo, CASE
-                                WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                ELSE he.total_amount
-                            END AS monto
-                        '''
+                        WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                        ELSE he.total_amount
+                    END AS monto
+                '''
         sqlWhere1 = ''' m.x_account_analytic_account_id   = %s\
-                        AND m.x_document_type = 'INGRESO'\
-                        AND mlp.date BETWEEN %s AND %s AND \
-                      '''
+                AND m.x_document_type = 'INGRESO'\
+                AND mlp.date BETWEEN %s AND %s AND \
+              '''
         sqlWhere2 = ''' m.x_account_analytic_account_id = %s\
-                        AND m.x_document_type = 'INGRESO'\
-                        AND m.date BETWEEN %s AND %s AND \
-                      '''
+                AND m.x_document_type = 'INGRESO'\
+                AND m.date BETWEEN %s AND %s AND \
+              '''
         sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
         sql = sql + " GROUP BY grupo"
         params = (x_account_analytic_account_id, where_params[2][1], where_params[2][0],
@@ -1656,23 +1825,23 @@ class ReportGeneralLedgerData(models.AbstractModel):
         # Get expenses from period group by SENAINFO accounts
         sqlFiledBase = "row_number() OVER () as id,grupo as cuenta_senainfo, sum(monto) as total"
         sqlFiled1 = '''ac.x_senainfo_group_name AS grupo, CASE
-                                WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                ELSE ml.price_total
-                            END AS monto
-                        '''
+                        WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                        ELSE ml.price_total
+                    END AS monto
+                '''
         sqlFiled2 = '''ac.x_senainfo_group_name AS grupo, CASE
-                                WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                ELSE he.total_amount
-                            END AS monto
-                        '''
+                        WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                        ELSE he.total_amount
+                    END AS monto
+                '''
         sqlWhere1 = ''' m.x_account_analytic_account_id   = %s\
-                        AND m.x_document_type = 'EGRESO'\
-                        AND mlp.date BETWEEN %s AND %s AND \
-                      '''
+                AND m.x_document_type = 'EGRESO'\
+                AND mlp.date BETWEEN %s AND %s AND \
+              '''
         sqlWhere2 = ''' m.x_account_analytic_account_id = %s\
-                        AND m.x_document_type = 'EGRESO'\
-                        AND m.date BETWEEN %s AND %s AND \
-                      '''
+                AND m.x_document_type = 'EGRESO'\
+                AND m.date BETWEEN %s AND %s AND \
+              '''
         sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
         sql = sql + " GROUP BY grupo"
 
@@ -1712,11 +1881,10 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         return account_res
 
-
-
     # Anterior
     # bank ledger - Libro Banco Old
-    def _get_bank_ledger_entries_old(self, accounts, x_account_analytic_account_id, x_sort_by, x_report_type,
+    def _get_bank_ledger_entries_old(self, accounts, x_account_analytic_account_id, x_sort_by,
+                                     x_report_type,
                                      x_document_type):
 
         cr = self.env.cr
@@ -1728,10 +1896,10 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         # Get initial balance
         sql = ('''SELECT amount_total\
-                FROM account_move\
-                WHERE x_account_analytic_account_id = %s\
-                AND x_name = 'SALDO INICIAL'\
-                ''')
+        FROM account_move\
+        WHERE x_account_analytic_account_id = %s\
+        AND x_name = 'SALDO INICIAL'\
+        ''')
 
         params = (x_account_analytic_account_id,)
         cr.execute(sql, params)
@@ -1742,23 +1910,23 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         sqlFiledBase = "tipo_documento, sum(monto) as saldo"
         sqlFiled1 = '''m.x_document_type AS tipo_documento, CASE
-                                WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                ELSE ml.price_total
-                            END AS monto
-                        '''
+                        WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                        ELSE ml.price_total
+                    END AS monto
+                '''
         sqlFiled2 = '''m.x_document_type AS tipo_documento,             
-                            CASE
-                                WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                ELSE he.total_amount
-                            END AS monto
-                        '''
+                    CASE
+                        WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                        ELSE he.total_amount
+                    END AS monto
+                '''
 
         sqlWhere1 = ''' m.x_account_analytic_account_id = %s\
-                        AND mlp.date < %s AND \
-                      '''
+                AND mlp.date < %s AND \
+              '''
         sqlWhere2 = ''' m.x_account_analytic_account_id = %s\
-                        AND m.date <  %s  AND \
-                      '''
+                AND m.date <  %s  AND \
+              '''
         sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
         sql = sql + " GROUP BY tipo_documento"
 
@@ -1779,10 +1947,10 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         # Get ids movements of bank ledger
         sql = ('''SELECT row_number() OVER () as id\
-                FROM account_report_back\
-                WHERE x_account_analytic_account_id = %s\
-                AND EXTRACT(YEAR FROM fecha_pago) = ''' + where_params[2][1][0:4] + ''' \
-                AND fecha_pago BETWEEN %s AND %s''')
+        FROM account_report_back\
+        WHERE x_account_analytic_account_id = %s\
+        AND EXTRACT(YEAR FROM fecha_pago) = ''' + where_params[2][1][0:4] + ''' \
+        AND fecha_pago BETWEEN %s AND %s''')
 
         params = (x_account_analytic_account_id, where_params[2][1], where_params[2][0])
 
@@ -1802,32 +1970,32 @@ class ReportGeneralLedgerData(models.AbstractModel):
             x_sort_by = 'fecha_pago'
 
         sqlFiledBase = '''row_number() OVER () as id, tipo_documento, fecha_ingreso, nro_comprobante, medio_pago, nro_comprobante_pago, fecha_pago, glosa, beneficiario,\
-                        CASE tipo_documento WHEN 'INGRESO' THEN monto ELSE 0 END AS ingreso,\
-                        CASE tipo_documento WHEN 'EGRESO' THEN monto ELSE 0 END AS egreso\
-                        '''
+                CASE tipo_documento WHEN 'INGRESO' THEN monto ELSE 0 END AS ingreso,\
+                CASE tipo_documento WHEN 'EGRESO' THEN monto ELSE 0 END AS egreso\
+                '''
         sqlFiled1 = '''row_number() OVER () as id, m.x_document_type AS tipo_documento, m.invoice_date AS fecha_ingreso,  m.x_correlative AS nro_comprobante,  pm.name AS medio_pago, p.x_income_document_number::text AS nro_comprobante_pago,  mlp.date AS fecha_pago, upper(p.x_name::text) AS glosa, CASE
-                                WHEN m.x_document_type::text = 'EGRESO'::character varying::text THEN upper(rp.name::text)
-                                ELSE ''::text
-                            END AS beneficiario,\
-                        CASE
-                                WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                ELSE ml.price_total
-                            END AS monto
-                        '''
+                        WHEN m.x_document_type::text = 'EGRESO'::character varying::text THEN upper(rp.name::text)
+                        ELSE ''::text
+                    END AS beneficiario,\
+                CASE
+                        WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                        ELSE ml.price_total
+                    END AS monto
+                '''
 
         sqlFiled2 = '''row_number() OVER () as id, m.x_document_type as tipo_documento,m.invoice_date AS fecha_ingreso,  m.x_correlative AS nro_comprobante,  pm.name AS medio_pago, he.x_income_document_number::text AS nro_comprobante_pago, m.invoice_date AS fecha_pago,  upper(ml.name::text) AS glosa,  upper(m.x_beneficiary::text) AS beneficiario,\
-                        CASE
-                                WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                ELSE he.total_amount
-                            END AS monto
-                        '''
+                CASE
+                        WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                        ELSE he.total_amount
+                    END AS monto
+                '''
 
         sqlWhere1 = ''' m.x_account_analytic_account_id = %s\
-                        AND mlp.date BETWEEN %s AND %s AND\
-                      '''
+                AND mlp.date BETWEEN %s AND %s AND\
+              '''
         sqlWhere2 = ''' m.x_account_analytic_account_id = %s\
-                        AND m.date BETWEEN %s AND %s AND\
-                      '''
+                AND m.date BETWEEN %s AND %s AND\
+              '''
         sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
         sql = sql + " ORDER BY " + x_sort_by + ", nro_comprobante "
         params = (x_account_analytic_account_id, where_params[2][1], where_params[2][0],
@@ -1886,10 +2054,10 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         # Get initial balance
         sql = ('''SELECT amount_total\
-                    FROM account_move\
-                    WHERE x_account_analytic_account_id = %s\
-                    AND x_name = 'SALDO INICIAL'\
-                    ''')
+            FROM account_move\
+            WHERE x_account_analytic_account_id = %s\
+            AND x_name = 'SALDO INICIAL'\
+            ''')
 
         params = (x_account_analytic_account_id,)
         cr.execute(sql, params)
@@ -1900,21 +2068,21 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         sqlFiledBase = "tipo_documento, sum(monto) as total"
         sqlFiled1 = '''m.x_document_type AS tipo_documento, CASE
-                                    WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                    ELSE ml.price_total
-                                END AS monto
-                            '''
+                            WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                            ELSE ml.price_total
+                        END AS monto
+                    '''
         sqlFiled2 = '''m.x_document_type AS tipo_documento, CASE
-                                    WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                    ELSE he.total_amount
-                                END AS monto
-                            '''
+                            WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                            ELSE he.total_amount
+                        END AS monto
+                    '''
         sqlWhere1 = ''' m.x_account_analytic_account_id = %s\
-                            AND mlp.date < %s AND\
-                          '''
+                    AND mlp.date < %s AND\
+                  '''
         sqlWhere2 = ''' m.x_account_analytic_account_id = %s\
-                            AND m.date < %s AND \
-                          '''
+                    AND m.date < %s AND \
+                  '''
         sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
         sql = sql + " GROUP BY tipo_documento"
         params = (x_account_analytic_account_id, where_params[2][1],
@@ -1936,21 +2104,21 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         sqlFiledBase = "tipo_documento, sum(monto) as total"
         sqlFiled1 = '''m.x_document_type AS tipo_documento, CASE
-                                    WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                    ELSE ml.price_total
-                                END AS monto
-                            '''
+                            WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                            ELSE ml.price_total
+                        END AS monto
+                    '''
         sqlFiled2 = '''m.x_document_type AS tipo_documento, CASE
-                                    WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                    ELSE he.total_amount
-                                END AS monto
-                            '''
+                            WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                            ELSE he.total_amount
+                        END AS monto
+                    '''
         sqlWhere1 = ''' m.x_account_analytic_account_id = %s\
-                            AND mlp.date BETWEEN %s AND %s AND\
-                          '''
+                    AND mlp.date BETWEEN %s AND %s AND\
+                  '''
         sqlWhere2 = ''' m.x_account_analytic_account_id = %s\
-                            AND m.date BETWEEN %s AND %s AND \
-                          '''
+                    AND m.date BETWEEN %s AND %s AND \
+                  '''
         sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
         sql = sql + " GROUP BY tipo_documento"
         params = (x_account_analytic_account_id, where_params[2][1], where_params[2][0],
@@ -1969,14 +2137,14 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         # Get checks drawn uncharged
         sql = ('''SELECT row_number() OVER () as id, m2.x_name AS documento, p.x_income_document_number AS nro_cheque,\
-                    m.date AS fecha_pago, p.amount AS monto, m.invoice_partner_display_name AS beneficiario, p.x_name AS referencia\
-                    FROM account_payment p\
-                    LEFT JOIN account_move m ON (m.payment_id = p.id)\
-                    LEFT JOIN account_move m2 ON (m.ref = m2.name)\
-                    WHERE p.x_is_charged = FALSE\
-                    AND m2.x_account_analytic_account_id = %s\
-                    AND m.date BETWEEN %s AND %s\
-                    ORDER BY ''' + x_sort_by)
+            m.date AS fecha_pago, p.amount AS monto, m.invoice_partner_display_name AS beneficiario, p.x_name AS referencia\
+            FROM account_payment p\
+            LEFT JOIN account_move m ON (m.payment_id = p.id)\
+            LEFT JOIN account_move m2 ON (m.ref = m2.name)\
+            WHERE p.x_is_charged = FALSE\
+            AND m2.x_account_analytic_account_id = %s\
+            AND m.date BETWEEN %s AND %s\
+            ORDER BY ''' + x_sort_by)
 
         params = (x_account_analytic_account_id, where_params[2][1], where_params[2][0])
 
@@ -2003,7 +2171,8 @@ class ReportGeneralLedgerData(models.AbstractModel):
         res['total_income'] = total_income
         res['total_expenses'] = total_expenses
         res['total_checks_drawn_uncharged'] = total_checks_drawn_uncharged
-        res['reconciled_balance'] = ((initial_balance + total_income) - total_expenses) - total_checks_drawn_uncharged
+        res['reconciled_balance'] = ((
+                                             initial_balance + total_income) - total_expenses) - total_checks_drawn_uncharged
         final_balance = (initial_balance + total_income) - total_expenses
         res['final_balance'] = final_balance
         res['bank_final_balance'] = x_bank_final_balance
@@ -2014,7 +2183,8 @@ class ReportGeneralLedgerData(models.AbstractModel):
         return account_res
 
     # accountability - Rendición de Cuentas Old
-    def _get_accountability_entries_old(self, accounts, x_account_analytic_account_id, x_sort_by, x_report_type,
+    def _get_accountability_entries_old(self, accounts, x_account_analytic_account_id, x_sort_by,
+                                        x_report_type,
                                         x_document_type):
 
         cr = self.env.cr
@@ -2026,10 +2196,10 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         # Get initial balance
         sql = ('''SELECT amount_total\
-                FROM account_move\
-                WHERE x_account_analytic_account_id = %s\
-                AND x_name = 'SALDO INICIAL'\
-                ''')
+        FROM account_move\
+        WHERE x_account_analytic_account_id = %s\
+        AND x_name = 'SALDO INICIAL'\
+        ''')
 
         params = (x_account_analytic_account_id,)
         cr.execute(sql, params)
@@ -2042,23 +2212,23 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         sqlFiledBase = "tipo_documento, sum(monto) as total"
         sqlFiled1 = '''m.x_document_type AS tipo_documento,\
-                        CASE
-                                WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                ELSE ml.price_total
-                            END AS monto
-                        '''
+                CASE
+                        WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                        ELSE ml.price_total
+                    END AS monto
+                '''
         sqlFiled2 = '''m.x_document_type AS tipo_documento,\
-                        CASE
-                                WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                ELSE he.total_amount
-                            END AS monto
-                        '''
+                CASE
+                        WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                        ELSE he.total_amount
+                    END AS monto
+                '''
         sqlWhere1 = ''' m.x_account_analytic_account_id = %s\
-                        AND mlp.date < %s AND\
-                      '''
+                AND mlp.date < %s AND\
+              '''
         sqlWhere2 = ''' m.x_account_analytic_account_id = %s\
-                        AND m.date < %s AND \
-                      '''
+                AND m.date < %s AND \
+              '''
         sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
         sql = sql + " GROUP BY tipo_documento"
         params = (x_account_analytic_account_id, where_params[2][1],
@@ -2080,23 +2250,23 @@ class ReportGeneralLedgerData(models.AbstractModel):
 
         sqlFiledBase = "row_number() OVER () as id, grupo as cuenta_senainfo, sum(monto) as total"
         sqlFiled1 = '''ac.x_senainfo_group_name AS grupo, CASE
-                                WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                ELSE ml.price_total
-                            END AS monto
-                        '''
+                        WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                        ELSE ml.price_total
+                    END AS monto
+                '''
         sqlFiled2 = '''ac.x_senainfo_group_name AS grupo, CASE
-                                WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                ELSE he.total_amount
-                            END AS monto
-                        '''
+                        WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                        ELSE he.total_amount
+                    END AS monto
+                '''
         sqlWhere1 = ''' m.x_account_analytic_account_id   = %s\
-                        AND m.x_document_type = 'INGRESO'\
-                        AND mlp.date BETWEEN %s AND %s AND \
-                      '''
+                AND m.x_document_type = 'INGRESO'\
+                AND mlp.date BETWEEN %s AND %s AND \
+              '''
         sqlWhere2 = ''' m.x_account_analytic_account_id = %s\
-                        AND m.x_document_type = 'INGRESO'\
-                        AND m.date BETWEEN %s AND %s AND \
-                      '''
+                AND m.x_document_type = 'INGRESO'\
+                AND m.date BETWEEN %s AND %s AND \
+              '''
         sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
         sql = sql + " GROUP BY grupo"
         params = (x_account_analytic_account_id, where_params[2][1], where_params[2][0],
@@ -2116,23 +2286,23 @@ class ReportGeneralLedgerData(models.AbstractModel):
         # Get expenses from period group by SENAINFO accounts
         sqlFiledBase = "row_number() OVER () as id,grupo as cuenta_senainfo, sum(monto) as total"
         sqlFiled1 = '''ac.x_senainfo_group_name AS grupo, CASE
-                                WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
-                                ELSE ml.price_total
-                            END AS monto
-                        '''
+                        WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
+                        ELSE ml.price_total
+                    END AS monto
+                '''
         sqlFiled2 = '''ac.x_senainfo_group_name AS grupo, CASE
-                                WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
-                                ELSE he.total_amount
-                            END AS monto
-                        '''
+                        WHEN ac.group_id = 17 THEN he.total_amount * '-1'::integer::numeric
+                        ELSE he.total_amount
+                    END AS monto
+                '''
         sqlWhere1 = ''' m.x_account_analytic_account_id   = %s\
-                        AND m.x_document_type = 'EGRESO'\
-                        AND mlp.date BETWEEN %s AND %s AND \
-                      '''
+                AND m.x_document_type = 'EGRESO'\
+                AND mlp.date BETWEEN %s AND %s AND \
+              '''
         sqlWhere2 = ''' m.x_account_analytic_account_id = %s\
-                        AND m.x_document_type = 'EGRESO'\
-                        AND m.date BETWEEN %s AND %s AND \
-                      '''
+                AND m.x_document_type = 'EGRESO'\
+                AND m.date BETWEEN %s AND %s AND \
+              '''
         sql = self.getSqlBase() % (sqlFiledBase, sqlFiled1, sqlWhere1, sqlFiled2, sqlWhere2)
         sql = sql + " GROUP BY grupo"
 

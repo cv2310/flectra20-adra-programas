@@ -11,7 +11,6 @@
                     </group>
                     <group>
                         <field name="x_date_from" widget="date"/>
-                        <field name="x_date_to" widget="date"/>
                     </group>
                     <footer>
                         <button string="Generar Excel" type="object" name="generate_excel_report" class="btn-primary"/>
@@ -32,7 +31,7 @@
         </record>
 
         <record id="action_window_expenses_grouped_reports" model="ir.actions.act_window">
-            <field name="name">Generador de reportes para Gastos Agruapdos</field>
+            <field name="name">Generador de reportes para Presupuesto</field>
             <field name="res_model">adra.expenses.grouped.reports</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="view_adra_expenses_grouped_reports_form_modal"/>

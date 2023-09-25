@@ -1,6 +1,7 @@
 from flectra import models
 import datetime
 
+
 class ReportXlsExpensesGrouped(models.AbstractModel):
     _name = 'report.adra_account_extended.report_xlsx_expenses_grouped'
     _inherit = 'report.report_xlsx.abstract'
@@ -8,18 +9,17 @@ class ReportXlsExpensesGrouped(models.AbstractModel):
     def generate_xlsx_report(self, workbook, data, objs):
         worksheet = workbook.add_worksheet("Report")
 
-        ano, mes, dia = map(int, data['x_date_from'].split('-'))
-        date_from = datetime.date(ano, mes, dia)
-        ano_str = str(ano)
-        ano, mes, dia = map(int, data['x_date_to'].split('-'))
-        date_to = datetime.date(ano, mes, dia)
-        x_date_from = data['x_date_from']
-        x_date_to = data['x_date_to']
+        year, mes, dia = map(int, data['x_date_from'].split('-'))
+
+        date_from = datetime.date(year, 1, 1)
+        date_to = (datetime.date(year + 1, 1, 1) - datetime.timedelta(days=1))
+        ano_str = str(year)
         x_project = data['x_project']
         x_account_analytic_account_id = data['x_account_analytic_account_id']
 
         reportData = self.env['report.general.ledger.data']
-        move_lines = reportData._get_budget_report_data(x_account_analytic_account_id,x_date_from, x_date_to, '2023-04-30')
+        move_lines = reportData._get_budget_report_data(x_account_analytic_account_id, date_from.strftime('%Y-%m-%d'), date_to.strftime('%Y-%m-%d'),
+                                                        '2023-04-30')
 
         title_format = workbook.add_format(
             {'font_name': 'Calibri', 'font_size': 12, 'bold': True, 'align': 'center', 'valign': 'vcenter'})
@@ -29,6 +29,15 @@ class ReportXlsExpensesGrouped(models.AbstractModel):
         middle_month_format = workbook.add_format(
             {'font_name': 'Calibri', 'font_size': 10, 'bold': True, 'align': 'center', 'valign': 'vcenter',
              'bottom': True, 'top': True})
+        initial_month_first_format = workbook.add_format(
+            {'font_name': 'Calibri', 'font_size': 12, 'bold': True, 'valign': 'vcenter',
+             'left': True, 'bottom': True, 'top': True})
+        initial_month_format = workbook.add_format(
+            {'font_name': 'Calibri', 'font_size': 10, 'bold': True, 'valign': 'vcenter', 'bottom': True,
+             'top': True, 'num_format': '"$"#,##0', 'align': 'right'})
+        initial_month_last_format = workbook.add_format(
+            {'font_name': 'Calibri', 'font_size': 10, 'bold': True, 'valign': 'vcenter', 'align': 'right',
+             'bottom': True, 'top': True, 'right': True, 'num_format': '"$"#,##0'})
         acc_acc_type_format = workbook.add_format(
             {'font_name': 'Calibri', 'font_size': 10, 'align': 'left', 'valign': 'vcenter'})
         table_content_format = workbook.add_format(
@@ -40,9 +49,10 @@ class ReportXlsExpensesGrouped(models.AbstractModel):
             {'font_name': 'Calibri', 'font_size': 10, 'bold': True, 'align': 'center', 'valign': 'vcenter',
              'right': True, 'bottom': True, 'top': True})
         table_header = workbook.add_format(
-            {'font_name': 'Calibri', 'font_size': 12, 'bold': True, 'align': 'center', 'valign': 'vcenter', 'border': 1})
+            {'font_name': 'Calibri', 'font_size': 12, 'bold': True, 'align': 'center', 'valign': 'vcenter',
+             'border': 1})
         total_first_format = workbook.add_format(
-            {'font_name': 'Calibri', 'font_size': 10, 'bold': True,'valign': 'vcenter',
+            {'font_name': 'Calibri', 'font_size': 10, 'bold': True, 'valign': 'vcenter',
              'left': True, 'bottom': True, 'top': True})
         total_month_format = workbook.add_format(
             {'font_name': 'Calibri', 'font_size': 10, 'bold': True, 'valign': 'vcenter', 'bottom': True,
@@ -59,8 +69,6 @@ class ReportXlsExpensesGrouped(models.AbstractModel):
         total_month_last_red_format = workbook.add_format(
             {'font_name': 'Calibri', 'font_size': 10, 'bold': True, 'valign': 'vcenter', 'align': 'right',
              'bottom': True, 'top': True, 'right': True, 'num_format': '"$"#,##0', 'bg_color': 'red', 'color': 'white'})
-
-
 
         worksheet.set_column('A:A', 42)
         worksheet.set_column('B:B', 20)
@@ -84,7 +92,7 @@ class ReportXlsExpensesGrouped(models.AbstractModel):
 
         worksheet.merge_range('A2:N2', f'ANÁLISIS DE PROYECTO {x_project} AÑO {ano_str}', title_format)
 
-        worksheet.write('C5', 'ENERO', first_month_format)
+        worksheet.write('C5', 'ENERO', initial_month_first_format)
         worksheet.write('D5', 'FEBRERO', middle_month_format)
         worksheet.write('E5', 'MARZO', middle_month_format)
         worksheet.write('F5', 'ABRIL', middle_month_format)
@@ -98,11 +106,28 @@ class ReportXlsExpensesGrouped(models.AbstractModel):
         worksheet.write('N5', 'DICIEMBRE', middle_month_format)
         worksheet.write('O5', 'TOTAL', total_header_month_format)
 
+        saldo_inicial = move_lines['saldo_inicial'][0]
+        worksheet.write('A6', 'SALDO INICIAL', initial_month_first_format)
+        worksheet.write('B6', '', initial_month_format)
+        worksheet.write('C6', saldo_inicial['mes_01'], initial_month_format)
+        worksheet.write('D6', saldo_inicial['mes_02'], initial_month_format)
+        worksheet.write('E6', saldo_inicial['mes_03'], initial_month_format)
+        worksheet.write('F6', saldo_inicial['mes_04'], initial_month_format)
+        worksheet.write('G6', saldo_inicial['mes_05'], initial_month_format)
+        worksheet.write('H6', saldo_inicial['mes_06'], initial_month_format)
+        worksheet.write('I6', saldo_inicial['mes_07'], initial_month_format)
+        worksheet.write('J6', saldo_inicial['mes_08'], initial_month_format)
+        worksheet.write('K6', saldo_inicial['mes_09'], initial_month_format)
+        worksheet.write('L6', saldo_inicial['mes_10'], initial_month_format)
+        worksheet.write('M6', saldo_inicial['mes_11'], initial_month_format)
+        worksheet.write('N6', saldo_inicial['mes_12'], initial_month_format)
+        worksheet.write('O6', '', initial_month_last_format)
+
         worksheet.merge_range('A7:O7', 'INGRESOS', table_header)
 
         current_row = 7
 
-        for line in move_lines['ingreso']:
+        for line in move_lines['ingresos']:
             worksheet.write(current_row, 0, line['tipo_cuenta'], acc_acc_type_format)
             worksheet.write(current_row, 1, line['cuenta'], acc_acc_type_format)
             worksheet.write(current_row, 2, line['mes_01'], table_content_format)
@@ -120,7 +145,7 @@ class ReportXlsExpensesGrouped(models.AbstractModel):
             worksheet.write(current_row, 14, line['mes_total'], table_content_total_format)
             current_row += 1
 
-        total_ingresos = move_lines['ingresos_total'][0]
+        total_ingresos = move_lines['ingresos_totales'][0]
         worksheet.write(current_row, 0, 'TOTAL INGRESOS', total_first_format)
         worksheet.write(current_row, 1, '', total_month_format)
         worksheet.write(current_row, 2, total_ingresos['mes_01'], total_month_format)
@@ -138,7 +163,6 @@ class ReportXlsExpensesGrouped(models.AbstractModel):
         worksheet.write(current_row, 14, total_ingresos['mes_total'], total_month_last_format)
 
         current_row += 2
-
 
         worksheet.merge_range(current_row, 0, current_row, 14, 'EGRESOS', table_header)
 
@@ -162,7 +186,7 @@ class ReportXlsExpensesGrouped(models.AbstractModel):
             worksheet.write(current_row, 14, line['mes_total'], table_content_total_format)
             current_row += 1
 
-        total_egresos = move_lines['gastos_total'][0]
+        total_egresos = move_lines['gastos_totales'][0]
         worksheet.write(current_row, 0, 'TOTAL EGRESOS', total_first_format)
         worksheet.write(current_row, 1, '', total_month_format)
         worksheet.write(current_row, 2, total_egresos['mes_01'], total_month_format)
@@ -181,7 +205,7 @@ class ReportXlsExpensesGrouped(models.AbstractModel):
 
         current_row += 1
 
-        saldo_final = move_lines['saldo'][0]
+        saldo_final = move_lines['saldos'][0]
         worksheet.write(current_row, 0, 'SALDO FINAL MES', total_first_red_format)
         worksheet.write(current_row, 1, '', total_month_red_format)
         worksheet.write(current_row, 2, saldo_final['mes_01'], total_month_red_format)
