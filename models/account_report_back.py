@@ -8,6 +8,7 @@ class AccountReportBack(models.Model):
     _name = "account.report.back"
     _description = "Accountability to SENAME"
     _auto = False
+    _order = "programa, tipo_documento desc, nro_comprobante, correlativo"
 
     id = fields.Float(string='id', readonly=True)
     tipo_docto_senainfo = fields.Integer(string='tipo_docto_senainfo', readonly=True)
@@ -68,6 +69,6 @@ class AccountReportBack(models.Model):
            rut_beneficiario,
            beneficiario,
            x_account_analytic_account_id
-    FROM account_export_v
-
+    FROM account_export_v 
+    ORDER BY programa, tipo_documento desc, nro_comprobante, correlativo
         """)

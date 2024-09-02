@@ -26,5 +26,3 @@ access_report_adra_account_extended_report_xlsx_expenses_grouped_manager,Access 
 
 access_adra_assets_change_project_user,Adra Change Project User,model_adra_assets_change_project,base.group_user,1,0,1,0
 access_adra_assets_change_project_manager,Adra Change Project Managers,model_adra_assets_change_project,base.group_erp_manager,1,1,1,1
-
-access_adra_company_wizard_manager,Access Adra Company Wizard Managers,model_adra_company_wizard,base.group_erp_manager,1,1,1,1

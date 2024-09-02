@@ -10,9 +10,8 @@ from flectra import http
 # from flectra.http import serialize_exception as _serialize_exception
 from flectra.exceptions import UserError
 from flectra.tools import pycompat
-
 from flectra.addons.web.controllers.main import serialize_exception, Export, ExportFormat  # Import the class
-
+from datetime import datetime
 
 class CustomExportController(Export):
 
@@ -54,28 +53,29 @@ class TXTExport(ExportFormat, http.Controller):
 
     def format_data(self, row):
         line_str = ''
+        date_now = datetime.now()
         if row['tipo_docto_senainfo'] == 1: # Ingreso
             line_str += pycompat.to_text(str(row['tipo_docto_senainfo']))
             line_str += pycompat.to_text(row['cod_programa'].zfill(9))
             line_str += pycompat.to_text(row['periodo'])
-            line_str += pycompat.to_text(row['fecha_ingreso'].strftime('%d-%m-%Y'))
+            line_str += pycompat.to_text(date_now.strftime('%d-%m-%Y'))
             line_str += pycompat.to_text(str(row['nro_comprobante']).zfill(9))
             line_str += pycompat.to_text(str(row['correlativo']).zfill(9))
             line_str += pycompat.to_text(row['fecha_pago'].strftime('%d-%m-%Y'))
             line_str += pycompat.to_text(str(row['vigencia']))
-            line_str += pycompat.to_text(str(row['cod_cuenta_senainfo']).zfill(9))
+            line_str += pycompat.to_text(str(row['medio_pago_senainfo']).zfill(9))
             line_str += pycompat.to_text(str(math.trunc(abs(row['monto']))).zfill(9))
             line_str += pycompat.to_text(self.clean_text(row['glosa'][0:20]).ljust(20,' ').ljust(89,'-'))
         elif row['tipo_docto_senainfo'] == 0: # Egreso
             line_str += pycompat.to_text(str(row['tipo_docto_senainfo']))
             line_str += pycompat.to_text(row['cod_programa'].zfill(9))
             line_str += pycompat.to_text(row['periodo'])
-            line_str += pycompat.to_text(row['fecha_ingreso'].strftime('%d-%m-%Y'))
+            line_str += pycompat.to_text(date_now.strftime('%d-%m-%Y'))
             line_str += pycompat.to_text(str(row['nro_comprobante']).zfill(9))
             line_str += pycompat.to_text(str(row['correlativo']).zfill(9))
             line_str += pycompat.to_text(row['fecha_pago'].strftime('%d-%m-%Y'))
             line_str += pycompat.to_text(str(row['vigencia']))
-            line_str += pycompat.to_text(str(row['medio_pago_senainfo']).rjust(9,' '))
+            line_str += pycompat.to_text(str(row['medio_pago_senainfo']).zfill(9))
             line_str += pycompat.to_text(str(math.trunc(abs(row['monto']))).zfill(9))
             row['glosa'] = self.clean_text(row['glosa'])
             if len(row['glosa']) > 19:

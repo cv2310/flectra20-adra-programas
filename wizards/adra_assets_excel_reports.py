@@ -101,8 +101,8 @@ class ReportXls(models.AbstractModel):
             worksheet.write(row, 7 + index_ap, brand_model, cell_format)
             worksheet.write(row, 8 + index_ap, asset.x_color if asset.x_color else "-", cell_format)
             worksheet.write(row, 9 + index_ap, asset.x_procedence if asset.x_procedence else "-", cell_format)
-            worksheet.write(row, 10 + index_ap, asset.x_expense_number if asset.x_expense_number else "-",
-                            number_format)
+            worksheet.write(row, 10 + index_ap, asset.x_expense_n if asset.x_expense_n else "-",
+                            cell_format)
             worksheet.write(row, 11 + index_ap, asset.x_invoice_number if asset.x_invoice_number else "-",
                             number_format)
             worksheet.write(row, 12 + index_ap, asset.x_expense_date if asset.x_expense_date else "-", date_format)
@@ -185,7 +185,7 @@ class ReportXls(models.AbstractModel):
 
         worksheet.merge_range('A4:B4', 'ADRA CHILE', adra_format)
         worksheet.insert_image('C3', logo_path_adra)
-        worksheet.insert_image('R2', logo_path_mejornines)
+        worksheet.insert_image('R2', logo_path_mejornines, {'x_scale': 0.4, 'y_scale': 0.4})
         worksheet.write('H3', 'NOMBRE PROYECTO:', project_info_format_left)
         worksheet.write('H4', 'CÓDIGO PROYECTO:', project_info_format_left)
         worksheet.write('H5', 'INSTITUCIÓN:', project_info_format_left)
@@ -297,7 +297,7 @@ class ReportXls(models.AbstractModel):
 
         worksheet.write('A4', 'ADRA CHILE', adra_format)
         worksheet.insert_image('B3', logo_path_adra)
-        worksheet.insert_image('T2', logo_path_mejornines)
+        worksheet.insert_image('T2', logo_path_mejornines, {'x_scale': 0.4, 'y_scale': 0.4})
         worksheet.merge_range('C3:F3', 'NOMBRE PROYECTO:', project_info_format_left)
         worksheet.merge_range('C4:F4', 'CÓDIGO PROYECTO:', project_info_format_left)
         worksheet.merge_range('C5:F5', 'INSTITUCIÓN:', project_info_format_left)

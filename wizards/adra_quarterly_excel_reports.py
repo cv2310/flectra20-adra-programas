@@ -51,7 +51,7 @@ class ReportXlsQuarterly(models.AbstractModel):
             month_03 = meses[mes + 2]
         h_month_01 = f"{ano_1}-{str(mes_1).zfill(2)}"
         h_month_02 = f"{ano_2}-{str(mes_2).zfill(2)}"
-        h_month_03 = f"{ano_1}-{str(mes_3).zfill(2)}"
+        h_month_03 = f"{ano_3}-{str(mes_3).zfill(2)}"
         date_from = datetime.date(ano_1, mes_1 , 1)
         if mes_3 == 12:
             date_to = (datetime.date(ano_3 +1, 1, 1) - datetime.timedelta(days=1))
@@ -69,7 +69,7 @@ class ReportXlsQuarterly(models.AbstractModel):
         worksheet.write('D1', month_02 + '-' + str(ano_2), column_header_format)
         worksheet.write('E1', month_03 + '-' + str(ano_3), column_header_format)
 
-        date_close = datetime.date(2023, 6, 30)
+        date_close = datetime.date(2024, 6, 30)
         reportData = self.env['report.general.ledger.data']
         month = { h_month_01: 'month_01',
                   h_month_02: 'month_02',

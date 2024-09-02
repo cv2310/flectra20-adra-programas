@@ -13,4 +13,3 @@ from . import adra_expenses_grouped_reports
 from . import adra_general_ledger_excel_reports
 from . import adra_general_ledger_reports
 from . import adra_assets_change_project
-from . import adra_company_wizard

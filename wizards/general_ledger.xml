@@ -56,11 +56,7 @@
                 </xpath>
 
                 <xpath expr="//button[@name='check_report']" position="after">
-                    <button name="print_report_xls" string="Imprimir EXCEL" type="object" class="btn-primary"
-                            attrs="{'invisible': [('x_document_type', 'in', ('INGRESO', 'EGRESO'))]}"/>
-                </xpath>
-                <xpath expr="//button[@name='check_report']" position="attributes">
-                    <attribute name="string">Imprimir PDF</attribute>
+                    <button name="print_report_xls" string="Imprimir Excel" type="object" class="btn-primary"/>
                 </xpath>
             </field>
         </record>

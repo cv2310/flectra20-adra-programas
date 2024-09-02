@@ -127,7 +127,9 @@ class AccountMove(models.Model):
             vals.get('date')
             date = vals.get('date')
             if date is not None:
-                lock_date = datetime.date(2023, 6, 30)
+                if isinstance(date, str):
+                    date = datetime.datetime.strptime(date, '%Y-%m-%d').date()
+                lock_date = datetime.date(2024, 6, 30)
                 #lock_date = move.company_id._get_user_fiscal_lock_date()
                 if date <= lock_date:
                     message = ("No se puede modificar o crear movimientos antes del ", format_date(self.env, lock_date))
