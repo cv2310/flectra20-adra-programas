@@ -435,7 +435,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
                 dato_tipo = self.datoTipo(date_from, date_close, date_to)
                 if dato_tipo == "OPEN_CLOSE" or dato_tipo == "OPEN":
                     sql_base = f'''SELECT row_number() OVER () as id, m2.x_name AS documento, p.x_income_document_number AS nro_cheque,\
-                            m.date AS fecha_pago, p.amount AS monto, m.invoice_partner_display_name AS beneficiario, p.x_name AS referencia\
+                            m.date AS fecha_pago, p.amount AS monto, m.invoice_partner_display_name AS beneficiario, ml.name AS referencia\
                             FROM account_payment p\
                             LEFT JOIN account_move m ON (m.payment_id = p.id)\
                             LEFT JOIN account_move m2 ON (m.ref = m2.name)\
@@ -452,7 +452,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
                                                                   AND m.date BETWEEN '{date_from}' AND '{date_to}' \
                                                                   '''
                     sqlOpen = f'''SELECT row_number() OVER () as id, m2.x_name AS documento, p.x_income_document_number AS nro_cheque,\
-                            m.date AS fecha_pago, p.amount AS monto, m.invoice_partner_display_name AS beneficiario, p.x_name AS referencia\
+                            m.date AS fecha_pago, p.amount AS monto, m.invoice_partner_display_name AS beneficiario, ml.name AS referencia\
                             FROM account_payment p\
                             LEFT JOIN account_move m ON (m.payment_id = p.id)\
                             LEFT JOIN account_move m2 ON (m.ref = m2.name)\
@@ -551,7 +551,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
                     dato_tipo = "CLOSE"
                 if dato_tipo == "OPEN_CLOSE" or dato_tipo == "OPEN":
 
-                    sqlFiled1 = '''row_number() OVER () as id, m.x_document_type AS tipo_documento, m.invoice_date AS fecha_ingreso,  m.x_correlative AS nro_comprobante,  pm.name AS medio_pago, p.x_income_document_number::text AS nro_comprobante_pago,  mlp.date AS fecha_pago, upper(p.x_name::text) AS glosa, CASE
+                    sqlFiled1 = '''row_number() OVER () as id, m.x_document_type AS tipo_documento, m.invoice_date AS fecha_ingreso,  m.x_correlative AS nro_comprobante,  pm.name AS medio_pago, p.x_income_document_number::text AS nro_comprobante_pago,  mlp.date AS fecha_pago, upper(ml.name::text) AS glosa, CASE
                                               WHEN m.x_document_type::text = 'EGRESO'::character varying::text THEN upper(rp.name::text)
                                               ELSE upper(rp.name::text)
                                           END AS beneficiario,\
@@ -1165,6 +1165,8 @@ class ReportGeneralLedgerData(models.AbstractModel):
         where_params = MoveLine._query_get()
 
         account_res = []
+        if x_sort_by == 'fecha_ingreso':
+            x_sort_by = 'fecha_pago'
 
         if x_report_type == 'cuenta':
 
@@ -1197,7 +1199,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
                             WHEN m.x_document_type::text = 'EGRESO'::character varying::text THEN upper(rp.name::text)
                             ELSE upper(rp.name::text)
                         END AS beneficiario,  pm.name AS medio_pago,\
-                        p.x_income_document_number::text AS nro_comprobante_pago, mlp.date AS fecha_pago, upper(p.x_name::text) AS glosa, CASE
+                        p.x_income_document_number::text AS nro_comprobante_pago, mlp.date AS fecha_pago, upper(ml.name::text) AS glosa, CASE
                             WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
                             ELSE ml.price_total
                         END AS monto\
@@ -1315,7 +1317,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
                         END AS tipo_docto_respaldo, m.x_back_up_document_number AS nro_docto_respaldo,  CASE
                             WHEN m.x_document_type::text = 'EGRESO'::character varying::text THEN upper(rp.name::text)
                             ELSE upper(rp.name::text)
-                        END AS beneficiario,  pm.name AS medio_pago, p.x_income_document_number::text AS nro_comprobante_pago, mlp.date AS fecha_pago, upper(p.x_name::text) AS glosa, CASE
+                        END AS beneficiario,  pm.name AS medio_pago, p.x_income_document_number::text AS nro_comprobante_pago, mlp.date AS fecha_pago, upper(ml.name::text) AS glosa, CASE
                             WHEN ac.group_id = 17 THEN ml.price_total * '-1'::integer::numeric
                             ELSE ml.price_total
                         END AS monto\
@@ -1415,7 +1417,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
         sql_param = {
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
-            'date_close': '2024-06-30',
+            'date_close': '2024-08-31',
         }
         sqlNew = self.getSql(self.LIBRO_BANCO, 1, sql_param)
         cr.execute(sqlNew)
@@ -1461,7 +1463,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
                 CASE tipo_documento WHEN 'INGRESO' THEN monto ELSE 0 END AS ingreso,\
                 CASE tipo_documento WHEN 'EGRESO' THEN monto ELSE 0 END AS egreso\
                 '''
-        sqlFiled1 = '''row_number() OVER () as id, m.x_document_type AS tipo_documento, m.invoice_date AS fecha_ingreso,  m.x_correlative AS nro_comprobante,  pm.name AS medio_pago, p.x_income_document_number::text AS nro_comprobante_pago,  mlp.date AS fecha_pago, upper(p.x_name::text) AS glosa, CASE
+        sqlFiled1 = '''row_number() OVER () as id, m.x_document_type AS tipo_documento, m.invoice_date AS fecha_ingreso,  m.x_correlative AS nro_comprobante,  pm.name AS medio_pago, p.x_income_document_number::text AS nro_comprobante_pago,  mlp.date AS fecha_pago, upper(ml.name::text) AS glosa, CASE
                         WHEN m.x_document_type::text = 'EGRESO'::character varying::text THEN upper(rp.name::text)
                         ELSE ''::text
                     END AS beneficiario,\
@@ -1493,7 +1495,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
             'date_to': where_params[2][0],
-            'date_close': '2024-06-30',
+            'date_close': '2024-08-31',
             'x_sort_by': x_sort_by
         }
         sqlNew = self.getSql(self.LIBRO_BANCO, 2, sql_param)
@@ -1587,7 +1589,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
         sql_param = {
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
-            'date_close': '2024-06-30',
+            'date_close': '2024-08-31',
         }
         sqlNew = self.getSql(self.RECONCILIACION_BANCO, 1, sql_param)
         cr.execute(sqlNew)
@@ -1632,7 +1634,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
             'date_to': where_params[2][0],
-            'date_close': '2024-06-30'
+            'date_close': '2024-08-31'
         }
         sqlNew = self.getSql(self.RECONCILIACION_BANCO, 2, sql_param)
         cr.execute(sqlNew)
@@ -1665,7 +1667,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
             'date_to': where_params[2][0],
-            'date_close': '2024-06-30',
+            'date_close': '2024-08-31',
             'x_sort_by': x_sort_by
         }
         sqlNew = self.getSql(self.RECONCILIACION_BANCO, 3, sql_param)
@@ -1758,7 +1760,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
         sql_param = {
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
-            'date_close': '2024-06-30',
+            'date_close': '2024-08-31',
         }
         sqlNew = self.getSql(self.RENDICION_CUENTAS, 1, sql_param)
         # SQL 1
@@ -1805,7 +1807,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
             'date_to': where_params[2][0],
-            'date_close': '2024-06-30',
+            'date_close': '2024-08-31',
         }
         sqlNew = self.getSql(self.RENDICION_CUENTAS, 2, sql_param)
         cr.execute(sqlNew)
@@ -1851,7 +1853,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
             'date_to': where_params[2][0],
-            'date_close': '2024-06-30',
+            'date_close': '2024-08-31',
         }
         sqlNew = self.getSql(self.RENDICION_CUENTAS, 3, sql_param)
         cr.execute(sqlNew)

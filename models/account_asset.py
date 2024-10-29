@@ -12,7 +12,17 @@ class AccountAssetAsset(models.Model):
     x_floor = fields.Char(string='Nº Piso', store=True)
     x_office_number = fields.Char(string='Nº de Oficina', store=True)
     x_type_measure = fields.Char(string='Tipo de Medida', store=True)
-    x_procedence = fields.Char(string='Procedencia', store=True)
+    x_procedence = fields.Selection(
+        [
+            ('adquirido', 'Adquirido por el proyecto'),
+            ('destinado', 'Destinado por el servicio'),
+            ('traspaso', 'Traspaso desde otro proyecto'),
+            ('donacion', 'Donación'),
+            ('comodato', 'Comodato')
+        ],
+        string='Procedencia',
+        store=True
+    )
     x_account_move_id = fields.Many2one('account.move', string='Egreso asociado', inverse_name='x_account_asset_asset_ids', store=True, index=True)
     x_expense_n = fields.Char(string='Nº de Egreso', store=True)
     x_expense_number = fields.Char(string='Tipo de documento', store=True)

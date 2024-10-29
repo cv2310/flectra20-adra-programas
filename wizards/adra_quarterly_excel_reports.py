@@ -69,7 +69,7 @@ class ReportXlsQuarterly(models.AbstractModel):
         worksheet.write('D1', month_02 + '-' + str(ano_2), column_header_format)
         worksheet.write('E1', month_03 + '-' + str(ano_3), column_header_format)
 
-        date_close = datetime.date(2024, 6, 30)
+        date_close = datetime.date(2024, 8, 31)
         reportData = self.env['report.general.ledger.data']
         month = { h_month_01: 'month_01',
                   h_month_02: 'month_02',
