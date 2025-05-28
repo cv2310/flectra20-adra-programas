@@ -19,7 +19,7 @@ class ReportXlsExpensesGrouped(models.AbstractModel):
 
         reportData = self.env['report.general.ledger.data']
         move_lines = reportData._get_budget_report_data(x_account_analytic_account_id, date_from.strftime('%Y-%m-%d'), date_to.strftime('%Y-%m-%d'),
-                                                        '2024-08-31')
+                                                        '2025-04-30')
 
         title_format = workbook.add_format(
             {'font_name': 'Calibri', 'font_size': 12, 'bold': True, 'align': 'center', 'valign': 'vcenter'})

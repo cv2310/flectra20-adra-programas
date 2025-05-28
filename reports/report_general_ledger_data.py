@@ -93,7 +93,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
     def getSqlClose():
         sql = '''
             SELECT {sqlField1}
-            FROM account_report_v1
+            FROM account_report_v1_tmp
             WHERE {sqlWhere1}
 
             UNION ALL
@@ -1417,7 +1417,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
         sql_param = {
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
-            'date_close': '2024-08-31',
+            'date_close': '2025-04-30',
         }
         sqlNew = self.getSql(self.LIBRO_BANCO, 1, sql_param)
         cr.execute(sqlNew)
@@ -1495,7 +1495,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
             'date_to': where_params[2][0],
-            'date_close': '2024-08-31',
+            'date_close': '2025-04-30',
             'x_sort_by': x_sort_by
         }
         sqlNew = self.getSql(self.LIBRO_BANCO, 2, sql_param)
@@ -1589,7 +1589,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
         sql_param = {
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
-            'date_close': '2024-08-31',
+            'date_close': '2025-04-30',
         }
         sqlNew = self.getSql(self.RECONCILIACION_BANCO, 1, sql_param)
         cr.execute(sqlNew)
@@ -1634,7 +1634,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
             'date_to': where_params[2][0],
-            'date_close': '2024-08-31'
+            'date_close': '2025-04-30'
         }
         sqlNew = self.getSql(self.RECONCILIACION_BANCO, 2, sql_param)
         cr.execute(sqlNew)
@@ -1667,7 +1667,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
             'date_to': where_params[2][0],
-            'date_close': '2024-08-31',
+            'date_close': '2025-04-30',
             'x_sort_by': x_sort_by
         }
         sqlNew = self.getSql(self.RECONCILIACION_BANCO, 3, sql_param)
@@ -1760,7 +1760,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
         sql_param = {
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
-            'date_close': '2024-08-31',
+            'date_close': '2025-04-30',
         }
         sqlNew = self.getSql(self.RENDICION_CUENTAS, 1, sql_param)
         # SQL 1
@@ -1807,7 +1807,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
             'date_to': where_params[2][0],
-            'date_close': '2024-08-31',
+            'date_close': '2025-04-30',
         }
         sqlNew = self.getSql(self.RENDICION_CUENTAS, 2, sql_param)
         cr.execute(sqlNew)
@@ -1853,7 +1853,7 @@ class ReportGeneralLedgerData(models.AbstractModel):
             'x_account_analytic_account_id': x_account_analytic_account_id,
             'date_from': where_params[2][1],
             'date_to': where_params[2][0],
-            'date_close': '2024-08-31',
+            'date_close': '2025-04-30',
         }
         sqlNew = self.getSql(self.RENDICION_CUENTAS, 3, sql_param)
         cr.execute(sqlNew)
